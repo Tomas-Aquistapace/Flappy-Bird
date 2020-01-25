@@ -23,43 +23,36 @@ namespace Flappy_Bird
 			switch (scenes)
 			{
 			case menu:
-
 				InputMenu();
-				Textures::MovementBackgrounds();
 				DrawMenu();
 				break;
-			case game:
 
+			case game:
 				Player_Things::Input();
 				if (Player_Things::pause == false)
 				{
-					Textures::MovementBackgrounds();
 					Enemies::MovementEnemies();
 					Player_Things::EarnPoint();
 					Player_Things::LoseOrWin();
 				}
-
-				DrawGame();
-
+				Game::DrawGame();
 				break;
-			case options:
 
+			case options:
 				Options::Input();
 				Options::DrawOptions();
-
 				break;
-			case credits:
 
+			case credits:
 				Credits::Input();
 				Credits::DrawCredits();
-
 				break;
-			case endGame:
 
+			case endGame:
 				End_game::Input();
 				End_game::DrawEndGame();
-				
 				break;
+
 			case exit:
 				
 				Player_Things::player.exitGame = true;

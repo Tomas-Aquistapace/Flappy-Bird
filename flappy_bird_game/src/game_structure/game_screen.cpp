@@ -8,29 +8,31 @@
 
 namespace Flappy_Bird
 {
-	int screenWidth = 600;
-	int screenHeight = 600;
-
-	static short fontTitle = 40;
-	static short fontSubTittle = 30;
-	static short font = 20;
-
-	void DrawGame()
+	namespace Game
 	{
-		BeginDrawing();
-		ClearBackground(BLACK);
-		
-		Textures::DrawBackground();
+		static short fontTitle = 40;
+		static short fontSubTittle = 30;
+		static short font = 20;
 
-		Enemies::DrawEnemies();
-
-		Player_Things::DrawPlayer();
-
-		if (Player_Things::pause == true)
+		void DrawGame()
 		{
-			DrawText("PAUSE", GetScreenWidth() / 2 - fontSubTittle, GetScreenHeight() / 2, fontSubTittle, WHITE);
-		}
+			
+			BeginDrawing();
+			ClearBackground(BLACK);
 
-		EndDrawing();
+			Textures::MovementBackgrounds();
+			Textures::DrawBackground();
+
+			Enemies::DrawEnemies();
+
+			Player_Things::DrawPlayer();
+
+			if (Player_Things::pause == true)
+			{
+				DrawText("PAUSE", GetScreenWidth() / 2 - fontSubTittle, GetScreenHeight() / 2, fontSubTittle, WHITE);
+			}
+
+			EndDrawing();
+		}
 	}
 }

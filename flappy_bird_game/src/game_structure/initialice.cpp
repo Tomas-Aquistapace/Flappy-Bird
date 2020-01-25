@@ -8,6 +8,9 @@
 
 namespace Flappy_Bird
 {
+	int screenWidth = 600;
+	int screenHeight = 600;
+
 	void InitialiceAll()
 	{
 		InitWindow(screenWidth, screenHeight, "Flappy Bird - Tomas Aquistapace");

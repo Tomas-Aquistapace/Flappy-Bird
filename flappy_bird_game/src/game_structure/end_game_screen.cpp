@@ -5,11 +5,12 @@
 #include "menu_screen.h"
 #include "game_objets/player.h"
 #include "game_structure/initialice.h"
+#include "assets_code/textures.h"
+
 namespace Flappy_Bird
 {
 	namespace End_game
 	{
-		//static int fontTittle = 50;
 		static int fontSubTittle = 30;
 
 		void Input()
@@ -25,6 +26,9 @@ namespace Flappy_Bird
 		{
 			BeginDrawing();
 			ClearBackground(BLACK);
+
+			Textures::MovementBackgrounds();
+			Textures::DrawBackground();
 
 			DrawText(FormatText("Points ~ %i", Player_Things::player.points), GetScreenWidth() / 2 - 70, GetScreenHeight() / 2 + 60, fontSubTittle, DARKGREEN);
 

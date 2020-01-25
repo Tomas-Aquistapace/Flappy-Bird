@@ -44,14 +44,26 @@ namespace Flappy_Bird
 
 	void DrawMenu()
 	{
+		int TriangleWidth = 40;
+		int TriangleHeight = 60;
+		int leftTriangleX = GetScreenWidth() / 2 - GetScreenWidth() / 3 - TriangleWidth;
+		int leftTriangleY = GetScreenHeight() / 2 + TriangleHeight / 2;
+
+		int rightTriangleX = GetScreenWidth() / 2 + GetScreenWidth() / 3;
+		int rightTriangleY = GetScreenHeight() / 2 + TriangleHeight / 2;
+
+		Textures::MovementBackgrounds();
+
 		BeginDrawing();
 		ClearBackground(BLACK);
 
 		Textures::DrawBackground();
 
 		DrawText("FLAPPY FLAME", GetScreenWidth() / 2 - 150, GetScreenHeight() / 5, fontTittle, GREEN);
-
 		DrawText("press SPACE", GetScreenWidth() / 2 - 60, GetScreenHeight() / 2 + 60, fontSubTittle, WHITE);
+
+		DrawRectangle(leftTriangleX, leftTriangleY, TriangleWidth, TriangleHeight, BLUE);
+		DrawRectangle(rightTriangleX, rightTriangleY, TriangleWidth, TriangleHeight, BLUE);
 
 		EndDrawing();
 	}

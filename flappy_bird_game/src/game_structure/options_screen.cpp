@@ -3,6 +3,8 @@
 #include "raylib.h"
 
 #include "menu_screen.h"
+#include "assets_code/textures.h"
+
 namespace Flappy_Bird
 {
 	namespace Options
@@ -20,10 +22,13 @@ namespace Flappy_Bird
 
 		void DrawOptions()
 		{
-			BeginDrawing();
 
+			BeginDrawing();
 			ClearBackground(BLANK);
 
+			Textures::MovementBackgrounds();
+			Textures::DrawBackground();
+			
 			DrawText("OPTIONS", GetScreenWidth() / 2 - 150, GetScreenHeight() / 5, fontTittle, GREEN);
 
 			EndDrawing();

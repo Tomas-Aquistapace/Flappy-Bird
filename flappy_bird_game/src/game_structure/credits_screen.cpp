@@ -5,6 +5,7 @@
 #include "menu_screen.h"
 #include "game_objets/player.h"
 #include "game_structure/initialice.h"
+#include "assets_code/textures.h"
 
 namespace Flappy_Bird
 {
@@ -27,8 +28,10 @@ namespace Flappy_Bird
 			BeginDrawing();
 			ClearBackground(BLACK);
 
-			DrawText("Credits", GetScreenWidth() / 2 - 50, GetScreenHeight() / 2, fontTittle, GREEN);
+			Textures::MovementBackgrounds();
+			Textures::DrawBackground();
 
+			DrawText("Credits", GetScreenWidth() / 2 - 50, GetScreenHeight() / 2, fontTittle, GREEN);
 			
 			EndDrawing();
 		}

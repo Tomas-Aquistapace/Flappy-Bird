@@ -93,7 +93,7 @@ namespace Flappy_Bird
 			short fontUI = 20;
 			short pixelsAxis = 20;
 
-			DrawText(FormatText("Points ~ %i", player.points), pixelsAxis, screenHeight - pixelsAxis, fontUI, WHITE);
+			DrawText(FormatText("Points ~ %i", player.points), pixelsAxis, GetScreenHeight() - pixelsAxis, fontUI, WHITE);
 		}
 
 		//------------------------------------------
