@@ -7,12 +7,21 @@ namespace Flappy_Bird
 {
 	namespace Player_Things
 	{
-		enum WIN_OR_LOSE {
+		enum WIN_OR_LOSE 
+		{
 			win, lose, inGame
 		};
-		struct PLAYER {
+		enum JUMP
+		{
+			jumping, falling
+		};
+
+		struct PLAYER 
+		{
 			Vector2 position;
 			float radius;
+			JUMP state;
+			float force;
 			int points;
 			bool exitGame;
 			WIN_OR_LOSE winOrLose;
@@ -20,9 +29,6 @@ namespace Flappy_Bird
 
 		extern PLAYER player;
 		extern bool pause;
-
-		extern short fontUI;
-		extern short pixelsAxis;
 
 		void InitialicePlayer();
 		void Input();

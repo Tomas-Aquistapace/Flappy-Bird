@@ -15,18 +15,16 @@ namespace Flappy_Bird
 
 		bool pause;
 
-		short fontUI = 20;
-		short pixelsAxis = 20;
+		const float SPEEDPJ = 150.0f;
 
-		static float SPEEDPJ = 300.0f;
-		static float SPEEDFALL = 150.0f;
-
-		static short heightRec = 10;
-		static short widthRec = 70;
+		static void Jump();
 
 		void InitialicePlayer()
 		{
 			player.winOrLose = inGame;
+
+			player.state = falling;
+			player.force = 0.0f;
 
 			player.position = { static_cast <float>(GetScreenWidth() / 3), static_cast <float>(GetScreenHeight() / 2) };
 			player.radius = 15;
@@ -51,14 +49,7 @@ namespace Flappy_Bird
 
 			if (pause == false)
 			{
-				if (IsKeyPressed(KEY_SPACE) == true)
-				{
-					player.position.y -= SPEEDPJ * 10 * GetFrameTime();
-				}
-				else
-				{
-					player.position.y += SPEEDFALL * GetFrameTime();
-				}
+				Jump();
 			}
 		}
 
@@ -99,7 +90,44 @@ namespace Flappy_Bird
 
 		void DrawUI()
 		{
+			short fontUI = 20;
+			short pixelsAxis = 20;
+
 			DrawText(FormatText("Points ~ %i", player.points), pixelsAxis, screenHeight - pixelsAxis, fontUI, WHITE);
+		}
+
+		//------------------------------------------
+
+		static void Jump()
+		{
+			const float MIN_GRAVITY = -150.0f;
+			const short GRAVITY = 90;
+
+			if (IsKeyPressed(KEY_SPACE) == true)
+			{
+				if (player.state == falling)
+				{
+					player.state = jumping;
+					player.force = SPEEDPJ;
+				}
+				else if (player.state == jumping)
+				{
+					player.state = falling;
+					player.force = 0;
+				}
+			}
+
+			if (player.force <= 0)
+			{
+				player.state = falling;		
+			}
+			
+			player.position.y -= player.force * GetFrameTime();
+
+			if (player.force > MIN_GRAVITY)
+			{
+				player.force -= GRAVITY * GetFrameTime();
+			}
 		}
 	}
 }
