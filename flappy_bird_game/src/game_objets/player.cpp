@@ -4,6 +4,7 @@
 #include "game_structure/menu_screen.h"
 #include "game_structure/game_screen.h"
 #include "game_structure/initialice.h"
+#include "assets_code/textures.h"
 
 namespace Flappy_Bird
 {
@@ -18,6 +19,7 @@ namespace Flappy_Bird
 		const float SPEEDPJ = 150.0f;
 
 		static void Jump();
+		static void DrawUI();
 
 		void InitialicePlayer()
 		{
@@ -39,7 +41,7 @@ namespace Flappy_Bird
 			if (IsKeyPressed(KEY_ESCAPE) == true)
 			{
 				ResetValues();
-				scenes = menu;
+				Menu::scenes = Menu::menu;
 			}
 
 			if (IsKeyPressed(KEY_ENTER) == true)
@@ -60,13 +62,13 @@ namespace Flappy_Bird
 				CheckCollisionCircleRec(player.position, player.radius, buttomPipe1.objet) == true ||
 				CheckCollisionCircleRec(player.position, player.radius, buttomPipe2.objet) == true)
 			{
-				scenes = endGame;
+				Menu::scenes = Menu::endGame;
 			}
 
 			if ((player.position.y + player.radius >= GetScreenHeight()) ||
 				(player.position.y - player.radius <= 0))
 			{
-				scenes = endGame;
+				Menu::scenes = Menu::endGame;
 			}
 		}
 
@@ -85,18 +87,20 @@ namespace Flappy_Bird
 		void DrawPlayer()
 		{
 			DrawCircle(static_cast<int>(player.position.x), static_cast<int>(player.position.y), player.radius, GREEN);
+
+			DrawTexture(Textures::player, static_cast<int>(player.position.x - player.radius), static_cast<int>(player.position.y - player.radius), WHITE);
 			DrawUI();
 		}
 
-		void DrawUI()
+		//------------------------------------------
+
+		static void DrawUI()
 		{
 			short fontUI = 20;
 			short pixelsAxis = 20;
 
 			DrawText(FormatText("Points ~ %i", player.points), pixelsAxis, GetScreenHeight() - pixelsAxis, fontUI, WHITE);
 		}
-
-		//------------------------------------------
 
 		static void Jump()
 		{

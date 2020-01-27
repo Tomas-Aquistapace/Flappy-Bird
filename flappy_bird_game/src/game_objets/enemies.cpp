@@ -1,6 +1,7 @@
 #include "enemies.h"
 
 #include "player.h"
+#include "assets_code/textures.h"
 
 namespace Flappy_Bird
 {
@@ -103,11 +104,15 @@ namespace Flappy_Bird
 
 		void DrawEnemies()
 		{
-			DrawRectangleRec(superiorPipe1.objet, RED);
-			DrawRectangleRec(buttomPipe1.objet, RED);
+			//DrawRectangleRec(superiorPipe1.objet, RED);
+			//DrawRectangleRec(buttomPipe1.objet, RED);
+			DrawTexture(Textures::walls, static_cast<int>(superiorPipe1.objet.x), static_cast<int>(superiorPipe1.objet.y), GRAY);
+			DrawTexture(Textures::walls, static_cast<int>(buttomPipe1.objet.x), static_cast<int>(buttomPipe1.objet.y), GRAY);
 
-			DrawRectangleRec(superiorPipe2.objet, RED);
-			DrawRectangleRec(buttomPipe2.objet, RED);
+			//DrawRectangleRec(superiorPipe2.objet, RED);
+			//DrawRectangleRec(buttomPipe2.objet, RED);
+			DrawTexture(Textures::walls, static_cast<int>(superiorPipe2.objet.x), static_cast<int>(superiorPipe2.objet.y), GRAY);
+			DrawTexture(Textures::walls, static_cast<int>(buttomPipe2.objet.x), static_cast<int>(buttomPipe2.objet.y), GRAY);
 		}
 	}
 }

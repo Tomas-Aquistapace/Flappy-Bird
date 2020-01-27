@@ -35,7 +35,6 @@ namespace Flappy_Bird
 		void LoseOrWin();
 		void EarnPoint();
 		void DrawPlayer();
-		void DrawUI();
 	}
 }
 

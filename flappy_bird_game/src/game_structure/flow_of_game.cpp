@@ -20,14 +20,14 @@ namespace Flappy_Bird
 
 		while (!WindowShouldClose() && Player_Things::player.exitGame != true)
 		{
-			switch (scenes)
+			switch (Menu::scenes)
 			{
-			case menu:
-				InputMenu();
-				DrawMenu();
+			case Menu::menu:
+				Menu::InputMenu();
+				Menu::DrawMenu();
 				break;
 
-			case game:
+			case Menu::game:
 				Player_Things::Input();
 				if (Player_Things::pause == false)
 				{
@@ -38,25 +38,24 @@ namespace Flappy_Bird
 				Game::DrawGame();
 				break;
 
-			case options:
+			case Menu::options:
 				Options::Input();
 				Options::DrawOptions();
 				break;
 
-			case credits:
+			case Menu::credits:
 				Credits::Input();
 				Credits::DrawCredits();
 				break;
 
-			case endGame:
+			case Menu::endGame:
 				End_game::Input();
 				End_game::DrawEndGame();
 				break;
 
-			case exit:
+			case Menu::exit:
 				
 				Player_Things::player.exitGame = true;
-
 				break;
 			}
 		}

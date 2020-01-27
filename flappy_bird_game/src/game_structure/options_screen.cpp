@@ -16,13 +16,12 @@ namespace Flappy_Bird
 		{
 			if (IsKeyPressed(KEY_RIGHT) == true)
 			{
-				scenes = menu;
+				Menu::scenes = Menu::menu;
 			}
 		}
 
 		void DrawOptions()
 		{
-
 			BeginDrawing();
 			ClearBackground(BLANK);
 

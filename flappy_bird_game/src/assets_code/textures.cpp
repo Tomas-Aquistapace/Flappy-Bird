@@ -1,5 +1,8 @@
 #include "textures.h"
 
+#include "game_objets/player.h"
+#include "game_structure/menu_screen.h"
+
 namespace Flappy_Bird
 {
 	namespace Textures
@@ -9,17 +12,38 @@ namespace Flappy_Bird
 		static float scrollingMid = 0.0f;
 		static float scrollingFore = 0.0f;
 
+		Image playerImage;
+		Image wallsImage;
+		Image arrowImage;
+
 		Texture2D stageBackground;
 		Texture2D background;
 		Texture2D midground;
 		Texture2D foreground;
+		Texture2D player;
+		Texture2D walls;
+		Texture2D menuArrows;
 
-		void InitialiceTextures()
+		void LoadTextures()
 		{
 			stageBackground = LoadTexture("assets/scenarios/stageBackground.png");
 			background = LoadTexture("assets/scenarios/background.png");
 			midground = LoadTexture("assets/scenarios/midground.png");
 			foreground = LoadTexture("assets/scenarios/foreground.png");
+			playerImage = LoadImage("assets/objects/player.png");
+			wallsImage = LoadImage("assets/objects/wall.png");
+			arrowImage = LoadImage("assets/menu/arrow.png");
+
+			ImageResize(&playerImage, static_cast<int>(Player_Things::player.radius) * 2, static_cast<int>(Player_Things::player.radius) * 2);
+			ImageResize(&arrowImage, static_cast<int>(Menu::leftArrow.rec.width), static_cast<int>(Menu::leftArrow.rec.height));
+
+			player = LoadTextureFromImage(playerImage);
+			walls = LoadTextureFromImage(wallsImage);
+			menuArrows = LoadTextureFromImage(arrowImage);
+
+			UnloadImage(playerImage);
+			UnloadImage(wallsImage);
+			UnloadImage(arrowImage);
 		}
 
 		void UnloadTextures()
@@ -28,6 +52,9 @@ namespace Flappy_Bird
 			UnloadTexture(background);
 			UnloadTexture(midground);
 			UnloadTexture(foreground);
+			UnloadTexture(player);
+			UnloadTexture(walls);
+			UnloadTexture(menuArrows);
 		}
 
 		void MovementBackgrounds()
@@ -37,6 +64,8 @@ namespace Flappy_Bird
 			scrollingMid -= 75.0f * GetFrameTime();
 			scrollingFore -= 150.0f * GetFrameTime();
 
+			if (scrollingStage <= -stageBackground.width)
+				scrollingStage = 0.0f;
 			if (scrollingBack <= -background.width)
 				scrollingBack = 0.0f;
 			if (scrollingMid <= -midground.width)

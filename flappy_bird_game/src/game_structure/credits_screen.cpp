@@ -19,7 +19,7 @@ namespace Flappy_Bird
 			if (IsKeyPressed(KEY_LEFT) == true)
 			{
 				ResetValues();
-				scenes = menu;
+				Menu::scenes = Menu::menu;
 			}
 		}
 

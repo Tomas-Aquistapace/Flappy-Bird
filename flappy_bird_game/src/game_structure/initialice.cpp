@@ -18,10 +18,10 @@ namespace Flappy_Bird
 
 		SetExitKey(KEY_BACK);
 
+		Menu::InitialiceMenu();
 		Player_Things::InitialicePlayer();
-		Textures::InitialiceTextures();
 		Enemies::InitialiceEnemies();
-		InitialiceMenu();
+		Textures::LoadTextures();
 
 		SetTargetFPS(60);
 	}
