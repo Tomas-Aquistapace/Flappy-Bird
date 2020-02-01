@@ -31,6 +31,21 @@ namespace Flappy_Bird
 			player.position = { static_cast <float>(GetScreenWidth() / 3), static_cast <float>(GetScreenHeight() / 2) };
 			player.radius = 15;
 			player.points = 0;
+			player.maxPoints = 0;
+			player.exitGame = false;
+
+			pause = false;
+		}
+
+		void ResetPlayer()
+		{
+			player.winOrLose = inGame;
+
+			player.state = falling;
+			player.force = 0.0f;
+
+			player.position = { static_cast <float>(GetScreenWidth() / 3), static_cast <float>(GetScreenHeight() / 2) };
+			player.points = 0;
 			player.exitGame = false;
 
 			pause = false;
@@ -40,7 +55,8 @@ namespace Flappy_Bird
 		{
 			if (IsKeyPressed(KEY_ESCAPE) == true)
 			{
-				ResetValues();
+				ResetPlayer();
+				InitialiceEnemies();
 				Menu::scenes = Menu::menu;
 			}
 
@@ -60,16 +76,24 @@ namespace Flappy_Bird
 			if (CheckCollisionCircleRec(player.position, player.radius, superiorPipe1.objet) == true ||
 				CheckCollisionCircleRec(player.position, player.radius, superiorPipe2.objet) == true ||
 				CheckCollisionCircleRec(player.position, player.radius, buttomPipe1.objet) == true ||
-				CheckCollisionCircleRec(player.position, player.radius, buttomPipe2.objet) == true)
-			{
-				Menu::scenes = Menu::endGame;
-			}
-
-			if ((player.position.y + player.radius >= GetScreenHeight()) ||
+				CheckCollisionCircleRec(player.position, player.radius, buttomPipe2.objet) == true
+				||
+				(player.position.y + player.radius >= GetScreenHeight()) ||
 				(player.position.y - player.radius <= 0))
 			{
 				Menu::scenes = Menu::endGame;
+
+				if (player.points > player.maxPoints)
+				{
+					player.maxPoints = player.points;
+				}
 			}
+
+			/*if ((player.position.y + player.radius >= GetScreenHeight()) ||
+				(player.position.y - player.radius <= 0))
+			{
+				Menu::scenes = Menu::endGame;
+			}*/
 		}
 
 		void EarnPoint()
@@ -126,11 +150,11 @@ namespace Flappy_Bird
 				player.state = falling;		
 			}
 			
-			player.position.y -= player.force * GetFrameTime();
+			player.position.y -= player.force * GetFrameTime() * 2;
 
 			if (player.force > MIN_GRAVITY)
 			{
-				player.force -= GRAVITY * GetFrameTime();
+				player.force -= GRAVITY * GetFrameTime() * 2;
 			}
 		}
 	}

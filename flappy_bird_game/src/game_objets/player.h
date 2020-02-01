@@ -23,6 +23,7 @@ namespace Flappy_Bird
 			JUMP state;
 			float force;
 			int points;
+			int maxPoints;
 			bool exitGame;
 			WIN_OR_LOSE winOrLose;
 		};
@@ -31,6 +32,7 @@ namespace Flappy_Bird
 		extern bool pause;
 
 		void InitialicePlayer();
+		void ResetPlayer();
 		void Input();
 		void LoseOrWin();
 		void EarnPoint();

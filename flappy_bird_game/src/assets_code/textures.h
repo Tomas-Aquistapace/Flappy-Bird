@@ -14,6 +14,7 @@ namespace Flappy_Bird
 		extern Texture2D player;
 		extern Texture2D walls;
 		extern Texture2D menuArrows;
+		extern Texture2D menuTittle;
 
 		void LoadTextures();
 		void UnloadTextures();

@@ -54,7 +54,6 @@ namespace Flappy_Bird
 				break;
 
 			case Menu::exit:
-				
 				Player_Things::player.exitGame = true;
 				break;
 			}

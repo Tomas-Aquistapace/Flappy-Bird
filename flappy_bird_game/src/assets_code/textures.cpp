@@ -15,6 +15,7 @@ namespace Flappy_Bird
 		Image playerImage;
 		Image wallsImage;
 		Image arrowImage;
+		Image menuTittleImage;
 
 		Texture2D stageBackground;
 		Texture2D background;
@@ -23,6 +24,7 @@ namespace Flappy_Bird
 		Texture2D player;
 		Texture2D walls;
 		Texture2D menuArrows;
+		Texture2D menuTittle;
 
 		void LoadTextures()
 		{
@@ -34,16 +36,22 @@ namespace Flappy_Bird
 			wallsImage = LoadImage("assets/objects/wall.png");
 			arrowImage = LoadImage("assets/menu/arrow.png");
 
+			menuTittleImage = LoadImage("assets/menu/framework.png");
+
+
 			ImageResize(&playerImage, static_cast<int>(Player_Things::player.radius) * 2, static_cast<int>(Player_Things::player.radius) * 2);
 			ImageResize(&arrowImage, static_cast<int>(Menu::leftArrow.rec.width), static_cast<int>(Menu::leftArrow.rec.height));
+			ImageResize(&menuTittleImage, 500, 100);
 
 			player = LoadTextureFromImage(playerImage);
 			walls = LoadTextureFromImage(wallsImage);
 			menuArrows = LoadTextureFromImage(arrowImage);
+			menuTittle = LoadTextureFromImage(menuTittleImage);
 
 			UnloadImage(playerImage);
 			UnloadImage(wallsImage);
 			UnloadImage(arrowImage);
+			UnloadImage(menuTittleImage);
 		}
 
 		void UnloadTextures()
@@ -55,6 +63,7 @@ namespace Flappy_Bird
 			UnloadTexture(player);
 			UnloadTexture(walls);
 			UnloadTexture(menuArrows);
+			UnloadTexture(menuTittle);
 		}
 
 		void MovementBackgrounds()

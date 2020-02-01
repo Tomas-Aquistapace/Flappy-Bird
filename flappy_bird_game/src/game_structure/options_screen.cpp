@@ -30,6 +30,8 @@ namespace Flappy_Bird
 			
 			DrawText("OPTIONS", GetScreenWidth() / 2 - 150, GetScreenHeight() / 5, fontTittle, GREEN);
 
+			DrawTexture(Textures::menuArrows, static_cast<int>(Menu::rightArrow.rec.x), static_cast<int>(Menu::rightArrow.rec.y), GRAY);
+
 			EndDrawing();
 		}
 	}

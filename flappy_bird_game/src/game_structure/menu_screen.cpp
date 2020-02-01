@@ -38,7 +38,7 @@ namespace Flappy_Bird
 		{
 			if (IsKeyPressed(KEY_SPACE) == true)
 			{
-				Player_Things::InitialicePlayer();
+				Player_Things::ResetPlayer();
 				scenes = game;
 			}
 
@@ -60,22 +60,17 @@ namespace Flappy_Bird
 
 		void DrawMenu()
 		{
-			//int TriangleWidth = 40;
-			//int TriangleHeight = 60;
-			//int leftTriangleX = GetScreenWidth() / 2 - GetScreenWidth() / 3 - TriangleWidth;
-			//int leftTriangleY = GetScreenHeight() / 2 + TriangleHeight / 2;
-			//
-			//int rightTriangleX = GetScreenWidth() / 2 + GetScreenWidth() / 3;
-			//int rightTriangleY = GetScreenHeight() / 2 + TriangleHeight / 2;
-
-			Textures::MovementBackgrounds();
-
 			BeginDrawing();
 			ClearBackground(BLACK);
 
+			Textures::MovementBackgrounds();
 			Textures::DrawBackground();
 
-			DrawText("FLAPPY FLAME", GetScreenWidth() / 2 - 150, GetScreenHeight() / 5, fontTittle, GREEN);
+			//DrawRectangle(GetScreenWidth()/2 - 250, GetScreenHeight() / 6, 500, 100, GRAY);
+
+			DrawTexture(Textures::menuTittle, GetScreenWidth() / 2 - 250, GetScreenHeight() / 6, GRAY);
+
+			DrawText("FLAPPY FLAME", GetScreenWidth() / 2 - 200, GetScreenHeight() / 5, fontTittle, GREEN);
 			DrawText("press SPACE", GetScreenWidth() / 2 - 60, GetScreenHeight() / 2 + 60, fontSubTittle, WHITE);
 
 			DrawRectangleRec(leftArrow.rec, BLUE);

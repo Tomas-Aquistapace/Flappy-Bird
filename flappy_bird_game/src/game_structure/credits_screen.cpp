@@ -3,8 +3,6 @@
 #include "raylib.h"
 
 #include "menu_screen.h"
-#include "game_objets/player.h"
-#include "game_structure/initialice.h"
 #include "assets_code/textures.h"
 
 namespace Flappy_Bird
@@ -18,7 +16,8 @@ namespace Flappy_Bird
 		{
 			if (IsKeyPressed(KEY_LEFT) == true)
 			{
-				ResetValues();
+				//Player_Things::ResetPlayer();
+				//Enemies::InitialiceEnemies();
 				Menu::scenes = Menu::menu;
 			}
 		}
@@ -31,8 +30,12 @@ namespace Flappy_Bird
 			Textures::MovementBackgrounds();
 			Textures::DrawBackground();
 
-			DrawText("Credits", GetScreenWidth() / 2 - 50, GetScreenHeight() / 2, fontTittle, GREEN);
+			DrawText("Credits", GetScreenWidth() / 2 - 100, GetScreenHeight() / 5, fontTittle, GREEN);
 			
+			DrawTexture(Textures::menuArrows, static_cast<int>(Menu::leftArrow.rec.x), static_cast<int>(Menu::leftArrow.rec.y), GRAY);
+
+			DrawRectangle(GetScreenWidth() / 2 - 175, GetScreenHeight() / 2 - 100, 350, 300, GRAY);
+
 			EndDrawing();
 		}
 	}

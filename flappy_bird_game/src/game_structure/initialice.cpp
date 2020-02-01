@@ -25,10 +25,4 @@ namespace Flappy_Bird
 
 		SetTargetFPS(60);
 	}
-
-	void ResetValues()
-	{
-		Player_Things::InitialicePlayer();
-		Enemies::InitialiceEnemies();
-	}
 }
