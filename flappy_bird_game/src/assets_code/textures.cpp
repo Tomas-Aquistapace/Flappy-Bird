@@ -6,21 +6,23 @@
 namespace Flappy_Bird
 {
 	namespace Textures
-	{
-		static float scrollingStage = 0.0f;
-		static float scrollingBack = 0.0f;
-		static float scrollingMid = 0.0f;
-		static float scrollingFore = 0.0f;
+	{	
+		static float scrolling_floor = 0.0f;
+		static float scrolling_trees_layer_1 = 0.0f;
+		static float scrolling_mist = 0.0f;
+		static float scrolling_trees_layer_2 = 0.0f;
+		static float scrolling_trees_layer_3 = 0.0f;
+		static float scrolling_stars = 0.0f;
 
-		Image playerImage;
-		Image wallsImage;
-		Image arrowImage;
-		Image menuTittleImage;
+		Texture2D trees_layer_1;
+		Texture2D mist;
+		Texture2D trees_layer_2;
+		Texture2D trees_layer_3;
+		Texture2D floor;
+		Texture2D stars;
+		Texture2D moon;
+		Texture2D base;
 
-		Texture2D stageBackground;
-		Texture2D background;
-		Texture2D midground;
-		Texture2D foreground;
 		Texture2D player;
 		Texture2D walls;
 		Texture2D menuArrows;
@@ -28,16 +30,30 @@ namespace Flappy_Bird
 
 		void LoadTextures()
 		{
-			stageBackground = LoadTexture("assets/scenarios/stageBackground.png");
-			background = LoadTexture("assets/scenarios/background.png");
-			midground = LoadTexture("assets/scenarios/midground.png");
-			foreground = LoadTexture("assets/scenarios/foreground.png");
+			Image playerImage;
+			Image wallsImage;
+			Image arrowImage;
+			Image menuTittleImage;			
+			
 			playerImage = LoadImage("assets/objects/player.png");
 			wallsImage = LoadImage("assets/objects/wall.png");
 			arrowImage = LoadImage("assets/menu/arrow.png");
 
 			menuTittleImage = LoadImage("assets/menu/framework.png");
 
+			//--------------
+			// Background
+
+			trees_layer_1 = LoadTexture("assets/scenarios/trees_layer_1.png");
+			mist = LoadTexture("assets/scenarios/mist.png");
+			trees_layer_2 = LoadTexture("assets/scenarios/trees_layer_2.png");
+			trees_layer_3 = LoadTexture("assets/scenarios/trees_layer_3.png");
+			floor = LoadTexture("assets/scenarios/floor.png");
+			stars = LoadTexture("assets/scenarios/stars.png");
+			moon = LoadTexture("assets/scenarios/moon.png");
+			base = LoadTexture("assets/scenarios/base.png");
+
+			//--------------
 
 			ImageResize(&playerImage, static_cast<int>(Player_Things::player.radius) * 2, static_cast<int>(Player_Things::player.radius) * 2);
 			ImageResize(&arrowImage, static_cast<int>(Menu::leftArrow.rec.width), static_cast<int>(Menu::leftArrow.rec.height));
@@ -56,10 +72,15 @@ namespace Flappy_Bird
 
 		void UnloadTextures()
 		{
-			UnloadTexture(stageBackground);
-			UnloadTexture(background);
-			UnloadTexture(midground);
-			UnloadTexture(foreground);
+			UnloadTexture(trees_layer_1);
+			UnloadTexture(mist);
+			UnloadTexture(trees_layer_2);
+			UnloadTexture(trees_layer_3);
+			UnloadTexture(floor);
+			UnloadTexture(stars);
+			UnloadTexture(moon);
+			UnloadTexture(base);
+
 			UnloadTexture(player);
 			UnloadTexture(walls);
 			UnloadTexture(menuArrows);
@@ -68,34 +89,50 @@ namespace Flappy_Bird
 
 		void MovementBackgrounds()
 		{
-			scrollingStage -= 10.0f * GetFrameTime();
-			scrollingBack -= 25.0f * GetFrameTime();
-			scrollingMid -= 75.0f * GetFrameTime();
-			scrollingFore -= 150.0f * GetFrameTime();
+			scrolling_stars -= 20.0f * GetFrameTime();
+			scrolling_trees_layer_3 -= 25.0f * GetFrameTime();
+			scrolling_trees_layer_2 -= 75.0f * GetFrameTime();
+			scrolling_mist -= 80.0f * GetFrameTime();
+			scrolling_trees_layer_1 -= 120.0f * GetFrameTime();
+			scrolling_floor -= 120.0f * GetFrameTime();
 
-			if (scrollingStage <= -stageBackground.width)
-				scrollingStage = 0.0f;
-			if (scrollingBack <= -background.width)
-				scrollingBack = 0.0f;
-			if (scrollingMid <= -midground.width)
-				scrollingMid = 0.0f;
-			if (scrollingFore <= -foreground.width)
-				scrollingFore = 0.0f;
+			if (scrolling_stars <= -stars.width)
+				scrolling_stars = 0.0f;
+			if (scrolling_trees_layer_3 <= -trees_layer_3.width)
+				scrolling_trees_layer_3 = 0.0f;
+			if (scrolling_trees_layer_2 <= -trees_layer_2.width)
+				scrolling_trees_layer_2 = 0.0f;
+			if (scrolling_mist <= -mist.width)
+				scrolling_mist = 0.0f;
+			if (scrolling_trees_layer_1 <= -trees_layer_1.width)
+				scrolling_trees_layer_1 = 0.0f;
+			if (scrolling_floor <= -floor.width)
+				scrolling_floor = 0.0f;
 		}
 
 		void DrawBackground()
-		{
-			DrawTextureV(stageBackground, Vector2{ scrollingStage, 0 }, WHITE);
-			DrawTextureV(stageBackground, Vector2{ stageBackground.width + scrollingStage, 0 }, WHITE);
+		{			
+			DrawTextureV(base, Vector2{ 0, 0 }, WHITE);
+			
+			DrawTextureV(moon, Vector2{ static_cast<float>(moon.width / -3), 0 }, WHITE);
 
-			DrawTextureV(background, Vector2{ scrollingBack, -80 }, WHITE);
-			DrawTextureV(background, Vector2{ background.width + scrollingBack, -80 }, WHITE);
+			DrawTextureV(stars, Vector2{ scrolling_stars, 0 }, WHITE);
+			DrawTextureV(stars, Vector2{ stars.width + scrolling_stars, 0 }, WHITE);
+			
+			DrawTextureV(trees_layer_3, Vector2{ scrolling_trees_layer_3, 100 }, WHITE);
+			DrawTextureV(trees_layer_3, Vector2{ trees_layer_3.width + scrolling_trees_layer_3, 100 }, WHITE);
+			
+			DrawTextureV(trees_layer_2, Vector2{ scrolling_trees_layer_2, 100 }, WHITE);
+			DrawTextureV(trees_layer_2, Vector2{ trees_layer_2.width + scrolling_trees_layer_2, 100 }, WHITE);
+			
+			DrawTextureV(mist, Vector2{ scrolling_mist, 100 }, WHITE);
+			DrawTextureV(mist, Vector2{ mist.width + scrolling_mist, 100 }, WHITE);
 
-			DrawTextureV(midground, Vector2{ scrollingMid, -60 }, WHITE);
-			DrawTextureV(midground, Vector2{ midground.width + scrollingMid, -60 }, WHITE);
+			DrawTextureV(trees_layer_1, Vector2{ scrolling_trees_layer_1, 100 }, WHITE);
+			DrawTextureV(trees_layer_1, Vector2{ trees_layer_1.width + scrolling_trees_layer_1, 100 }, WHITE);
 
-			DrawTextureV(foreground, Vector2{ scrollingFore, -90 }, WHITE);
-			DrawTextureV(foreground, Vector2{ foreground.width + scrollingFore, -90 }, WHITE);
+			DrawTextureV(floor, Vector2{ scrolling_floor, 100 }, WHITE);
+			DrawTextureV(floor, Vector2{ floor.width + scrolling_floor, 100 }, WHITE);
 		}
 	}
 }
