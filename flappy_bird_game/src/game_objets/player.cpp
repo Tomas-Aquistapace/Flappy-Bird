@@ -5,6 +5,7 @@
 #include "game_structure/game_screen.h"
 #include "game_structure/initialice.h"
 #include "assets_code/textures.h"
+#include "assets_code/sounds.h"
 
 namespace Flappy_Bird
 {
@@ -87,13 +88,9 @@ namespace Flappy_Bird
 				{
 					player.maxPoints = player.points;
 				}
-			}
 
-			/*if ((player.position.y + player.radius >= GetScreenHeight()) ||
-				(player.position.y - player.radius <= 0))
-			{
-				Menu::scenes = Menu::endGame;
-			}*/
+				PlaySound(Sounds::die_sound);
+			}
 		}
 
 		void EarnPoint()
@@ -137,6 +134,8 @@ namespace Flappy_Bird
 				{
 					player.state = jumping;
 					player.force = SPEEDPJ;
+
+					PlaySound(Sounds::jump);
 				}
 				else if (player.state == jumping)
 				{

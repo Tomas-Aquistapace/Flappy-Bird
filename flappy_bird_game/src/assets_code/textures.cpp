@@ -35,23 +35,23 @@ namespace Flappy_Bird
 			Image arrowImage;
 			Image menuTittleImage;			
 			
-			playerImage = LoadImage("assets/objects/player.png");
-			wallsImage = LoadImage("assets/objects/wall.png");
-			arrowImage = LoadImage("assets/menu/arrow.png");
+			playerImage = LoadImage("assets/textures/objects/player.png");
+			wallsImage = LoadImage("assets/textures/objects/wall.png");
+			arrowImage = LoadImage("assets/textures/menu/arrow.png");
 
-			menuTittleImage = LoadImage("assets/menu/framework.png");
+			menuTittleImage = LoadImage("assets/textures/menu/framework.png");
 
 			//--------------
 			// Background
 
-			trees_layer_1 = LoadTexture("assets/scenarios/trees_layer_1.png");
-			mist = LoadTexture("assets/scenarios/mist.png");
-			trees_layer_2 = LoadTexture("assets/scenarios/trees_layer_2.png");
-			trees_layer_3 = LoadTexture("assets/scenarios/trees_layer_3.png");
-			floor = LoadTexture("assets/scenarios/floor.png");
-			stars = LoadTexture("assets/scenarios/stars.png");
-			moon = LoadTexture("assets/scenarios/moon.png");
-			base = LoadTexture("assets/scenarios/base.png");
+			trees_layer_1 = LoadTexture("assets/textures/scenarios/trees_layer_1.png");
+			mist = LoadTexture("assets/textures/scenarios/mist.png");
+			trees_layer_2 = LoadTexture("assets/textures/scenarios/trees_layer_2.png");
+			trees_layer_3 = LoadTexture("assets/textures/scenarios/trees_layer_3.png");
+			floor = LoadTexture("assets/textures/scenarios/floor.png");
+			stars = LoadTexture("assets/textures/scenarios/stars.png");
+			moon = LoadTexture("assets/textures/scenarios/moon.png");
+			base = LoadTexture("assets/textures/scenarios/base.png");
 
 			//--------------
 

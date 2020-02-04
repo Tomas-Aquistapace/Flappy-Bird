@@ -16,9 +16,6 @@
     <ClCompile Include="..\src\game_structure\game_screen.cpp">
       <Filter>game_structure</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\game_structure\initialice.cpp">
-      <Filter>game_structure</Filter>
-    </ClCompile>
     <ClCompile Include="..\src\game_objets\enemies.cpp">
       <Filter>game_objets</Filter>
     </ClCompile>
@@ -43,12 +40,12 @@
     <ClCompile Include="..\src\assets_code\textures.cpp">
       <Filter>assets_code</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\assets_code\sounds.cpp">
+      <Filter>assets_code</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\game_structure\game_screen.h">
-      <Filter>game_structure</Filter>
-    </ClInclude>
-    <ClInclude Include="..\src\game_structure\initialice.h">
       <Filter>game_structure</Filter>
     </ClInclude>
     <ClInclude Include="..\src\game_objets\enemies.h">
@@ -73,6 +70,9 @@
       <Filter>game_structure</Filter>
     </ClInclude>
     <ClInclude Include="..\src\assets_code\textures.h">
+      <Filter>assets_code</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\assets_code\sounds.h">
       <Filter>assets_code</Filter>
     </ClInclude>
   </ItemGroup>
