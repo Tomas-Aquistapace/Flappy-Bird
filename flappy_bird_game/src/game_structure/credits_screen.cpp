@@ -30,6 +30,8 @@ namespace Flappy_Bird
 			Textures::MovementBackgrounds();
 			Textures::DrawBackground();
 
+			DrawRectangle(GetScreenWidth() / 2 - 200, GetScreenHeight() / 6, 400, 95, DARKGRAY);
+
 			DrawText("Credits", GetScreenWidth() / 2 - 100, GetScreenHeight() / 5, fontTittle, GREEN);
 			
 			DrawTexture(Textures::menuArrows, static_cast<int>(Menu::leftArrow.rec.x), static_cast<int>(Menu::leftArrow.rec.y), GRAY);

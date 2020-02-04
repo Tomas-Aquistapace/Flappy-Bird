@@ -32,7 +32,8 @@ namespace Flappy_Bird
 
 			Textures::MovementBackgrounds();
 			Textures::DrawBackground();
-
+			
+			DrawRectangle(GetScreenWidth() / 2 - 200, GetScreenHeight() / 6, 400, 95, DARKGRAY);
 			DrawText("Game Over", GetScreenWidth() / 2 - 200, GetScreenHeight() / 5, fontTittle, GREEN);
 
 			DrawRectangle(GetScreenWidth() / 2 - 125, GetScreenHeight() / 2 - 75, 250, 100, GRAY);
