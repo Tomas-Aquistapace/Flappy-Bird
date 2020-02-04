@@ -89,12 +89,15 @@ namespace Flappy_Bird
 
 		void MovementBackgrounds()
 		{
-			scrolling_stars -= 20.0f * GetFrameTime();
-			scrolling_trees_layer_3 -= 25.0f * GetFrameTime();
-			scrolling_trees_layer_2 -= 75.0f * GetFrameTime();
-			scrolling_mist -= 80.0f * GetFrameTime();
-			scrolling_trees_layer_1 -= 120.0f * GetFrameTime();
-			scrolling_floor -= 120.0f * GetFrameTime();
+			if (Player_Things::pause != true)
+			{
+				scrolling_stars -= 20.0f * GetFrameTime();
+				scrolling_trees_layer_3 -= 25.0f * GetFrameTime();
+				scrolling_trees_layer_2 -= 75.0f * GetFrameTime();
+				scrolling_mist -= 80.0f * GetFrameTime();
+				scrolling_trees_layer_1 -= 120.0f * GetFrameTime();
+				scrolling_floor -= 120.0f * GetFrameTime();
+			}
 
 			if (scrolling_stars <= -stars.width)
 				scrolling_stars = 0.0f;
