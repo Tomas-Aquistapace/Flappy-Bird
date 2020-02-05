@@ -86,7 +86,8 @@ namespace Flappy_Bird
 			DrawTexture(Textures::menuTittle, GetScreenWidth() / 2 - 250, GetScreenHeight() / 6, GRAY);
 
 			DrawText("FLAPPY FLAME", GetScreenWidth() / 2 - 200, GetScreenHeight() / 5, fontTittle, GREEN);
-			DrawText("press SPACE", GetScreenWidth() / 2 - 60, GetScreenHeight() / 2 + 60, fontSubTittle, WHITE);
+			DrawText("press SPACE\n	  to JUMP", GetScreenWidth() / 2 - 60, GetScreenHeight() / 2 + 60, fontSubTittle, WHITE);
+			DrawText("press ESCAPE to EXIT", 20, GetScreenHeight() - 20, fontSubTittle, WHITE);
 
 			DrawRectangleRec(leftArrow.rec, BLUE);
 			DrawRectangleRec(rightArrow.rec, BLUE);
