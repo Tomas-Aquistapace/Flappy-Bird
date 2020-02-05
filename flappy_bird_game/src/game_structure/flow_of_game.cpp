@@ -60,7 +60,7 @@ namespace Flappy_Bird
 		const int SCREENWIDTH = 600;
 		const int SCREENHEIGHT = 600;
 
-		InitWindow(SCREENWIDTH, SCREENHEIGHT, "Flappy Bird - Tomas Aquistapace");
+		InitWindow(SCREENWIDTH, SCREENHEIGHT, "Flappy Flame - Tomas Aquistapace");
 		HideCursor();
 
 		SetExitKey(KEY_BACK);
