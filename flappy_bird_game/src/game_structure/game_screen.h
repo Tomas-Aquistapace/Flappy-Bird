@@ -8,7 +8,8 @@ namespace Flappy_Bird
 		extern int screenWidth;
 		extern int screenHeight;
 
-		void DrawGame();
+		void Game();
+		//void DrawGame();
 	}
 }
 

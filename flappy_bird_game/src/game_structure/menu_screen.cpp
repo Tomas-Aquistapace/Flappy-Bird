@@ -3,6 +3,7 @@
 #include "game_screen.h"
 #include "game_objets/player.h"
 #include "assets_code/textures.h"
+#include "assets_code/sounds.h"
 
 namespace Flappy_Bird
 {
@@ -15,6 +16,9 @@ namespace Flappy_Bird
 
 		static int fontTittle = 50;
 		static int fontSubTittle = 20;
+
+		static void InputMenu();
+		static void DrawMenu();
 
 		void InitialiceMenu()
 		{
@@ -34,11 +38,21 @@ namespace Flappy_Bird
 			rightArrow.rec.y = static_cast<float>(GetScreenHeight() / 2 + height / 2);
 		}
 
-		void InputMenu()
+		void Menu()
+		{
+			InputMenu();
+			Sounds::StateGameMusic(Sounds::update);
+			DrawMenu();
+		}
+
+		// ----------------------------
+
+		static void InputMenu()
 		{
 			if (IsKeyPressed(KEY_SPACE) == true)
 			{
 				Player_Things::ResetPlayer();
+				Sounds::StatePlayerMusic(Sounds::play);
 				scenes = game;
 			}
 
@@ -55,10 +69,11 @@ namespace Flappy_Bird
 			if (IsKeyPressed(KEY_ESCAPE) == true)
 			{
 				scenes = exit;
+				Sounds::StateGameMusic(Sounds::stop);
 			}
 		}
 
-		void DrawMenu()
+		static void DrawMenu()
 		{
 			BeginDrawing();
 			ClearBackground(BLACK);

@@ -5,8 +5,7 @@ namespace Flappy_Bird
 {
 	namespace Credits
 	{
-		void Input();
-		void DrawCredits();
+		void Credits();
 	}
 }
 

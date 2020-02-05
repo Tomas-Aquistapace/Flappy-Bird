@@ -20,10 +20,10 @@ namespace Flappy_Bird
 		extern ARROW leftArrow;
 		extern ARROW rightArrow;
 
-
 		void InitialiceMenu();
-		void InputMenu();
-		void DrawMenu();
+		void Menu();
+		//void InputMenu();
+		//void DrawMenu();
 	}
 }
 

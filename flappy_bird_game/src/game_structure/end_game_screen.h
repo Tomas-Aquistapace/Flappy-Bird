@@ -5,8 +5,7 @@ namespace Flappy_Bird
 {
 	namespace End_game
 	{
-		void Input();
-		void DrawEndGame();
+		void EndGame();
 	}
 }
 

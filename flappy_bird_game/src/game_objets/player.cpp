@@ -59,6 +59,7 @@ namespace Flappy_Bird
 				ResetPlayer();
 				InitialiceEnemies();
 				Menu::scenes = Menu::menu;
+				Sounds::StatePlayerMusic(Sounds::stop);
 			}
 
 			if (IsKeyPressed(KEY_ENTER) == true)
@@ -82,6 +83,9 @@ namespace Flappy_Bird
 				(player.position.y + player.radius >= GetScreenHeight()) ||
 				(player.position.y - player.radius <= 0))
 			{
+				Sounds::StateEndMusic(Sounds::play);
+				PlaySound(Sounds::die_sound);
+				
 				Menu::scenes = Menu::endGame;
 
 				if (player.points > player.maxPoints)
@@ -89,7 +93,6 @@ namespace Flappy_Bird
 					player.maxPoints = player.points;
 				}
 
-				PlaySound(Sounds::die_sound);
 			}
 		}
 

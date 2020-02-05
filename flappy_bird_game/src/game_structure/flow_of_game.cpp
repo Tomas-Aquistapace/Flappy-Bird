@@ -5,8 +5,8 @@
 #include "menu_screen.h"
 #include "credits_screen.h"
 #include "options_screen.h"
-#include "end_game_screen.h"
 #include "game_screen.h"
+#include "end_game_screen.h"
 #include "game_objets/player.h"
 #include "game_objets/enemies.h"
 #include "assets_code/textures.h"
@@ -15,6 +15,7 @@
 namespace Flappy_Bird
 {
 	static void InitialiceAll();
+	static void UnloadAll();
 
 	void FlowOfGame()
 	{
@@ -25,35 +26,23 @@ namespace Flappy_Bird
 			switch (Menu::scenes)
 			{
 			case Menu::menu:
-				Menu::InputMenu();
-				Menu::DrawMenu();
+				Menu::Menu();
 				break;
 
 			case Menu::game:
-				Player_Things::Input();
-				if (Player_Things::pause == false)
-				{
-					Enemies::MovementEnemies();
-					Player_Things::EarnPoint();
-					Player_Things::LoseOrWin();
-					Sounds::StatePlayerMusic(Sounds::update);
-				}
-				Game::DrawGame();
+				Game::Game();
 				break;
 
 			case Menu::options:
-				Options::Input();
-				Options::DrawOptions();
+				Options::Options();
 				break;
 
 			case Menu::credits:
-				Credits::Input();
-				Credits::DrawCredits();
+				Credits::Credits();
 				break;
 
 			case Menu::endGame:
-				End_game::Input();
-				End_game::DrawEndGame();
+				End_game::EndGame();
 				break;
 
 			case Menu::exit:
@@ -61,8 +50,7 @@ namespace Flappy_Bird
 				break;
 			}
 		}
-		Textures::UnloadTextures();
-		Sounds::UnloadMusic_Sound();
+		UnloadAll();
 	}
 	
 	// -----------------------------	
@@ -85,5 +73,11 @@ namespace Flappy_Bird
 		Textures::LoadTextures();
 
 		SetTargetFPS(60);
+	}
+
+	static void UnloadAll()
+	{
+		Textures::UnloadTextures();
+		Sounds::UnloadMusic_Sound();
 	}
 }

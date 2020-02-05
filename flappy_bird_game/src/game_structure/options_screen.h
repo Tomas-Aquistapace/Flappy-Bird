@@ -5,8 +5,7 @@ namespace Flappy_Bird
 {
 	namespace Options
 	{
-		void Input();
-		void DrawOptions();
+		void Options();
 	}
 }
 

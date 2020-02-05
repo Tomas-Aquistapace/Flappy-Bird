@@ -19,9 +19,9 @@ namespace Flappy_Bird
 
 		void LoadMusic_Sound();
 		//void SetSoundsVolume(bool mute);
+		void StateGameMusic(STATE states);
+		void StateEndMusic(STATE states);
 		void StatePlayerMusic(STATE states);
-		//void StateMenuMusic(STATE states);
-		//void StateGameMusic(STATE states);
 		//void StateWinMusic(STATE states);
 		void UnloadMusic_Sound();
 	}

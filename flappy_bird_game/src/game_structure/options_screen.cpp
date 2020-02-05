@@ -4,6 +4,7 @@
 
 #include "menu_screen.h"
 #include "assets_code/textures.h"
+#include "assets_code/sounds.h"
 
 namespace Flappy_Bird
 {
@@ -12,7 +13,19 @@ namespace Flappy_Bird
 		static int fontTittle = 50;
 		static int fontSubTittle = 20;
 
-		void Input()
+		static void Input();
+		static void Draw();
+
+		void Options()
+		{
+			Input();
+			Sounds::StateGameMusic(Sounds::update);
+			Draw();
+		}
+
+		// --------------------
+
+		static void Input()
 		{
 			if (IsKeyPressed(KEY_RIGHT) == true)
 			{
@@ -20,7 +33,7 @@ namespace Flappy_Bird
 			}
 		}
 
-		void DrawOptions()
+		static void Draw()
 		{
 			BeginDrawing();
 			ClearBackground(BLANK);

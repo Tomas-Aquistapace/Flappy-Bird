@@ -4,7 +4,8 @@ namespace Flappy_Bird
 {
 	namespace Sounds
 	{
-		//Music loopMusic;
+		Music gameMusic;
+		Music endMusic;
 		Music player_flames;
 		Sound jump;
 		Sound die_sound;
@@ -13,13 +14,14 @@ namespace Flappy_Bird
 		{
 			InitAudioDevice();
 
-			//loopMusic = LoadMusicStream("assets/loop_songs/main_song.ogg");
+			gameMusic = LoadMusicStream("assets/sounds/music/halloween-fun_by_pinkzebra.ogg");
+			endMusic = LoadMusicStream("assets/sounds/music/Loyalty_Freak_Music_-_We_all_gonna_die.ogg");
 			player_flames = LoadMusicStream("assets/sounds/player_sounds/player_flames.ogg");
 			
 			jump = LoadSound("assets/sounds/player_sounds/jump.ogg");
 			die_sound = LoadSound("assets/sounds/player_sounds/lose.ogg");
 
-			PlayMusicStream(player_flames);
+			PlayMusicStream(gameMusic);
 		}
 
 		/*void SetSoundsVolume(bool mute)
@@ -44,6 +46,39 @@ namespace Flappy_Bird
 			}
 		}*/
 
+
+		void StateGameMusic(STATE states)
+		{
+			switch (states)
+			{
+			case stop:
+				StopMusicStream(gameMusic);
+				break;
+			case play:
+				PlayMusicStream(gameMusic);
+				break;
+			case update:
+				UpdateMusicStream(gameMusic);
+				break;
+			}
+		}
+
+		void StateEndMusic(STATE states)
+		{
+			switch (states)
+			{
+			case stop:
+				StopMusicStream(endMusic);
+				break;
+			case play:
+				PlayMusicStream(endMusic);
+				break;
+			case update:
+				UpdateMusicStream(endMusic);
+				break;
+			}
+		}
+
 		void StatePlayerMusic(STATE states)
 		{
 			switch (states)
@@ -59,38 +94,6 @@ namespace Flappy_Bird
 				break;
 			}
 		}
-
-		//void StateMenuMusic(STATE states)
-		//{
-		//	switch (states)
-		//	{
-		//	case stop:
-		//		StopMusicStream(menuMusic);
-		//		break;
-		//	case play:
-		//		PlayMusicStream(menuMusic);
-		//		break;
-		//	case update:
-		//		UpdateMusicStream(menuMusic);
-		//		break;
-		//	}
-		//}
-
-		//void StateGameMusic(STATE states)
-		//{
-		//	switch (states)
-		//	{
-		//	case stop:
-		//		StopMusicStream(gameMusic);
-		//		break;
-		//	case play:
-		//		PlayMusicStream(gameMusic);
-		//		break;
-		//	case update:
-		//		UpdateMusicStream(gameMusic);
-		//		break;
-		//	}
-		//}
 
 		//void StateWinMusic(STATE states)
 		//{
@@ -110,6 +113,8 @@ namespace Flappy_Bird
 
 		void UnloadMusic_Sound()
 		{
+			UnloadMusicStream(gameMusic);
+			UnloadMusicStream(endMusic);
 			UnloadMusicStream(player_flames);
 			UnloadSound(jump);
 			UnloadSound(die_sound);

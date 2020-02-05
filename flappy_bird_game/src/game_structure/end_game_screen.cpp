@@ -5,8 +5,8 @@
 #include "menu_screen.h"
 #include "game_objets/player.h"
 #include "game_objets/enemies.h"
-#include "game_structure/initialice.h"
 #include "assets_code/textures.h"
+#include "assets_code/sounds.h"
 
 namespace Flappy_Bird
 {
@@ -15,17 +15,31 @@ namespace Flappy_Bird
 		static int fontTittle = 50;
 		static int fontSubTittle = 25;
 
-		void Input()
+		static void Input();
+		static void DrawEndGame();
+
+		void EndGame()
+		{
+			Input();
+			Sounds::StateEndMusic(Sounds::update);
+			DrawEndGame();
+		}
+
+		// -----------------------
+
+		static void Input()
 		{
 			if (IsKeyPressed(KEY_ENTER) == true)
 			{
 				Player_Things::ResetPlayer();
 				Enemies::InitialiceEnemies();
+				Sounds::StateEndMusic(Sounds::stop);
+				Sounds::StateGameMusic(Sounds::play);
 				Menu::scenes = Menu::menu;
 			}
 		}
 
-		void DrawEndGame()
+		static void DrawEndGame()
 		{
 			BeginDrawing();
 			ClearBackground(BLACK);

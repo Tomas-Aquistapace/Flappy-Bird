@@ -5,6 +5,7 @@
 #include "game_objets/player.h"
 #include "game_objets/enemies.h"
 #include "assets_code/textures.h"
+#include "assets_code/sounds.h"
 
 namespace Flappy_Bird
 {
@@ -14,9 +15,26 @@ namespace Flappy_Bird
 		static short fontSubTittle = 30;
 		static short font = 20;
 
-		void DrawGame()
+		static void Draw();
+
+		void Game()
 		{
-			
+			Player_Things::Input();
+			if (Player_Things::pause == false)
+			{
+				Enemies::MovementEnemies();
+				Player_Things::EarnPoint();
+				Player_Things::LoseOrWin();
+				Sounds::StatePlayerMusic(Sounds::update);
+			}
+			Sounds::StateGameMusic(Sounds::update);
+			Draw();
+		}
+
+		// -----------------------
+
+		static void Draw()
+		{
 			BeginDrawing();
 			ClearBackground(BLACK);
 
