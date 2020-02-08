@@ -27,6 +27,10 @@ namespace Flappy_Bird
 		Texture2D walls;
 		Texture2D menuArrows;
 		Texture2D menuTittle;
+		Texture2D raylibCredits;
+
+		Font tittleFont;
+		Font textFont;
 
 		void LoadTextures()
 		{
@@ -38,8 +42,8 @@ namespace Flappy_Bird
 			playerImage = LoadImage("assets/textures/objects/player.png");
 			wallsImage = LoadImage("assets/textures/objects/wall.png");
 			arrowImage = LoadImage("assets/textures/menu/arrow.png");
-
 			menuTittleImage = LoadImage("assets/textures/menu/framework.png");
+			raylibCredits = LoadTexture("assets/credits/raylib_48x48.png");
 
 			//--------------
 			// Background
@@ -64,6 +68,9 @@ namespace Flappy_Bird
 			menuArrows = LoadTextureFromImage(arrowImage);
 			menuTittle = LoadTextureFromImage(menuTittleImage);
 
+			tittleFont = LoadFontEx("assets/font/dark_power.ttf", 200, 0, 240);
+			textFont = LoadFontEx("assets/font/enchanted_land.otf", 200, 0, 240);
+
 			UnloadImage(playerImage);
 			UnloadImage(wallsImage);
 			UnloadImage(arrowImage);
@@ -85,6 +92,10 @@ namespace Flappy_Bird
 			UnloadTexture(walls);
 			UnloadTexture(menuArrows);
 			UnloadTexture(menuTittle);
+			UnloadTexture(raylibCredits);
+
+			UnloadFont(tittleFont);
+			UnloadFont(textFont);
 		}
 
 		void MovementBackgrounds()
