@@ -18,11 +18,11 @@ namespace Flappy_Bird
 		extern Sound die_sound;
 
 		void LoadMusic_Sound();
-		//void SetSoundsVolume(bool mute);
+		void SetEffectsVolume(bool mute);
+		void SetMusicVolume(bool mute);
 		void StateGameMusic(STATE states);
 		void StateEndMusic(STATE states);
 		void StatePlayerMusic(STATE states);
-		//void StateWinMusic(STATE states);
 		void UnloadMusic_Sound();
 	}
 }

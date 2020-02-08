@@ -4,6 +4,8 @@ namespace Flappy_Bird
 {
 	namespace Sounds
 	{
+		STATE state;
+
 		Music gameMusic;
 		Music endMusic;
 		Music player_flames;
@@ -24,12 +26,11 @@ namespace Flappy_Bird
 			PlayMusicStream(gameMusic);
 		}
 
-		/*void SetSoundsVolume(bool mute)
+		void SetEffectsVolume(bool mute)
 		{
 			if (mute == true)
 			{
 				PauseMusicStream(player_flames);
-
 				SetMusicVolume(player_flames, 0.0f);
 
 				SetSoundVolume(jump, 0.0f);
@@ -38,13 +39,30 @@ namespace Flappy_Bird
 			else
 			{
 				ResumeMusicStream(player_flames);
-
 				SetMusicVolume(player_flames, 1.0f);
 
 				SetSoundVolume(jump, 1.0f);
 				SetSoundVolume(die_sound, 1.0f);
 			}
-		}*/
+		}
+		
+		void SetMusicVolume(bool mute)
+		{
+			if (mute == true)
+			{
+				PauseMusicStream(gameMusic);
+
+				SetMusicVolume(gameMusic, 0.0f);
+				SetMusicVolume(endMusic, 0.0f);
+			}
+			else
+			{
+				ResumeMusicStream(gameMusic);
+
+				SetMusicVolume(gameMusic, 1.0f);
+				SetMusicVolume(endMusic, 1.0f);
+			}
+		}
 
 
 		void StateGameMusic(STATE states)
