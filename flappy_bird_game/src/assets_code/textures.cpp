@@ -34,16 +34,28 @@ namespace Flappy_Bird
 
 		void LoadTextures()
 		{
+			//--------------
+			// Textures various
+			
 			Image playerImage;
 			Image wallsImage;
 			Image arrowImage;
 			Image menuTittleImage;			
-			
+
 			playerImage = LoadImage("assets/textures/objects/player.png");
 			wallsImage = LoadImage("assets/textures/objects/wall.png");
 			arrowImage = LoadImage("assets/textures/menu/arrow.png");
 			menuTittleImage = LoadImage("assets/textures/menu/framework.png");
 			raylibCredits = LoadTexture("assets/credits/raylib_48x48.png");
+
+			ImageResize(&playerImage, static_cast<int>(Player_Things::player.radius) * 2, static_cast<int>(Player_Things::player.radius) * 2);
+			ImageResize(&arrowImage, static_cast<int>(Menu::leftArrow.rec.width), static_cast<int>(Menu::leftArrow.rec.height));
+			ImageResize(&menuTittleImage, 500, 100);
+
+			player = LoadTextureFromImage(playerImage);
+			walls = LoadTextureFromImage(wallsImage);
+			menuArrows = LoadTextureFromImage(arrowImage);
+			menuTittle = LoadTextureFromImage(menuTittleImage);
 
 			//--------------
 			// Background
@@ -58,18 +70,12 @@ namespace Flappy_Bird
 			base = LoadTexture("assets/textures/scenarios/base.png");
 
 			//--------------
+			// Fonts
 
-			ImageResize(&playerImage, static_cast<int>(Player_Things::player.radius) * 2, static_cast<int>(Player_Things::player.radius) * 2);
-			ImageResize(&arrowImage, static_cast<int>(Menu::leftArrow.rec.width), static_cast<int>(Menu::leftArrow.rec.height));
-			ImageResize(&menuTittleImage, 500, 100);
+			tittleFont = LoadFontEx("assets/font/dark_power.ttf", 300, 0, 240);
+			textFont = LoadFontEx("assets/font/enchanted_land.otf", 300, 0, 240);
 
-			player = LoadTextureFromImage(playerImage);
-			walls = LoadTextureFromImage(wallsImage);
-			menuArrows = LoadTextureFromImage(arrowImage);
-			menuTittle = LoadTextureFromImage(menuTittleImage);
-
-			tittleFont = LoadFontEx("assets/font/dark_power.ttf", 200, 0, 240);
-			textFont = LoadFontEx("assets/font/enchanted_land.otf", 200, 0, 240);
+			// -------------
 
 			UnloadImage(playerImage);
 			UnloadImage(wallsImage);

@@ -81,7 +81,7 @@ namespace Flappy_Bird
 			Vector2 text2Pos;
 
 			tittlePos.x = static_cast<float>(GetScreenWidth() / 2 - 180);
-			tittlePos.y = static_cast<float>(GetScreenHeight() / 5);
+			tittlePos.y = static_cast<float>(GetScreenHeight() / 5 - 10);
 
 			text1Pos.x = static_cast<float>(GetScreenWidth() / 2 - 70);
 			text1Pos.y = static_cast<float>(GetScreenHeight() / 2 + 20);

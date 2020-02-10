@@ -10,7 +10,7 @@ namespace Flappy_Bird
 {
 	namespace Options
 	{
-		static int fontTittle = 50;
+		static int fontTittle = 80;
 		static int fontSubTittle = 20;
 
 		static bool muteEffects = false;
@@ -49,6 +49,11 @@ namespace Flappy_Bird
 
 		static void Draw()
 		{
+			Vector2 tittlePos;
+
+			tittlePos.x = static_cast<float>(GetScreenWidth() / 2 - 110);
+			tittlePos.y = static_cast<float>(GetScreenHeight() / 5 - 10);
+
 			BeginDrawing();
 			ClearBackground(BLANK);
 
@@ -57,7 +62,9 @@ namespace Flappy_Bird
 			
 			DrawRectangle(GetScreenWidth() / 2 - 200, GetScreenHeight() / 6, 400, 95, DARKGRAY);
 
-			DrawText("OPTIONS", GetScreenWidth() / 2 - 150, GetScreenHeight() / 5, fontTittle, GREEN);
+			DrawTextEx(Textures::tittleFont, "Options", tittlePos, static_cast<float>(fontTittle), 5, BLACK);
+
+			//DrawText("OPTIONS", GetScreenWidth() / 2 - 150, GetScreenHeight() / 5, fontTittle, GREEN);
 
 
 

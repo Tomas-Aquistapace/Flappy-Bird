@@ -10,7 +10,7 @@ namespace Flappy_Bird
 {
 	namespace Credits
 	{
-		static int fontTittle = 50;
+		static float fontTittle = 80;
 		static int fontSubTittle = 15;
 
 		static void Input();
@@ -35,6 +35,11 @@ namespace Flappy_Bird
 
 		static void Draw()
 		{
+			Vector2 tittlePos;
+
+			tittlePos.x = static_cast<float>(GetScreenWidth() / 2 - 100);
+			tittlePos.y = static_cast<float>(GetScreenHeight() / 5 - 10);
+
 			BeginDrawing();
 			ClearBackground(BLACK);
 
@@ -42,7 +47,7 @@ namespace Flappy_Bird
 			Textures::DrawBackground();
 
 			DrawRectangle(GetScreenWidth() / 2 - 200, GetScreenHeight() / 6, 400, 95, DARKGRAY);
-			DrawText("Credits", GetScreenWidth() / 2 - 100, GetScreenHeight() / 5, fontTittle, GREEN);
+			DrawTextEx(Textures::tittleFont, "Credits", tittlePos, fontTittle, 5, BLACK);
 
 			DrawRectangle(GetScreenWidth() / 2 - 175, GetScreenHeight() / 2 - 100, 350, 300, GRAY);
 			DrawText("Main programer: Tomas Aquistapace\nMain artist: Joaquin Gonzalez\n\nMusic:\n Halloween Fun - by pinkzebra\n We all gonna die - by Loyalty_Freak_Music", (GetScreenWidth() / 2 - 175) + (350 / 2) - (MeasureText("Main programer: Tomas Aquistapace\nMain artist: Joaquin\n\nMusic:\n Halloween Fun - by pinkzebra\n We all gonna die - by Loyalty_Freak_Music", fontSubTittle) / 2), 300, fontSubTittle, WHITE);
