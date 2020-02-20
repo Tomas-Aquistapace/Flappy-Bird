@@ -16,6 +16,8 @@ namespace Flappy_Bird
 
 		bool pause;
 
+		const float HEIGHT_PLAYER = 30;
+		const float WIDTH_PLAYER = 30;
 		const float SPEEDPJ = 150.0f;
 
 		static Vector2 position;
@@ -24,22 +26,28 @@ namespace Flappy_Bird
 		static float framesCounter = 0;
 		static float maxCounter = 0.25f;
 
+		static Rectangle frameRecJump;
+		static float currentFrameJump = 0;
+		static float framesCounterJump = 0;
+		static float maxCounterJump = 0.30f;
+
 		static void Jump();
 		static void DrawUI();
-		static void AnimationPlayer();
+		static void AnimationMove();
+		static void AnimationJump();
 
 		void InitialicePlayer()
 		{
 			Image ImageMovement;
-			//Image ImageJump;
+			Image ImageJump;
 
 			player.winOrLose = inGame;
 
 			player.state = falling;
 			player.force = 0.0f;
 
-			player.body.height = 30;
-			player.body.width = 30;
+			player.body.height = HEIGHT_PLAYER;
+			player.body.width = WIDTH_PLAYER;
 			player.body.x = static_cast <float>(GetScreenWidth() / 3);
 			player.body.y = static_cast <float>(GetScreenHeight() / 2);
 
@@ -50,17 +58,15 @@ namespace Flappy_Bird
 			ImageMovement = LoadImage("assets/textures/character/gosthiidle-Sheet.png");
 			player.spriteMovement = LoadTextureFromImage(ImageMovement);
 			frameRec = { 0.0f, 0.0f, static_cast<float>(player.spriteMovement.height), static_cast<float>(player.spriteMovement.width / 4) };
-			
-			//player.spriteMovement = LoadTexture("assets/textures/character/gosthiidle 1-Sheet.png");
 
-			//ImageJump = LoadImage("assets/textures/character/gosthisalto 1-Sheet.png");
-			//player.spriteJump = LoadTextureFromImage(ImageJump);
-			//player.spriteJump = LoadTexture("assets/textures/character/gosthisalto 1-Sheet.png");
+			ImageJump = LoadImage("assets/textures/character/gosthisalto-Sheet.png");
+			player.spriteJump = LoadTextureFromImage(ImageJump);
+			frameRecJump = { 0.0f, 0.0f, static_cast<float>(player.spriteMovement.height), static_cast<float>(player.spriteMovement.width / 4) };
 
 			pause = false;
 
 			UnloadImage(ImageMovement);
-			//UnloadImage(ImageJump);
+			UnloadImage(ImageJump);
 		}
 
 		void ResetPlayer()
@@ -135,8 +141,11 @@ namespace Flappy_Bird
 
 		void DrawPlayer()
 		{
-			DrawRectangleRec(player.body, GREEN);
-			AnimationPlayer();
+			if (player.state == jumping)
+				AnimationJump();
+			else
+				AnimationMove();
+			
 			DrawUI();
 		}
 
@@ -184,7 +193,7 @@ namespace Flappy_Bird
 			}
 		}
 
-		static void AnimationPlayer()
+		static void AnimationMove()
 		{
 			if (pause == false)
 			{
@@ -204,6 +213,27 @@ namespace Flappy_Bird
 			}
 
 			DrawTextureRec(player.spriteMovement, frameRec, position, WHITE);
+		}
+
+		static void AnimationJump()
+		{
+			if (pause == false)
+			{
+				framesCounterJump += GetFrameTime();
+
+				if (framesCounterJump >= (maxCounterJump))
+				{
+					framesCounterJump = 0;
+
+					currentFrameJump++;
+					if (currentFrameJump > 1)
+						currentFrameJump = 0;
+
+					frameRecJump.x = static_cast<float>(currentFrameJump * (player.spriteJump.width / 2));
+				}
+				position = { player.body.x - player.body.width / 2, player.body.y };
+			}
+			DrawTextureRec(player.spriteJump, frameRecJump, position, WHITE);
 		}
 	}
 }
