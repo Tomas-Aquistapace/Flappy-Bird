@@ -4,7 +4,6 @@
 #include "game_structure/menu_screen.h"
 #include "game_structure/game_screen.h"
 #include "game_structure/initialice.h"
-#include "assets_code/textures.h"
 #include "assets_code/sounds.h"
 
 namespace Flappy_Bird
@@ -19,23 +18,49 @@ namespace Flappy_Bird
 
 		const float SPEEDPJ = 150.0f;
 
+		static Vector2 position;
+		static Rectangle frameRec;
+		static float currentFrame = 0;
+		static float framesCounter = 0;
+		static float maxCounter = 0.25f;
+
 		static void Jump();
 		static void DrawUI();
+		static void AnimationPlayer();
 
 		void InitialicePlayer()
 		{
+			Image ImageMovement;
+			//Image ImageJump;
+
 			player.winOrLose = inGame;
 
 			player.state = falling;
 			player.force = 0.0f;
 
-			player.position = { static_cast <float>(GetScreenWidth() / 3), static_cast <float>(GetScreenHeight() / 2) };
-			player.radius = 15;
+			player.body.height = 30;
+			player.body.width = 30;
+			player.body.x = static_cast <float>(GetScreenWidth() / 3);
+			player.body.y = static_cast <float>(GetScreenHeight() / 2);
+
 			player.points = 0;
 			player.maxPoints = 0;
 			player.exitGame = false;
 
+			ImageMovement = LoadImage("assets/textures/character/gosthiidle-Sheet.png");
+			player.spriteMovement = LoadTextureFromImage(ImageMovement);
+			frameRec = { 0.0f, 0.0f, static_cast<float>(player.spriteMovement.height), static_cast<float>(player.spriteMovement.width / 4) };
+			
+			//player.spriteMovement = LoadTexture("assets/textures/character/gosthiidle 1-Sheet.png");
+
+			//ImageJump = LoadImage("assets/textures/character/gosthisalto 1-Sheet.png");
+			//player.spriteJump = LoadTextureFromImage(ImageJump);
+			//player.spriteJump = LoadTexture("assets/textures/character/gosthisalto 1-Sheet.png");
+
 			pause = false;
+
+			UnloadImage(ImageMovement);
+			//UnloadImage(ImageJump);
 		}
 
 		void ResetPlayer()
@@ -45,7 +70,8 @@ namespace Flappy_Bird
 			player.state = falling;
 			player.force = 0.0f;
 
-			player.position = { static_cast <float>(GetScreenWidth() / 3), static_cast <float>(GetScreenHeight() / 2) };
+			player.body.x = static_cast <float>(GetScreenWidth() / 3);
+			player.body.y = static_cast <float>(GetScreenHeight() / 2);
 			player.points = 0;
 			player.exitGame = false;
 
@@ -75,13 +101,13 @@ namespace Flappy_Bird
 
 		void LoseOrWin()
 		{
-			if (CheckCollisionCircleRec(player.position, player.radius, superiorPipe1.objet) == true ||
-				CheckCollisionCircleRec(player.position, player.radius, superiorPipe2.objet) == true ||
-				CheckCollisionCircleRec(player.position, player.radius, buttomPipe1.objet) == true ||
-				CheckCollisionCircleRec(player.position, player.radius, buttomPipe2.objet) == true
+			if (CheckCollisionRecs(player.body, superiorPipe1.objet) == true ||
+				CheckCollisionRecs(player.body, superiorPipe2.objet) == true ||
+				CheckCollisionRecs(player.body, buttomPipe1.objet) == true ||
+				CheckCollisionRecs(player.body, buttomPipe2.objet) == true
 				||
-				(player.position.y + player.radius >= GetScreenHeight()) ||
-				(player.position.y - player.radius <= 0))
+				(player.body.y + player.body.height >= GetScreenHeight()) ||
+				(player.body.y <= 0))
 			{
 				Sounds::StateEndMusic(Sounds::play);
 				PlaySound(Sounds::die_sound);
@@ -92,17 +118,16 @@ namespace Flappy_Bird
 				{
 					player.maxPoints = player.points;
 				}
-
 			}
 		}
 
 		void EarnPoint()
 		{
-			if (player.position.x > (buttomPipe1.objet.x + buttomPipe1.objet.width - 3.5f) &&
-				player.position.x <= (buttomPipe1.objet.x + buttomPipe1.objet.width)
+			if (player.body.x > (buttomPipe1.objet.x + buttomPipe1.objet.width - 3.5f) &&
+				player.body.x <= (buttomPipe1.objet.x + buttomPipe1.objet.width)
 				||
-				player.position.x > (buttomPipe2.objet.x + buttomPipe2.objet.width - 3.5f) &&
-				player.position.x <= (buttomPipe2.objet.x + buttomPipe2.objet.width))
+				player.body.x > (buttomPipe2.objet.x + buttomPipe2.objet.width - 3.5f) &&
+				player.body.x <= (buttomPipe2.objet.x + buttomPipe2.objet.width))
 			{
 				player.points++;
 			}
@@ -110,9 +135,8 @@ namespace Flappy_Bird
 
 		void DrawPlayer()
 		{
-			DrawCircle(static_cast<int>(player.position.x), static_cast<int>(player.position.y), player.radius, GREEN);
-
-			DrawTexture(Textures::player, static_cast<int>(player.position.x - player.radius), static_cast<int>(player.position.y - player.radius), WHITE);
+			DrawRectangleRec(player.body, GREEN);
+			AnimationPlayer();
 			DrawUI();
 		}
 
@@ -152,12 +176,34 @@ namespace Flappy_Bird
 				player.state = falling;		
 			}
 			
-			player.position.y -= player.force * GetFrameTime() * 2;
+			player.body.y -= player.force * GetFrameTime() * 2;
 
 			if (player.force > MIN_GRAVITY)
 			{
 				player.force -= GRAVITY * GetFrameTime() * 2;
 			}
+		}
+
+		static void AnimationPlayer()
+		{
+			if (pause == false)
+			{
+				framesCounter += GetFrameTime();
+
+				if (framesCounter >= (maxCounter))
+				{
+					framesCounter = 0;
+
+					currentFrame++;
+					if (currentFrame > 1)
+						currentFrame = 0;
+
+					frameRec.x = static_cast<float>(currentFrame*(player.spriteMovement.width / 4));
+				}
+				position = { player.body.x - player.body.width / 2, player.body.y };
+			}
+
+			DrawTextureRec(player.spriteMovement, frameRec, position, WHITE);
 		}
 	}
 }

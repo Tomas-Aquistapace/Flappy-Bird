@@ -7,7 +7,8 @@ namespace Flappy_Bird
 {
 	namespace Enemies
 	{
-		struct PIPES {
+		struct PIPES 
+		{
 			Rectangle objet;
 		};
 

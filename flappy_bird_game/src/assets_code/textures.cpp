@@ -23,7 +23,6 @@ namespace Flappy_Bird
 		Texture2D moon;
 		Texture2D base;
 
-		Texture2D player;
 		Texture2D walls;
 		Texture2D menuArrows;
 		Texture2D menuTittle;
@@ -37,22 +36,22 @@ namespace Flappy_Bird
 			//--------------
 			// Textures various
 			
-			Image playerImage;
+			//Image playerImage;
 			Image wallsImage;
 			Image arrowImage;
-			Image menuTittleImage;			
+			Image menuTittleImage;
 
-			playerImage = LoadImage("assets/textures/objects/player.png");
+			//playerImage = LoadImage("assets/textures/objects/player.png");
 			wallsImage = LoadImage("assets/textures/objects/wall.png");
 			arrowImage = LoadImage("assets/textures/menu/arrow.png");
 			menuTittleImage = LoadImage("assets/textures/menu/framework.png");
-			raylibCredits = LoadTexture("assets/credits/raylib_48x48.png");
+			raylibCredits = LoadTexture("assets/textures/credits/raylib_48x48.png");
 
-			ImageResize(&playerImage, static_cast<int>(Player_Things::player.radius) * 2, static_cast<int>(Player_Things::player.radius) * 2);
+			//ImageResize(&playerImage, static_cast<int>(Player_Things::player.radius) * 2, static_cast<int>(Player_Things::player.radius) * 2);
 			ImageResize(&arrowImage, static_cast<int>(Menu::leftArrow.rec.width), static_cast<int>(Menu::leftArrow.rec.height));
 			ImageResize(&menuTittleImage, 500, 100);
 
-			player = LoadTextureFromImage(playerImage);
+			//player = LoadTextureFromImage(playerImage);
 			walls = LoadTextureFromImage(wallsImage);
 			menuArrows = LoadTextureFromImage(arrowImage);
 			menuTittle = LoadTextureFromImage(menuTittleImage);
@@ -77,7 +76,7 @@ namespace Flappy_Bird
 
 			// -------------
 
-			UnloadImage(playerImage);
+			//UnloadImage(playerImage);
 			UnloadImage(wallsImage);
 			UnloadImage(arrowImage);
 			UnloadImage(menuTittleImage);
@@ -94,7 +93,9 @@ namespace Flappy_Bird
 			UnloadTexture(moon);
 			UnloadTexture(base);
 
-			UnloadTexture(player);
+			//UnloadTexture(player);
+			UnloadTexture(Player_Things::player.spriteMovement);
+			UnloadTexture(Player_Things::player.spriteJump);
 			UnloadTexture(walls);
 			UnloadTexture(menuArrows);
 			UnloadTexture(menuTittle);

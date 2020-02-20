@@ -18,14 +18,15 @@ namespace Flappy_Bird
 
 		struct PLAYER 
 		{
-			Vector2 position;
-			float radius;
+			Rectangle body;
 			JUMP state;
 			float force;
 			int points;
 			int maxPoints;
 			bool exitGame;
 			WIN_OR_LOSE winOrLose;
+			Texture2D spriteMovement;
+			Texture2D spriteJump;
 		};
 
 		extern PLAYER player;

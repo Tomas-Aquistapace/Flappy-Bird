@@ -7,7 +7,6 @@ namespace Flappy_Bird
 {
 	namespace Textures
 	{
-		extern Texture2D player;
 		extern Texture2D walls;
 		extern Texture2D menuArrows;
 		extern Texture2D menuTittle;
