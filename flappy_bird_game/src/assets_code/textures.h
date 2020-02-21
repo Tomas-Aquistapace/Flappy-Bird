@@ -10,6 +10,10 @@ namespace Flappy_Bird
 		extern Texture2D walls;
 		extern Texture2D menuArrows;
 		extern Texture2D menuTittle;
+		extern Texture2D creditsTittle;
+		extern Texture2D credits;
+		extern Texture2D optionsTittle;
+		extern Texture2D optionsEffects;
 		extern Texture2D raylibCredits;
 
 		extern Font tittleFont;

@@ -10,8 +10,7 @@ namespace Flappy_Bird
 {
 	namespace Options
 	{
-		static int fontTittle = 80;
-		static int fontSubTittle = 20;
+		static float fontTittle = 130;
 
 		static bool muteEffects = false;
 		static bool muteMusic = false;
@@ -49,10 +48,16 @@ namespace Flappy_Bird
 
 		static void Draw()
 		{
-			Vector2 tittlePos;
+			int extraPixels = 10;
 
-			tittlePos.x = static_cast<float>(GetScreenWidth() / 2 - 110);
-			tittlePos.y = static_cast<float>(GetScreenHeight() / 5 - 10);
+			Vector2 text1Pos;
+			Vector2 text2Pos;
+
+			text1Pos.x = static_cast<float>(GetScreenWidth() / 2 - Textures::optionsEffects.width - Textures::optionsEffects.width / 2 - Textures::optionsEffects.width / 3);
+			text1Pos.y = static_cast<float>(GetScreenHeight() / 2 + Textures::optionsEffects.height - extraPixels);
+
+			text2Pos.x = static_cast<float>(GetScreenWidth() / 2 + Textures::optionsEffects.width + extraPixels);
+			text2Pos.y = static_cast<float>(GetScreenHeight() / 2 + Textures::optionsEffects.height - extraPixels);
 
 			BeginDrawing();
 			ClearBackground(BLANK);
@@ -60,35 +65,26 @@ namespace Flappy_Bird
 			Textures::MovementBackgrounds();
 			Textures::DrawBackground();
 			
-			DrawRectangle(GetScreenWidth() / 2 - 200, GetScreenHeight() / 6, 400, 95, DARKGRAY);
+			DrawTexture(Textures::optionsTittle, GetScreenWidth() / 2 - Textures::optionsTittle.width / 2, GetScreenHeight() / 10, DARKGRAY);
 
-			DrawTextEx(Textures::tittleFont, "Options", tittlePos, static_cast<float>(fontTittle), 5, BLACK);
-
-			//DrawText("OPTIONS", GetScreenWidth() / 2 - 150, GetScreenHeight() / 5, fontTittle, GREEN);
-
-
-
-			DrawRectangle(GetScreenWidth() / 2 - 140, GetScreenHeight() / 2 + GetScreenHeight() / 3, 75, 75, BLUE);
-
+			DrawTexture(Textures::optionsEffects, GetScreenWidth() / 2 - Textures::optionsEffects.width * 2, GetScreenHeight() / 2 + Textures::optionsEffects.height, BLUE);
 			if (!muteEffects)
 			{
-				DrawText("S", GetScreenWidth() / 2 - 120, GetScreenHeight() / 2 + GetScreenHeight() / 3 + 20, fontTittle, GREEN);
+				DrawTextEx(Textures::textFont, "S", text1Pos, fontTittle, 2, BLACK);
 			}
 			else
 			{
-				DrawText("S", GetScreenWidth() / 2 - 120, GetScreenHeight() / 2 + GetScreenHeight() / 3 + 20, fontTittle, RED);
+				DrawTextEx(Textures::textFont, "S", text1Pos, fontTittle, 2, RED);
 			}
 
-
-			DrawRectangle(GetScreenWidth() / 2 + 75, GetScreenHeight() / 2 + GetScreenHeight() / 3, 75, 75, DARKBLUE);
-			
+			DrawTexture(Textures::optionsEffects, GetScreenWidth() / 2 + Textures::optionsEffects.width, GetScreenHeight() / 2 + Textures::optionsEffects.height, DARKBLUE);
 			if(!muteMusic)
 			{
-				DrawText("M", GetScreenWidth() / 2 + 100, GetScreenHeight() / 2 + GetScreenHeight() / 3 + 20, fontTittle, GREEN);
+				DrawTextEx(Textures::textFont, "M", text2Pos, fontTittle, 2, BLACK);
 			}
 			else
 			{
-				DrawText("M", GetScreenWidth() / 2 + 100, GetScreenHeight() / 2 + GetScreenHeight() / 3 + 20, fontTittle, RED);
+				DrawTextEx(Textures::textFont, "M", text2Pos, fontTittle, 2, RED);
 			}
 
 			DrawTexture(Textures::menuArrows, static_cast<int>(Menu::rightArrow.rec.x), static_cast<int>(Menu::rightArrow.rec.y), GRAY);

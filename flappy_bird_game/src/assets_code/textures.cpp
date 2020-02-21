@@ -26,6 +26,10 @@ namespace Flappy_Bird
 		Texture2D walls;
 		Texture2D menuArrows;
 		Texture2D menuTittle;
+		Texture2D credits;
+		Texture2D creditsTittle;
+		Texture2D optionsTittle;
+		Texture2D optionsEffects;
 		Texture2D raylibCredits;
 
 		Font tittleFont;
@@ -39,18 +43,27 @@ namespace Flappy_Bird
 			Image wallsImage;
 			Image arrowImage;
 			Image menuTittleImage;
+			Image creditsImage;
+			Image optionsImage;
 
 			wallsImage = LoadImage("assets/textures/objects/wall.png");
 			arrowImage = LoadImage("assets/textures/menu/arrow.png");
-			menuTittleImage = LoadImage("assets/textures/menu/framework.png");
+			menuTittleImage = LoadImage("assets/textures/framework/frameworkTittle.png");
+			creditsImage = LoadImage("assets/textures/framework/frameworkCredits.png");
+			creditsTittle = LoadTexture("assets/textures/framework/frameworkCreditsTittle.png");
+			optionsTittle = LoadTexture("assets/textures/framework/frameworkOptionsTittle.png");
+			optionsImage = LoadImage("assets/textures/framework/framework.png");
 			raylibCredits = LoadTexture("assets/textures/credits/raylib_48x48.png");
 
 			ImageResize(&arrowImage, static_cast<int>(Menu::leftArrow.rec.width), static_cast<int>(Menu::leftArrow.rec.height));
-			ImageResize(&menuTittleImage, 500, 100);
+			ImageResize(&creditsImage, 350, 300);
+			ImageResize(&optionsImage, 100, 100);
 
 			walls = LoadTextureFromImage(wallsImage);
 			menuArrows = LoadTextureFromImage(arrowImage);
 			menuTittle = LoadTextureFromImage(menuTittleImage);
+			credits = LoadTextureFromImage(creditsImage);
+			optionsEffects = LoadTextureFromImage(optionsImage);
 
 			//--------------
 			// Background
@@ -75,6 +88,8 @@ namespace Flappy_Bird
 			UnloadImage(wallsImage);
 			UnloadImage(arrowImage);
 			UnloadImage(menuTittleImage);
+			UnloadImage(creditsImage);
+			UnloadImage(optionsImage);
 		}
 
 		void UnloadTextures()
@@ -93,6 +108,10 @@ namespace Flappy_Bird
 			UnloadTexture(walls);
 			UnloadTexture(menuArrows);
 			UnloadTexture(menuTittle);
+			UnloadTexture(credits);
+			UnloadTexture(creditsTittle);
+			UnloadTexture(optionsTittle);
+			UnloadTexture(optionsEffects);
 			UnloadTexture(raylibCredits);
 
 			UnloadFont(tittleFont);
