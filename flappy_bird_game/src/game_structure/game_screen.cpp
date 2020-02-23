@@ -50,7 +50,6 @@ namespace Flappy_Bird
 
 			if (Player::pause == true)
 			{
-				//DrawText("PAUSE", GetScreenWidth() / 2 - fontSubTittle, GetScreenHeight() / 2, fontSubTittle, WHITE);
 				DrawTextEx(Textures::tittleFont, "Pause", textPos, FONT_PAUSE, 2, BLACK);
 			}
 

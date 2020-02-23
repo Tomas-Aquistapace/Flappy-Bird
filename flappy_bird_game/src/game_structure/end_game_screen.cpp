@@ -11,6 +11,9 @@ namespace Flappy_Bird
 {
 	namespace End_game
 	{
+		const float FONT_POINT = 50;
+		const float FONT_EXIT = 40;
+
 		static Texture2D endScreenTittle;
 		static Texture2D endScreenPoints;
 
@@ -57,17 +60,20 @@ namespace Flappy_Bird
 
 		static void DrawEndGame()
 		{
-			float font = 50;
 			int extraPixels = 10;
 
 			Vector2 text1Pos;
 			Vector2 text2Pos;
+			Vector2 text3Pos;
 
-			text1Pos.x = static_cast<float>((GetScreenWidth() / 2 + endScreenPoints.width / 3.5f) - ((MeasureText("Points ~ %i", static_cast<int>(font)) / 2)));
+			text1Pos.x = static_cast<float>((GetScreenWidth() / 2 + endScreenPoints.width / 3.5f) - ((MeasureText("Points  %i", static_cast<int>(FONT_POINT)) / 2)));
 			text1Pos.y = static_cast<float>(GetScreenHeight() / 2 - endScreenPoints.height / 2 + extraPixels);
 
-			text2Pos.x = static_cast<float>((GetScreenWidth() / 2 + endScreenPoints.width / 2.5f) - ((MeasureText("Max Points ~ %i", static_cast<int>(font)) / 2)));
+			text2Pos.x = static_cast<float>((GetScreenWidth() / 2 + endScreenPoints.width / 2.5f) - ((MeasureText("Max Points  %i", static_cast<int>(FONT_POINT)) / 2)));
 			text2Pos.y = static_cast<float>(GetScreenHeight() / 2 + endScreenPoints.height);
+			
+			text3Pos.x = static_cast<float>(GetScreenWidth() / 2 - (FONT_EXIT + FONT_EXIT / 2));
+			text3Pos.y = static_cast<float>(GetScreenHeight() / 2 + GetScreenHeight() / 3);
 
 			BeginDrawing();
 			ClearBackground(BLACK);
@@ -78,10 +84,12 @@ namespace Flappy_Bird
 			DrawTexture(endScreenTittle, GetScreenWidth() / 2 - endScreenTittle.width / 2, GetScreenHeight() / 10, DARKGRAY);
 
 			DrawTexture(endScreenPoints, GetScreenWidth() / 2 - endScreenPoints.width / 2, GetScreenHeight() / 2 - (endScreenPoints.height - endScreenPoints.height / 3), GRAY);
-			DrawTextEx(Textures::textFont, FormatText("Points ~ %i", Player::player.points), text1Pos, font, 2, BLACK);
+			DrawTextEx(Textures::textFont, FormatText("Points  %i", Player::player.points), text1Pos, FONT_POINT, 2, BLACK);
 
 			DrawTexture(endScreenPoints, GetScreenWidth() / 2 - endScreenPoints.width / 2, GetScreenHeight() / 2 + (endScreenPoints.height - endScreenPoints.height / 3), DARKGRAY);
-			DrawTextEx(Textures::textFont, FormatText("Max Points ~ %i", Player::player.maxPoints), text2Pos, font, 2, WHITE);
+			DrawTextEx(Textures::textFont, FormatText("Max Points  %i", Player::player.maxPoints), text2Pos, FONT_POINT, 2, WHITE);
+
+			DrawTextEx(Textures::textFont, "Press Enter", text3Pos, FONT_EXIT, 2, WHITE);
 
 			EndDrawing();
 		}

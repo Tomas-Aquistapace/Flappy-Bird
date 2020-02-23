@@ -17,8 +17,14 @@ namespace Flappy_Bird
 
 		const float HEIGHT_PLAYER = 30;
 		const float WIDTH_PLAYER = 30;
-		const float SPEEDPJ = 150.0f;
+		const float FORCE = 150.0f;
+		const float GRAVITY = 90;
+		const float MIN_GRAVITY = -150.0f;
 
+		const short FONT_UI = 40;
+		const short PIXELS_AXIS = 20;
+
+		// animation
 		static Vector2 position;
 		static Rectangle frameRec;
 		static float currentFrame = 0;
@@ -29,6 +35,7 @@ namespace Flappy_Bird
 		static float currentFrameJump = 0;
 		static float framesCounterJump = 0;
 		static float maxCounterJump = 0.30f;
+		// ---------
 
 		static void Jump();
 		static void DrawUI();
@@ -158,28 +165,27 @@ namespace Flappy_Bird
 
 		static void DrawUI()
 		{
-			const short FONT_UI = 40;
-			const short PIXELS_AXIS = 20;
+			Vector2 text1Pos;
+			Vector2 text2Pos;
 
-			Vector2 textPos;
+			text1Pos.x = static_cast<float>(PIXELS_AXIS);
+			text1Pos.y = static_cast<float>(GetScreenHeight() - FONT_UI);
+			
+			text2Pos.x = static_cast<float>(GetScreenWidth() + GetScreenWidth() / 4 - MeasureText("Enter to Pause", FONT_UI) - PIXELS_AXIS);
+			text2Pos.y = static_cast<float>(GetScreenHeight() - FONT_UI);
 
-			textPos.x = static_cast<float>(PIXELS_AXIS);
-			textPos.y = static_cast<float>(GetScreenHeight() - FONT_UI);
-
-			DrawTextEx(Textures::textFont, FormatText("Points ~ %i", Player::player.points), textPos, FONT_UI, 2, WHITE);
+			DrawTextEx(Textures::textFont, FormatText("Points ~ %i", Player::player.points), text1Pos, FONT_UI, 2, WHITE);
+			DrawTextEx(Textures::textFont, "Enter to Pause", text2Pos, FONT_UI, 2, WHITE);
 		}
 
 		static void Jump()
 		{
-			const float MIN_GRAVITY = -150.0f;
-			const short GRAVITY = 90;
-
 			if (IsKeyPressed(KEY_SPACE) == true)
 			{
 				if (player.state == falling)
 				{
 					player.state = jumping;
-					player.force = SPEEDPJ;
+					player.force = FORCE;
 
 					PlaySound(Sounds::jump);
 				}
