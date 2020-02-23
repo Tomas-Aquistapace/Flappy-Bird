@@ -5,7 +5,7 @@
 
 namespace Flappy_Bird
 {
-	namespace Player_Things
+	namespace Player
 	{
 		enum WIN_OR_LOSE 
 		{
@@ -31,13 +31,14 @@ namespace Flappy_Bird
 
 		extern PLAYER player;
 		extern bool pause;
-
-		void InitialicePlayer();
-		void ResetPlayer();
-		void Input();
-		void LoseOrWin();
-		void EarnPoint();
-		void DrawPlayer();
+		
+		extern void Initialize();
+		extern void ResetPlayer();
+		extern void Unload();
+		extern void Input();
+		extern void LoseOrWin();
+		extern void EarnPoint();
+		extern void DrawPlayer();
 	}
 }
 

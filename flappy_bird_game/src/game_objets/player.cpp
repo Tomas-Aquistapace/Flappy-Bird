@@ -2,8 +2,6 @@
 
 #include "enemies.h"
 #include "game_structure/menu_screen.h"
-#include "game_structure/game_screen.h"
-//#include "game_structure/initialice.h"
 #include "assets_code/textures.h"
 #include "assets_code/sounds.h"
 
@@ -11,7 +9,7 @@ namespace Flappy_Bird
 {
 	using namespace Enemies;
 
-	namespace Player_Things
+	namespace Player
 	{
 		PLAYER player;
 
@@ -37,7 +35,7 @@ namespace Flappy_Bird
 		static void AnimationMove();
 		static void AnimationJump();
 
-		void InitialicePlayer()
+		void Initialize()
 		{
 			Image ImageMovement;
 			Image ImageJump;
@@ -85,12 +83,18 @@ namespace Flappy_Bird
 			pause = false;
 		}
 
+		void Unload()
+		{
+			UnloadTexture(player.spriteMovement);
+			UnloadTexture(player.spriteJump);
+		}
+
 		void Input()
 		{
 			if (IsKeyPressed(KEY_ESCAPE) == true)
 			{
 				ResetPlayer();
-				InitialiceEnemies();
+				Initialize();
 				Menu::scenes = Menu::menu;
 				Sounds::StatePlayerMusic(Sounds::stop);
 			}
@@ -108,10 +112,10 @@ namespace Flappy_Bird
 
 		void LoseOrWin()
 		{
-			if (CheckCollisionRecs(player.body, superiorPipe1.objet) == true ||
-				CheckCollisionRecs(player.body, superiorPipe2.objet) == true ||
-				CheckCollisionRecs(player.body, buttomPipe1.objet) == true ||
-				CheckCollisionRecs(player.body, buttomPipe2.objet) == true
+			if (CheckCollisionRecs(player.body, superiorWall1.objet) == true ||
+				CheckCollisionRecs(player.body, superiorWall2.objet) == true ||
+				CheckCollisionRecs(player.body, buttomWall1.objet) == true ||
+				CheckCollisionRecs(player.body, buttomWall2.objet) == true
 				||
 				(player.body.y + player.body.height >= GetScreenHeight()) ||
 				(player.body.y <= 0))
@@ -130,11 +134,11 @@ namespace Flappy_Bird
 
 		void EarnPoint()
 		{
-			if (player.body.x > (buttomPipe1.objet.x + buttomPipe1.objet.width - 3.5f) &&
-				player.body.x <= (buttomPipe1.objet.x + buttomPipe1.objet.width)
+			if (player.body.x > (buttomWall1.objet.x + buttomWall1.objet.width - 3.5f) &&
+				player.body.x <= (buttomWall1.objet.x + buttomWall1.objet.width)
 				||
-				player.body.x > (buttomPipe2.objet.x + buttomPipe2.objet.width - 3.5f) &&
-				player.body.x <= (buttomPipe2.objet.x + buttomPipe2.objet.width))
+				player.body.x > (buttomWall2.objet.x + buttomWall2.objet.width - 3.5f) &&
+				player.body.x <= (buttomWall2.objet.x + buttomWall2.objet.width))
 			{
 				player.points++;
 			}
@@ -154,15 +158,15 @@ namespace Flappy_Bird
 
 		static void DrawUI()
 		{
-			short fontUI = 40;
-			short pixelsAxis = 20;
+			const short FONT_UI = 40;
+			const short PIXELS_AXIS = 20;
 
 			Vector2 textPos;
 
-			textPos.x = static_cast<float>(pixelsAxis);
-			textPos.y = static_cast<float>(GetScreenHeight() - fontUI);
+			textPos.x = static_cast<float>(PIXELS_AXIS);
+			textPos.y = static_cast<float>(GetScreenHeight() - FONT_UI);
 
-			DrawTextEx(Textures::textFont, FormatText("Points ~ %i", Player_Things::player.points), textPos, fontUI, 2, WHITE);
+			DrawTextEx(Textures::textFont, FormatText("Points ~ %i", Player::player.points), textPos, FONT_UI, 2, WHITE);
 		}
 
 		static void Jump()

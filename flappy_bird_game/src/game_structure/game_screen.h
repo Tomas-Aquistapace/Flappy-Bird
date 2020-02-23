@@ -5,11 +5,7 @@ namespace Flappy_Bird
 {
 	namespace Game
 	{
-		extern int screenWidth;
-		extern int screenHeight;
-
-		void Game();
-		//void DrawGame();
+		extern void Game();
 	}
 }
 

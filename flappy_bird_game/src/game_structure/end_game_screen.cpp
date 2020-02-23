@@ -4,7 +4,6 @@
 
 #include "menu_screen.h"
 #include "game_objets/player.h"
-#include "game_objets/enemies.h"
 #include "assets_code/textures.h"
 #include "assets_code/sounds.h"
 
@@ -12,8 +11,8 @@ namespace Flappy_Bird
 {
 	namespace End_game
 	{
-		Texture2D endScreenTittle;
-		Texture2D endScreenPoints;
+		static Texture2D endScreenTittle;
+		static Texture2D endScreenPoints;
 
 		static void Input();
 		static void DrawEndGame();
@@ -50,8 +49,6 @@ namespace Flappy_Bird
 		{
 			if (IsKeyPressed(KEY_ENTER) == true)
 			{
-				Player_Things::ResetPlayer();
-				Enemies::InitialiceEnemies();
 				Sounds::StateEndMusic(Sounds::stop);
 				Sounds::StateGameMusic(Sounds::play);
 				Menu::scenes = Menu::menu;
@@ -81,10 +78,10 @@ namespace Flappy_Bird
 			DrawTexture(endScreenTittle, GetScreenWidth() / 2 - endScreenTittle.width / 2, GetScreenHeight() / 10, DARKGRAY);
 
 			DrawTexture(endScreenPoints, GetScreenWidth() / 2 - endScreenPoints.width / 2, GetScreenHeight() / 2 - (endScreenPoints.height - endScreenPoints.height / 3), GRAY);
-			DrawTextEx(Textures::textFont, FormatText("Points ~ %i", Player_Things::player.points), text1Pos, font, 2, BLACK);
+			DrawTextEx(Textures::textFont, FormatText("Points ~ %i", Player::player.points), text1Pos, font, 2, BLACK);
 
 			DrawTexture(endScreenPoints, GetScreenWidth() / 2 - endScreenPoints.width / 2, GetScreenHeight() / 2 + (endScreenPoints.height - endScreenPoints.height / 3), DARKGRAY);
-			DrawTextEx(Textures::textFont, FormatText("Max Points ~ %i", Player_Things::player.maxPoints), text2Pos, font, 2, WHITE);
+			DrawTextEx(Textures::textFont, FormatText("Max Points ~ %i", Player::player.maxPoints), text2Pos, font, 2, WHITE);
 
 			EndDrawing();
 		}

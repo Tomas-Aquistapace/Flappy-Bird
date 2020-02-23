@@ -6,11 +6,11 @@ namespace Flappy_Bird
 	{
 		STATE state;
 
-		Music gameMusic;
-		Music endMusic;
-		Music player_flames;
 		Sound jump;
 		Sound die_sound;
+		static Music gameMusic;
+		static Music endMusic;
+		static Music player_flames;
 
 		void LoadMusic_Sound()
 		{
@@ -113,22 +113,6 @@ namespace Flappy_Bird
 			}
 		}
 
-		//void StateWinMusic(STATE states)
-		//{
-		//	switch (states)
-		//	{
-		//	case stop:
-		//		StopMusicStream(winMusic);
-		//		break;
-		//	case play:
-		//		PlayMusicStream(winMusic);
-		//		break;
-		//	case update:
-		//		UpdateMusicStream(winMusic);
-		//		break;
-		//	}
-		//}
-
 		void UnloadMusic_Sound()
 		{
 			UnloadMusicStream(gameMusic);
@@ -139,6 +123,5 @@ namespace Flappy_Bird
 
 			CloseAudioDevice();
 		}
-
 	}
 }

@@ -7,20 +7,23 @@ namespace Flappy_Bird
 {
 	namespace Enemies
 	{
-		struct PIPES 
+		struct WALLS 
 		{
 			Rectangle objet;
 		};
 
-		extern PIPES buttomPipe1;
-		extern PIPES buttomPipe2;
-		extern PIPES superiorPipe1;
-		extern PIPES superiorPipe2;
-		extern float SPEED_ENEMI;
+		extern WALLS buttomWall1;
+		extern WALLS buttomWall2;
+		extern WALLS superiorWall1;
+		extern WALLS superiorWall2;
 
-		void InitialiceEnemies();
-		void MovementEnemies();
-		void DrawEnemies();
+		extern const float SPEED_ENEMI;
+
+		extern void Initialize();
+		extern void Reset();
+		extern void Unload();
+		extern void MovementEnemies();
+		extern void DrawEnemies();
 	}
 }
 

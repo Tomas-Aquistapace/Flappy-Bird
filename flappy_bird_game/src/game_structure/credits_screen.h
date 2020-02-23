@@ -5,7 +5,9 @@ namespace Flappy_Bird
 {
 	namespace Credits
 	{
-		void Credits();
+		extern void Initialize();
+		extern void Unload();
+		extern void Credits();
 	}
 }
 

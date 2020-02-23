@@ -13,8 +13,33 @@ namespace Flappy_Bird
 		static float fontTittle = 80;
 		static int fontSubTittle = 15;
 
+		Texture2D creditsTittle;
+		Texture2D credits;
+		Texture2D raylibCredits;
+
 		static void Input();
 		static void Draw();
+
+		void Initialize()
+		{
+			Image creditsImage;
+
+			creditsTittle = LoadTexture("assets/textures/framework/frameworkCreditsTittle.png");
+			raylibCredits = LoadTexture("assets/textures/credits/raylib_48x48.png");
+
+			creditsImage = LoadImage("assets/textures/framework/frameworkCredits.png");
+			ImageResize(&creditsImage, 350, 300);
+			credits = LoadTextureFromImage(creditsImage);
+
+			UnloadImage(creditsImage);
+		}
+		
+		void Unload()
+		{
+			UnloadTexture(credits);
+			UnloadTexture(creditsTittle);
+			UnloadTexture(raylibCredits);
+		}
 
 		void Credits()
 		{
@@ -46,12 +71,12 @@ namespace Flappy_Bird
 			Textures::MovementBackgrounds();
 			Textures::DrawBackground();
 
-			DrawTexture(Textures::creditsTittle, GetScreenWidth() / 2 - Textures::creditsTittle.width / 2, GetScreenHeight() / 10, DARKGRAY);
+			DrawTexture(creditsTittle, GetScreenWidth() / 2 - creditsTittle.width / 2, GetScreenHeight() / 10, DARKGRAY);
 
-			DrawTexture(Textures::credits, GetScreenWidth() / 2 - Textures::credits.width / 2, GetScreenHeight() / 2 - Textures::credits.height / 3, GRAY);
+			DrawTexture(credits, GetScreenWidth() / 2 - credits.width / 2, GetScreenHeight() / 2 - credits.height / 3, GRAY);
 
-			DrawTexture(Textures::raylibCredits, GetScreenWidth() - Textures::raylibCredits.width, GetScreenHeight() - Textures::raylibCredits.height, WHITE);
-			DrawTexture(Textures::menuArrows, static_cast<int>(Menu::leftArrow.rec.x), static_cast<int>(Menu::leftArrow.rec.y), GRAY);
+			DrawTexture(raylibCredits, GetScreenWidth() - raylibCredits.width, GetScreenHeight() - raylibCredits.height, WHITE);
+			DrawTexture(Menu::menuArrows, static_cast<int>(Menu::leftArrow.rec.x), static_cast<int>(Menu::leftArrow.rec.y), GRAY);
 			
 			EndDrawing();
 		}

@@ -7,7 +7,8 @@ namespace Flappy_Bird
 {
 	namespace Menu
 	{
-		enum STATE {
+		enum STATE 
+		{
 			game, exit, menu, options, credits, endGame
 		};
 
@@ -20,10 +21,11 @@ namespace Flappy_Bird
 		extern ARROW leftArrow;
 		extern ARROW rightArrow;
 
-		void InitialiceMenu();
-		void Menu();
-		//void InputMenu();
-		//void DrawMenu();
+		extern Texture2D menuArrows;
+
+		extern void Initialize();
+		extern void Unload();
+		extern void Menu();
 	}
 }
 

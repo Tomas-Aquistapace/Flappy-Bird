@@ -21,7 +21,7 @@ namespace Flappy_Bird
 	{
 		InitialiceAll();
 
-		while (!WindowShouldClose() && Player_Things::player.exitGame != true)
+		while (!WindowShouldClose() && Player::player.exitGame != true)
 		{
 			switch (Menu::scenes)
 			{
@@ -46,7 +46,7 @@ namespace Flappy_Bird
 				break;
 
 			case Menu::exit:
-				Player_Things::player.exitGame = true;
+				Player::player.exitGame = true;
 				break;
 			}
 		}
@@ -65,21 +65,31 @@ namespace Flappy_Bird
 
 		SetExitKey(KEY_BACK);
 
-		Menu::InitialiceMenu();
-		Player_Things::InitialicePlayer();
-		Enemies::InitialiceEnemies();
+		Player::Initialize();
+		Enemies::Initialize();
+
+		Menu::Initialize();
+		Options::Initialize();
+		Credits::Initialize();
 		End_game::Initialize();
+		Textures::LoadTextures();
 
 		Sounds::LoadMusic_Sound();
-		Textures::LoadTextures();
 
 		SetTargetFPS(60);
 	}
 
 	static void UnloadAll()
 	{
+		Player::Unload();
+		Enemies::Unload();
+
+		Menu::Unload();
+		Options::Unload();
+		Credits::Unload();
 		End_game::Unload();
 		Textures::UnloadTextures();
+
 		Sounds::UnloadMusic_Sound();
 	}
 }

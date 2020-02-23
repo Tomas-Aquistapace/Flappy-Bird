@@ -11,20 +11,18 @@ namespace Flappy_Bird
 {
 	namespace Game
 	{
-		static short fontTitle = 40;
-		static short fontSubTittle = 30;
-		static short font = 20;
+		static const short FONT_PAUSE = 80;
 
 		static void Draw();
 
 		void Game()
 		{
-			Player_Things::Input();
-			if (Player_Things::pause == false)
+			Player::Input();
+			if (Player::pause == false)
 			{
 				Enemies::MovementEnemies();
-				Player_Things::EarnPoint();
-				Player_Things::LoseOrWin();
+				Player::EarnPoint();
+				Player::LoseOrWin();
 				Sounds::StatePlayerMusic(Sounds::update);
 			}
 			Sounds::StateGameMusic(Sounds::update);
@@ -35,6 +33,11 @@ namespace Flappy_Bird
 
 		static void Draw()
 		{
+			Vector2 textPos;
+			
+			textPos.x = static_cast<float>(GetScreenWidth() / 2 - FONT_PAUSE);
+			textPos.y = static_cast<float>(GetScreenHeight() / 2);
+
 			BeginDrawing();
 			ClearBackground(BLACK);
 
@@ -43,11 +46,12 @@ namespace Flappy_Bird
 
 			Enemies::DrawEnemies();
 
-			Player_Things::DrawPlayer();
+			Player::DrawPlayer();
 
-			if (Player_Things::pause == true)
+			if (Player::pause == true)
 			{
-				DrawText("PAUSE", GetScreenWidth() / 2 - fontSubTittle, GetScreenHeight() / 2, fontSubTittle, WHITE);
+				//DrawText("PAUSE", GetScreenWidth() / 2 - fontSubTittle, GetScreenHeight() / 2, fontSubTittle, WHITE);
+				DrawTextEx(Textures::tittleFont, "Pause", textPos, FONT_PAUSE, 2, BLACK);
 			}
 
 			EndDrawing();

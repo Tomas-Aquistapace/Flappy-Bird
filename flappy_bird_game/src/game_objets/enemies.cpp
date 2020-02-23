@@ -7,84 +7,114 @@ namespace Flappy_Bird
 {
 	namespace Enemies
 	{
-		using namespace Player_Things;
+		using namespace Player;
 
-		PIPES buttomPipe1;
-		PIPES buttomPipe2;
-		PIPES superiorPipe1;
-		PIPES superiorPipe2;
-		float SPEED_ENEMI = 200.0f;
+		WALLS buttomWall1;
+		WALLS buttomWall2;
+		WALLS superiorWall1;
+		WALLS superiorWall2;
 
-		static float height = 300;
-		static float width = 50;
+		static Texture2D walls;
+
+		const float SPEED_ENEMI = 200.0f;
+		static const float HEIGHT = 300;
+		static const float WIDTH = 50;
 
 		static bool screenCenter;
 		static bool moveSecondPipe;
 
-		void InitialiceEnemies()
+		void Initialize()
 		{
-			superiorPipe1.objet.height = height;
-			superiorPipe1.objet.width = width;
-			superiorPipe1.objet.x = static_cast<float>(GetScreenWidth() + height / 2);
-			superiorPipe1.objet.y = static_cast<float>(GetRandomValue(-(static_cast<int>(height / 2)), 0));
+			walls = LoadTexture("assets/textures/objects/wall.png");
 
-			buttomPipe1.objet.height = height;
-			buttomPipe1.objet.width = width;
-			buttomPipe1.objet.x = static_cast<float>(GetScreenWidth() + height / 2);
-			buttomPipe1.objet.y = superiorPipe1.objet.y + height + 200;
+			//firts traps
+			superiorWall1.objet.height = HEIGHT;
+			superiorWall1.objet.width = WIDTH;
+			superiorWall1.objet.x = static_cast<float>(GetScreenWidth() + HEIGHT / 2);
+			superiorWall1.objet.y = static_cast<float>(GetRandomValue(-(static_cast<int>(HEIGHT / 2)), 0));
+
+			buttomWall1.objet.height = HEIGHT;
+			buttomWall1.objet.width = WIDTH;
+			buttomWall1.objet.x = static_cast<float>(GetScreenWidth() + HEIGHT / 2);
+			buttomWall1.objet.y = superiorWall1.objet.y + HEIGHT + 200;
 
 			//seconds traps
-			superiorPipe2.objet.height = height;
-			superiorPipe2.objet.width = width;
-			superiorPipe2.objet.x = static_cast<float>(GetScreenWidth());
-			superiorPipe2.objet.y = static_cast<float>(GetRandomValue(-(static_cast<int>(height / 2)), 0));
+			superiorWall2.objet.height = HEIGHT;
+			superiorWall2.objet.width = WIDTH;
+			superiorWall2.objet.x = static_cast<float>(GetScreenWidth());
+			superiorWall2.objet.y = static_cast<float>(GetRandomValue(-(static_cast<int>(HEIGHT / 2)), 0));
 
-			buttomPipe2.objet.height = height;
-			buttomPipe2.objet.width = width;
-			buttomPipe2.objet.x = static_cast<float>(GetScreenWidth());
-			buttomPipe2.objet.y = superiorPipe2.objet.y + height + 200;
+			buttomWall2.objet.height = HEIGHT;
+			buttomWall2.objet.width = WIDTH;
+			buttomWall2.objet.x = static_cast<float>(GetScreenWidth());
+			buttomWall2.objet.y = superiorWall2.objet.y + HEIGHT + 200;
 
 			screenCenter = false;
 			moveSecondPipe = false;
 		}
 
+		void Reset()
+		{
+			//firts traps
+			superiorWall1.objet.x = static_cast<float>(GetScreenWidth() + HEIGHT / 2);
+			superiorWall1.objet.y = static_cast<float>(GetRandomValue(-(static_cast<int>(HEIGHT / 2)), 0));
+
+			buttomWall1.objet.x = static_cast<float>(GetScreenWidth() + HEIGHT / 2);
+			buttomWall1.objet.y = superiorWall1.objet.y + HEIGHT + 200;
+
+			//seconds traps
+			superiorWall2.objet.x = static_cast<float>(GetScreenWidth());
+			superiorWall2.objet.y = static_cast<float>(GetRandomValue(-(static_cast<int>(HEIGHT / 2)), 0));
+
+			buttomWall2.objet.x = static_cast<float>(GetScreenWidth());
+			buttomWall2.objet.y = superiorWall2.objet.y + HEIGHT + 200;
+
+			screenCenter = false;
+			moveSecondPipe = false;
+		}
+
+		void Unload()
+		{
+			UnloadTexture(walls);
+		}
+
 		void MovementEnemies()
 		{
-			if ((buttomPipe1.objet.x + width < 0) && (superiorPipe1.objet.x + width < 0))
+			if ((buttomWall1.objet.x + WIDTH < 0) && (superiorWall1.objet.x + WIDTH < 0))
 			{
-				superiorPipe1.objet.x = static_cast<float>(GetScreenWidth());
-				superiorPipe1.objet.y = static_cast<float>(GetRandomValue(-(static_cast<int>(height / 2)), 0));
+				superiorWall1.objet.x = static_cast<float>(GetScreenWidth());
+				superiorWall1.objet.y = static_cast<float>(GetRandomValue(-(static_cast<int>(HEIGHT / 2)), 0));
 
-				buttomPipe1.objet.x = static_cast<float>(GetScreenWidth());
+				buttomWall1.objet.x = static_cast<float>(GetScreenWidth());
 
 				if (player.points < 9)
 				{
-					buttomPipe1.objet.y = superiorPipe1.objet.y + height + 200;
+					buttomWall1.objet.y = superiorWall1.objet.y + HEIGHT + 200;
 				}
 				else
 				{
-					buttomPipe1.objet.y = superiorPipe1.objet.y + height + 150;
+					buttomWall1.objet.y = superiorWall1.objet.y + HEIGHT + 150;
 				}
 
 				screenCenter = false;
 			}
 
 			//seconds traps
-			if ((buttomPipe1.objet.x + width / 2 < GetScreenWidth() / 2) && ((superiorPipe1.objet.x + width / 2 < GetScreenWidth() / 2)) &&
+			if ((buttomWall1.objet.x + WIDTH / 2 < GetScreenWidth() / 2) && ((superiorWall1.objet.x + WIDTH / 2 < GetScreenWidth() / 2)) &&
 				(screenCenter == false))
 			{
-				superiorPipe2.objet.x = static_cast<float>(GetScreenWidth());
-				superiorPipe2.objet.y = static_cast<float>(GetRandomValue(-(static_cast<int>(height / 2)), 0));
+				superiorWall2.objet.x = static_cast<float>(GetScreenWidth());
+				superiorWall2.objet.y = static_cast<float>(GetRandomValue(-(static_cast<int>(HEIGHT / 2)), 0));
 
-				buttomPipe2.objet.x = static_cast<float>(GetScreenWidth());
+				buttomWall2.objet.x = static_cast<float>(GetScreenWidth());
 
 				if (player.points < 9)
 				{
-					buttomPipe2.objet.y = superiorPipe2.objet.y + height + 200;
+					buttomWall2.objet.y = superiorWall2.objet.y + HEIGHT + 200;
 				}
 				else
 				{
-					buttomPipe2.objet.y = superiorPipe2.objet.y + height + 150;
+					buttomWall2.objet.y = superiorWall2.objet.y + HEIGHT + 150;
 				}
 
 				screenCenter = true;
@@ -92,27 +122,23 @@ namespace Flappy_Bird
 			}
 
 
-			superiorPipe1.objet.x -= SPEED_ENEMI * GetFrameTime();
-			buttomPipe1.objet.x -= SPEED_ENEMI * GetFrameTime();
+			superiorWall1.objet.x -= SPEED_ENEMI * GetFrameTime();
+			buttomWall1.objet.x -= SPEED_ENEMI * GetFrameTime();
 
 			if (moveSecondPipe == true)
 			{
-				superiorPipe2.objet.x -= SPEED_ENEMI * GetFrameTime();
-				buttomPipe2.objet.x -= SPEED_ENEMI * GetFrameTime();
+				superiorWall2.objet.x -= SPEED_ENEMI * GetFrameTime();
+				buttomWall2.objet.x -= SPEED_ENEMI * GetFrameTime();
 			}
 		}
 
 		void DrawEnemies()
 		{
-			//DrawRectangleRec(superiorPipe1.objet, RED);
-			//DrawRectangleRec(buttomPipe1.objet, RED);
-			DrawTexture(Textures::walls, static_cast<int>(superiorPipe1.objet.x), static_cast<int>(superiorPipe1.objet.y), GRAY);
-			DrawTexture(Textures::walls, static_cast<int>(buttomPipe1.objet.x), static_cast<int>(buttomPipe1.objet.y), GRAY);
+			DrawTexture(walls, static_cast<int>(superiorWall1.objet.x), static_cast<int>(superiorWall1.objet.y), GRAY);
+			DrawTexture(walls, static_cast<int>(buttomWall1.objet.x), static_cast<int>(buttomWall1.objet.y), GRAY);
 
-			//DrawRectangleRec(superiorPipe2.objet, RED);
-			//DrawRectangleRec(buttomPipe2.objet, RED);
-			DrawTexture(Textures::walls, static_cast<int>(superiorPipe2.objet.x), static_cast<int>(superiorPipe2.objet.y), GRAY);
-			DrawTexture(Textures::walls, static_cast<int>(buttomPipe2.objet.x), static_cast<int>(buttomPipe2.objet.y), GRAY);
+			DrawTexture(walls, static_cast<int>(superiorWall2.objet.x), static_cast<int>(superiorWall2.objet.y), GRAY);
+			DrawTexture(walls, static_cast<int>(buttomWall2.objet.x), static_cast<int>(buttomWall2.objet.y), GRAY);
 		}
 	}
 }

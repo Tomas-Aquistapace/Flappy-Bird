@@ -5,7 +5,9 @@ namespace Flappy_Bird
 {
 	namespace Options
 	{
-		void Options();
+		extern void Initialize();
+		extern void Unload();
+		extern void Options();
 	}
 }
 
