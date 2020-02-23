@@ -10,7 +10,7 @@ namespace Flappy_Bird
 {
 	namespace Options
 	{
-		static float fontTittle = 130;
+		static float fontOptions = 130;
 
 		static bool muteEffects = false;
 		static bool muteMusic = false;
@@ -70,21 +70,21 @@ namespace Flappy_Bird
 			DrawTexture(Textures::optionsEffects, GetScreenWidth() / 2 - Textures::optionsEffects.width * 2, GetScreenHeight() / 2 + Textures::optionsEffects.height, BLUE);
 			if (!muteEffects)
 			{
-				DrawTextEx(Textures::textFont, "S", text1Pos, fontTittle, 2, BLACK);
+				DrawTextEx(Textures::textFont, "S", text1Pos, fontOptions, 2, BLACK);
 			}
 			else
 			{
-				DrawTextEx(Textures::textFont, "S", text1Pos, fontTittle, 2, RED);
+				DrawTextEx(Textures::textFont, "S", text1Pos, fontOptions, 2, RED);
 			}
 
 			DrawTexture(Textures::optionsEffects, GetScreenWidth() / 2 + Textures::optionsEffects.width, GetScreenHeight() / 2 + Textures::optionsEffects.height, DARKBLUE);
 			if(!muteMusic)
 			{
-				DrawTextEx(Textures::textFont, "M", text2Pos, fontTittle, 2, BLACK);
+				DrawTextEx(Textures::textFont, "M", text2Pos, fontOptions, 2, BLACK);
 			}
 			else
 			{
-				DrawTextEx(Textures::textFont, "M", text2Pos, fontTittle, 2, RED);
+				DrawTextEx(Textures::textFont, "M", text2Pos, fontOptions, 2, RED);
 			}
 
 			DrawTexture(Textures::menuArrows, static_cast<int>(Menu::rightArrow.rec.x), static_cast<int>(Menu::rightArrow.rec.y), GRAY);

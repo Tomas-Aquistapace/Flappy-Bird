@@ -12,11 +12,30 @@ namespace Flappy_Bird
 {
 	namespace End_game
 	{
-		static int fontTittle = 50;
-		static int fontSubTittle = 25;
+		Texture2D endScreenTittle;
+		Texture2D endScreenPoints;
 
 		static void Input();
 		static void DrawEndGame();
+
+		void Initialize()
+		{
+			Image endGameImage;
+
+			endScreenTittle = LoadTexture("assets/textures/framework/frameworkGameOverTittle.png");
+
+			endGameImage = LoadImage("assets/textures/framework/frameworkPoints.png");
+			ImageResize(&endGameImage, 250, 100);
+			endScreenPoints = LoadTextureFromImage(endGameImage);
+
+			UnloadImage(endGameImage);
+		}
+
+		void Unload()
+		{
+			UnloadTexture(endScreenTittle);
+			UnloadTexture(endScreenPoints);
+		}
 
 		void EndGame()
 		{
@@ -41,20 +60,31 @@ namespace Flappy_Bird
 
 		static void DrawEndGame()
 		{
+			float font = 50;
+			int extraPixels = 10;
+
+			Vector2 text1Pos;
+			Vector2 text2Pos;
+
+			text1Pos.x = static_cast<float>((GetScreenWidth() / 2 + endScreenPoints.width / 3.5f) - ((MeasureText("Points ~ %i", static_cast<int>(font)) / 2)));
+			text1Pos.y = static_cast<float>(GetScreenHeight() / 2 - endScreenPoints.height / 2 + extraPixels);
+
+			text2Pos.x = static_cast<float>((GetScreenWidth() / 2 + endScreenPoints.width / 2.5f) - ((MeasureText("Max Points ~ %i", static_cast<int>(font)) / 2)));
+			text2Pos.y = static_cast<float>(GetScreenHeight() / 2 + endScreenPoints.height);
+
 			BeginDrawing();
 			ClearBackground(BLACK);
 
 			Textures::MovementBackgrounds();
 			Textures::DrawBackground();
 			
-			DrawRectangle(GetScreenWidth() / 2 - 200, GetScreenHeight() / 6, 400, 95, DARKGRAY);
-			DrawText("Game Over", GetScreenWidth() / 2 - 200, GetScreenHeight() / 5, fontTittle, GREEN);
+			DrawTexture(endScreenTittle, GetScreenWidth() / 2 - endScreenTittle.width / 2, GetScreenHeight() / 10, DARKGRAY);
 
-			DrawRectangle(GetScreenWidth() / 2 - 125, GetScreenHeight() / 2 - 75, 250, 100, GRAY);
-			DrawText(FormatText("Points ~ %i", Player_Things::player.points), GetScreenWidth() / 2 - 70, GetScreenHeight() / 2 - 50, fontSubTittle, GREEN);
+			DrawTexture(endScreenPoints, GetScreenWidth() / 2 - endScreenPoints.width / 2, GetScreenHeight() / 2 - (endScreenPoints.height - endScreenPoints.height / 3), GRAY);
+			DrawTextEx(Textures::textFont, FormatText("Points ~ %i", Player_Things::player.points), text1Pos, font, 2, BLACK);
 
-			DrawRectangle(GetScreenWidth() / 2 - 125, GetScreenHeight() / 2 + 75, 250, 100, DARKGRAY);
-			DrawText(FormatText("Max Points ~ %i", Player_Things::player.maxPoints), GetScreenWidth() / 2 - 70, GetScreenHeight() / 2 + 100, fontSubTittle, GREEN);
+			DrawTexture(endScreenPoints, GetScreenWidth() / 2 - endScreenPoints.width / 2, GetScreenHeight() / 2 + (endScreenPoints.height - endScreenPoints.height / 3), DARKGRAY);
+			DrawTextEx(Textures::textFont, FormatText("Max Points ~ %i", Player_Things::player.maxPoints), text2Pos, font, 2, WHITE);
 
 			EndDrawing();
 		}

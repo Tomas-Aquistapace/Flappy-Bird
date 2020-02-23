@@ -68,6 +68,7 @@ namespace Flappy_Bird
 		Menu::InitialiceMenu();
 		Player_Things::InitialicePlayer();
 		Enemies::InitialiceEnemies();
+		End_game::Initialize();
 
 		Sounds::LoadMusic_Sound();
 		Textures::LoadTextures();
@@ -77,6 +78,7 @@ namespace Flappy_Bird
 
 	static void UnloadAll()
 	{
+		End_game::Unload();
 		Textures::UnloadTextures();
 		Sounds::UnloadMusic_Sound();
 	}

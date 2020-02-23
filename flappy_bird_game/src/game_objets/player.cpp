@@ -3,7 +3,8 @@
 #include "enemies.h"
 #include "game_structure/menu_screen.h"
 #include "game_structure/game_screen.h"
-#include "game_structure/initialice.h"
+//#include "game_structure/initialice.h"
+#include "assets_code/textures.h"
 #include "assets_code/sounds.h"
 
 namespace Flappy_Bird
@@ -153,10 +154,15 @@ namespace Flappy_Bird
 
 		static void DrawUI()
 		{
-			short fontUI = 20;
+			short fontUI = 40;
 			short pixelsAxis = 20;
 
-			DrawText(FormatText("Points ~ %i", player.points), pixelsAxis, GetScreenHeight() - pixelsAxis, fontUI, WHITE);
+			Vector2 textPos;
+
+			textPos.x = static_cast<float>(pixelsAxis);
+			textPos.y = static_cast<float>(GetScreenHeight() - fontUI);
+
+			DrawTextEx(Textures::textFont, FormatText("Points ~ %i", Player_Things::player.points), textPos, fontUI, 2, WHITE);
 		}
 
 		static void Jump()

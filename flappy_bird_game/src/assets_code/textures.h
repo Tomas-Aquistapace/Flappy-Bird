@@ -14,6 +14,8 @@ namespace Flappy_Bird
 		extern Texture2D credits;
 		extern Texture2D optionsTittle;
 		extern Texture2D optionsEffects;
+		extern Texture2D endScreenTittle;
+		extern Texture2D endScreenPoints;
 		extern Texture2D raylibCredits;
 
 		extern Font tittleFont;

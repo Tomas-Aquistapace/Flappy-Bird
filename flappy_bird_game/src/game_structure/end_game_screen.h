@@ -5,7 +5,9 @@ namespace Flappy_Bird
 {
 	namespace End_game
 	{
-		void EndGame();
+		extern void Initialize();
+		extern void Unload();
+		extern void EndGame();
 	}
 }
 
