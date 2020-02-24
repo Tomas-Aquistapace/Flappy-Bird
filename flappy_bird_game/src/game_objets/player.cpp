@@ -13,6 +13,9 @@ namespace Flappy_Bird
 	{
 		PLAYER player;
 
+		Texture2D frameworkSkin1;
+		Texture2D frameworkSkin2;
+
 		bool pause;
 
 		const float HEIGHT_PLAYER = 30;
@@ -44,9 +47,6 @@ namespace Flappy_Bird
 
 		void Initialize()
 		{
-			Image ImageMovement;
-			Image ImageJump;
-
 			player.winOrLose = inGame;
 
 			player.state = falling;
@@ -60,18 +60,21 @@ namespace Flappy_Bird
 			player.maxPoints = 0;
 			player.exitGame = false;
 
-			ImageMovement = LoadImage("assets/textures/character/gosthiidle-Sheet.png");
-			player.spriteMovement = LoadTextureFromImage(ImageMovement);
-			frameRec = { 0.0f, 0.0f, static_cast<float>(player.spriteMovement.height), static_cast<float>(player.spriteMovement.width / 4) };
+			player.skinSelected = 1;
+			player.maxSkins = 2;
 
-			ImageJump = LoadImage("assets/textures/character/gosthisalto-Sheet.png");
-			player.spriteJump = LoadTextureFromImage(ImageJump);
-			frameRecJump = { 0.0f, 0.0f, static_cast<float>(player.spriteMovement.height), static_cast<float>(player.spriteMovement.width / 4) };
+			player.spriteMovement1 = LoadTexture("assets/textures/character/gosthiidle-Sheet1.png");
+			player.spriteMovement2 = LoadTexture("assets/textures/character/gosthiidle-Sheet2.png");
+			frameRec = { 0.0f, 0.0f, static_cast<float>(player.spriteMovement1.height), static_cast<float>(player.spriteMovement1.width / 4) };
+
+			player.spriteJump1 = LoadTexture("assets/textures/character/gosthisalto-Sheet1.png");
+			player.spriteJump2 = LoadTexture("assets/textures/character/gosthisalto-Sheet2.png");
+			frameRecJump = { 0.0f, 0.0f, static_cast<float>(player.spriteMovement1.height), static_cast<float>(player.spriteMovement1.width / 4) };
+
+			frameworkSkin1 = LoadTexture("assets/textures/character/framework-skin-1.png");
+			frameworkSkin2 = LoadTexture("assets/textures/character/framework-skin-2.png");
 
 			pause = false;
-
-			UnloadImage(ImageMovement);
-			UnloadImage(ImageJump);
 		}
 
 		void ResetPlayer()
@@ -92,8 +95,12 @@ namespace Flappy_Bird
 
 		void Unload()
 		{
-			UnloadTexture(player.spriteMovement);
-			UnloadTexture(player.spriteJump);
+			UnloadTexture(player.spriteMovement1);
+			UnloadTexture(player.spriteMovement2);
+			UnloadTexture(player.spriteJump1);
+			UnloadTexture(player.spriteJump2);
+			UnloadTexture(frameworkSkin1);
+			UnloadTexture(frameworkSkin2);
 		}
 
 		void Input()
@@ -155,7 +162,6 @@ namespace Flappy_Bird
 
 		void DrawPlayer()
 		{
-			DrawCircleV(player.position, player.radius, BLUE);
 			if (player.state == jumping)
 				AnimationJump();
 			else
@@ -226,12 +232,19 @@ namespace Flappy_Bird
 					if (currentFrame > 1)
 						currentFrame = 0;
 
-					frameRec.x = static_cast<float>(currentFrame*(player.spriteMovement.width / 4));
+					frameRec.x = static_cast<float>(currentFrame*(player.spriteMovement1.width / 4));
 				}
 				position = { player.position.x - player.radius * 2, player.position.y - player.radius };
 			}
 
-			DrawTextureRec(player.spriteMovement, frameRec, position, WHITE);
+			if (player.skinSelected == 1)
+			{
+				DrawTextureRec(player.spriteMovement1, frameRec, position, WHITE);
+			}
+			else if (player.skinSelected == 2)
+			{
+				DrawTextureRec(player.spriteMovement2, frameRec, position, WHITE);
+			}
 		}
 
 		static void AnimationJump()
@@ -248,11 +261,19 @@ namespace Flappy_Bird
 					if (currentFrameJump > 1)
 						currentFrameJump = 0;
 
-					frameRecJump.x = static_cast<float>(currentFrameJump * (player.spriteJump.width / 2));
+					frameRecJump.x = static_cast<float>(currentFrameJump * (player.spriteJump1.width / 2));
 				}
 				position = { player.position.x - player.radius * 2, player.position.y - player.radius };
 			}
-			DrawTextureRec(player.spriteJump, frameRecJump, position, WHITE);
+
+			if (player.skinSelected == 1)
+			{
+				DrawTextureRec(player.spriteJump1, frameRecJump, position, WHITE);
+			}
+			else if (player.skinSelected == 2)
+			{
+				DrawTextureRec(player.spriteJump2, frameRecJump, position, WHITE);
+			}
 		}
 	}
 }

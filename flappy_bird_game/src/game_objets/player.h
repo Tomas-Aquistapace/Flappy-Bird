@@ -27,9 +27,16 @@ namespace Flappy_Bird
 			int maxPoints;
 			bool exitGame;
 			WIN_OR_LOSE winOrLose;
-			Texture2D spriteMovement;
-			Texture2D spriteJump;
+			int skinSelected;
+			int maxSkins;
+			Texture2D spriteMovement1;
+			Texture2D spriteMovement2;
+			Texture2D spriteJump1;
+			Texture2D spriteJump2;
 		};
+
+		extern Texture2D frameworkSkin1;
+		extern Texture2D frameworkSkin2;
 
 		extern PLAYER player;
 		extern bool pause;

@@ -3,6 +3,7 @@
 #include "raylib.h"
 
 #include "menu_screen.h"
+#include "game_objets/player.h"
 #include "assets_code/textures.h"
 #include "assets_code/sounds.h"
 
@@ -10,7 +11,8 @@ namespace Flappy_Bird
 {
 	namespace Options
 	{
-		static float fontOptions = 130;
+		static const float FONT_OPTIONS = 130;
+		static const float FONT_PRESS_SPACE = 30;
 
 		static bool muteEffects = false;
 		static bool muteMusic = false;
@@ -66,6 +68,15 @@ namespace Flappy_Bird
 			{
 				muteMusic = !muteMusic;
 			}
+
+			if (IsKeyPressed(KEY_SPACE) == true) 
+			{
+				Player::player.skinSelected++;
+				if (Player::player.skinSelected > Player::player.maxSkins)
+				{
+					Player::player.skinSelected = 1;
+				}
+			}
 		}
 
 		static void Draw()
@@ -74,12 +85,16 @@ namespace Flappy_Bird
 
 			Vector2 text1Pos;
 			Vector2 text2Pos;
+			Vector2 text3Pos;
 
 			text1Pos.x = static_cast<float>(GetScreenWidth() / 2 - optionsEffects.width - optionsEffects.width / 2 - optionsEffects.width / 3);
-			text1Pos.y = static_cast<float>(GetScreenHeight() / 2 + optionsEffects.height - extraPixels);
+			text1Pos.y = static_cast<float>(GetScreenHeight() - (optionsEffects.height + optionsEffects.height / 3) - extraPixels);
 
 			text2Pos.x = static_cast<float>(GetScreenWidth() / 2 + optionsEffects.width + extraPixels);
-			text2Pos.y = static_cast<float>(GetScreenHeight() / 2 + optionsEffects.height - extraPixels);
+			text2Pos.y = static_cast<float>(GetScreenHeight() - (optionsEffects.height + optionsEffects.height / 3) - extraPixels);
+			
+			text3Pos.x = static_cast<float>(GetScreenWidth() / 2 - FONT_PRESS_SPACE * 2);
+			text3Pos.y = static_cast<float>(GetScreenHeight() - Player::frameworkSkin1.height / 2 - extraPixels);
 
 			BeginDrawing();
 			ClearBackground(BLANK);
@@ -89,25 +104,38 @@ namespace Flappy_Bird
 			
 			DrawTexture(optionsTittle, GetScreenWidth() / 2 - optionsTittle.width / 2, GetScreenHeight() / 10, DARKGRAY);
 
-			DrawTexture(optionsEffects, GetScreenWidth() / 2 - optionsEffects.width * 2, GetScreenHeight() / 2 + optionsEffects.height, BLUE);
+
+			if (Player::player.skinSelected == 1)
+			{
+				DrawTexture(Player::frameworkSkin1, GetScreenWidth() / 2 - Player::frameworkSkin1.width / 2, GetScreenHeight() / 2 - Player::frameworkSkin1.height / 3, WHITE);
+			}
+			else if (Player::player.skinSelected == 2)
+			{
+				DrawTexture(Player::frameworkSkin2, GetScreenWidth() / 2 - Player::frameworkSkin2.width / 2, GetScreenHeight() / 2 - Player::frameworkSkin2.height / 3, WHITE);
+			}
+			DrawTextEx(Textures::textFont, "press SPACE", text3Pos, FONT_PRESS_SPACE, 2, WHITE);
+
+
+			DrawTexture(optionsEffects, GetScreenWidth() / 2 - optionsEffects.width * 2, GetScreenHeight() - (optionsEffects.height + optionsEffects.height / 3), BLUE);
 			if (!muteEffects)
 			{
-				DrawTextEx(Textures::textFont, "S", text1Pos, fontOptions, 2, BLACK);
+				DrawTextEx(Textures::textFont, "S", text1Pos, FONT_OPTIONS, 2, BLACK);
 			}
 			else
 			{
-				DrawTextEx(Textures::textFont, "S", text1Pos, fontOptions, 2, RED);
+				DrawTextEx(Textures::textFont, "S", text1Pos, FONT_OPTIONS, 2, RED);
 			}
 
-			DrawTexture(optionsEffects, GetScreenWidth() / 2 + optionsEffects.width, GetScreenHeight() / 2 + optionsEffects.height, DARKBLUE);
-			if(!muteMusic)
+			DrawTexture(optionsEffects, GetScreenWidth() / 2 + optionsEffects.width, GetScreenHeight() - (optionsEffects.height + optionsEffects.height / 3), DARKBLUE);
+			if (!muteMusic)
 			{
-				DrawTextEx(Textures::textFont, "M", text2Pos, fontOptions, 2, BLACK);
+				DrawTextEx(Textures::textFont, "M", text2Pos, FONT_OPTIONS, 2, BLACK);
 			}
 			else
 			{
-				DrawTextEx(Textures::textFont, "M", text2Pos, fontOptions, 2, RED);
+				DrawTextEx(Textures::textFont, "M", text2Pos, FONT_OPTIONS, 2, RED);
 			}
+
 
 			DrawTexture(Menu::menuArrows, static_cast<int>(Menu::rightArrow.rec.x), static_cast<int>(Menu::rightArrow.rec.y), GRAY);
 
