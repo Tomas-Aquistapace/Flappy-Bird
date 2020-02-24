@@ -23,7 +23,7 @@ namespace Flappy_Bird
 
 		while (!WindowShouldClose() && Player::player.exitGame != true)
 		{
-			switch (Menu::scenes)
+			switch (Menu::scene)
 			{
 			case Menu::menu:
 				Menu::Menu();

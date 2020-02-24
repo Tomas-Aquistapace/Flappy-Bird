@@ -55,11 +55,6 @@ namespace Flappy_Bird
 
 		static void Input()
 		{
-			if (IsKeyPressed(KEY_RIGHT) == true)
-			{
-				Menu::scenes = Menu::menu;
-			}
-
 			if (IsKeyPressed(KEY_S) == true) 
 			{
 				muteEffects = !muteEffects;
@@ -136,8 +131,7 @@ namespace Flappy_Bird
 				DrawTextEx(Textures::textFont, "M", text2Pos, FONT_OPTIONS, 2, MAROON);
 			}
 
-
-			DrawTexture(Menu::menuArrows, static_cast<int>(Menu::rightArrow.rec.x), static_cast<int>(Menu::rightArrow.rec.y), GRAY);
+			Menu::KeysRightPressed(Menu::menu);
 
 			EndDrawing();
 		}

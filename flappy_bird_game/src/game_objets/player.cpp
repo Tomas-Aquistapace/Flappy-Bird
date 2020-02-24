@@ -109,7 +109,7 @@ namespace Flappy_Bird
 			{
 				ResetPlayer();
 				Initialize();
-				Menu::scenes = Menu::menu;
+				Menu::scene = Menu::menu;
 				Sounds::StatePlayerMusic(Sounds::stop);
 			}
 
@@ -139,7 +139,7 @@ namespace Flappy_Bird
 				Sounds::StateEndMusic(Sounds::play);
 				PlaySound(Sounds::die_sound);
 				
-				Menu::scenes = Menu::endGame;
+				Menu::scene = Menu::endGame;
 
 				if (player.points > player.maxPoints)
 				{

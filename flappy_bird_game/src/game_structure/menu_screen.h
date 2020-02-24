@@ -7,7 +7,7 @@ namespace Flappy_Bird
 {
 	namespace Menu
 	{
-		enum STATE 
+		enum SCENE 
 		{
 			game, exit, menu, options, credits, endGame
 		};
@@ -15,17 +15,19 @@ namespace Flappy_Bird
 		struct ARROW
 		{
 			Rectangle rec;
+			Texture2D menuArrows;
+			Texture2D menuArrowsPressed;
 		};
 
-		extern STATE scenes;
+		extern SCENE scene;
 		extern ARROW leftArrow;
 		extern ARROW rightArrow;
-
-		extern Texture2D menuArrows;
 
 		extern void Initialize();
 		extern void Unload();
 		extern void Menu();
+		extern void KeysLeftPressed(SCENE place);
+		extern void KeysRightPressed(SCENE place);
 	}
 }
 

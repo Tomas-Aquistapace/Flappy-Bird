@@ -54,7 +54,7 @@ namespace Flappy_Bird
 			{
 				Sounds::StateEndMusic(Sounds::stop);
 				Sounds::StateGameMusic(Sounds::play);
-				Menu::scenes = Menu::menu;
+				Menu::scene = Menu::menu;
 			}
 		}
 

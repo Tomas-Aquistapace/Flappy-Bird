@@ -17,7 +17,6 @@ namespace Flappy_Bird
 		Texture2D credits;
 		Texture2D raylibCredits;
 
-		static void Input();
 		static void Draw();
 
 		void Initialize()
@@ -43,20 +42,11 @@ namespace Flappy_Bird
 
 		void Credits()
 		{
-			Input();
 			Sounds::StateGameMusic(Sounds::update);
 			Draw();
 		}
 
 		// ---------------------------
-
-		static void Input()
-		{
-			if (IsKeyPressed(KEY_LEFT) == true)
-			{
-				Menu::scenes = Menu::menu;
-			}
-		}
 
 		static void Draw()
 		{
@@ -76,7 +66,8 @@ namespace Flappy_Bird
 			DrawTexture(credits, GetScreenWidth() / 2 - credits.width / 2, GetScreenHeight() / 2 - credits.height / 3, GRAY);
 
 			DrawTexture(raylibCredits, GetScreenWidth() - raylibCredits.width, GetScreenHeight() - raylibCredits.height, WHITE);
-			DrawTexture(Menu::menuArrows, static_cast<int>(Menu::leftArrow.rec.x), static_cast<int>(Menu::leftArrow.rec.y), GRAY);
+
+			Menu::KeysLeftPressed(Menu::menu);
 			
 			EndDrawing();
 		}
