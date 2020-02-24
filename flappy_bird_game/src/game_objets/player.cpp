@@ -128,8 +128,8 @@ namespace Flappy_Bird
 		{
 			if (CheckCollisionCircleRec(player.position, player.radius, superiorWall1.objet) == true ||
 				CheckCollisionCircleRec(player.position, player.radius, superiorWall2.objet) == true ||
-				CheckCollisionCircleRec(player.position, player.radius, buttomWall1.objet) == true ||
-				CheckCollisionCircleRec(player.position, player.radius, buttomWall2.objet) == true
+				CheckCollisionCircleRec(player.position, player.radius, bottomWall1.objet) == true ||
+				CheckCollisionCircleRec(player.position, player.radius, bottomWall2.objet) == true
 				||
 				(player.position.y + player.radius >= GetScreenHeight()) ||
 				(player.position.y <= 0)
@@ -150,11 +150,11 @@ namespace Flappy_Bird
 
 		void EarnPoint()
 		{
-			if (player.position.x > (buttomWall1.objet.x + buttomWall1.objet.width - 3.5f) &&
-				player.position.x <= (buttomWall1.objet.x + buttomWall1.objet.width)
+			if (player.position.x > (bottomWall1.objet.x + bottomWall1.objet.width - 3.5f) &&
+				player.position.x <= (bottomWall1.objet.x + bottomWall1.objet.width)
 				||
-				player.position.x > (buttomWall2.objet.x + buttomWall2.objet.width - 3.5f) &&
-				player.position.x <= (buttomWall2.objet.x + buttomWall2.objet.width))
+				player.position.x > (bottomWall2.objet.x + bottomWall2.objet.width - 3.5f) &&
+				player.position.x <= (bottomWall2.objet.x + bottomWall2.objet.width))
 			{
 				player.points++;
 			}

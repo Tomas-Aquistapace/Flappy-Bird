@@ -10,7 +10,7 @@ namespace Flappy_Bird
 		struct WALLS 
 		{
 			Rectangle objet;
-			//Texture2D texture;
+			Texture2D texture;
 		};
 
 		struct SkULLS
@@ -23,8 +23,8 @@ namespace Flappy_Bird
 
 		extern SkULLS skull;
 
-		extern WALLS buttomWall1;
-		extern WALLS buttomWall2;
+		extern WALLS bottomWall1;
+		extern WALLS bottomWall2;
 		extern WALLS superiorWall1;
 		extern WALLS superiorWall2;
 

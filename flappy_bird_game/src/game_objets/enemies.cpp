@@ -12,12 +12,12 @@ namespace Flappy_Bird
 
 		SkULLS skull;
 
-		WALLS buttomWall1;
-		WALLS buttomWall2;
+		WALLS bottomWall1;
+		WALLS bottomWall2;
 		WALLS superiorWall1;
 		WALLS superiorWall2;
 
-		static Texture2D walls;
+		//static Texture2D walls;
 
 		const float SPEED_WALL = 200.0f;
 		const float SPEED_SKULL = 300.0f;
@@ -39,29 +39,33 @@ namespace Flappy_Bird
 
 			skull.appears = false;
 
-			walls = LoadTexture("assets/textures/objects/wall.png");
+			//walls = LoadTexture("assets/textures/objects/wall.png");
 
 			// firts walls
 			superiorWall1.objet.height = HEIGHT;
 			superiorWall1.objet.width = WIDTH;
 			superiorWall1.objet.x = static_cast<float>(GetScreenWidth() + HEIGHT / 2);
 			superiorWall1.objet.y = static_cast<float>(GetRandomValue(-(static_cast<int>(HEIGHT / 2)), 0));
+			superiorWall1.texture = LoadTexture("assets/textures/objects/superior wall.png");
 
-			buttomWall1.objet.height = HEIGHT;
-			buttomWall1.objet.width = WIDTH;
-			buttomWall1.objet.x = static_cast<float>(GetScreenWidth() + HEIGHT / 2);
-			buttomWall1.objet.y = superiorWall1.objet.y + HEIGHT + 200;
+			bottomWall1.objet.height = HEIGHT;
+			bottomWall1.objet.width = WIDTH;
+			bottomWall1.objet.x = static_cast<float>(GetScreenWidth() + HEIGHT / 2);
+			bottomWall1.objet.y = superiorWall1.objet.y + HEIGHT + GetScreenHeight() / 3;
+			bottomWall1.texture = LoadTexture("assets/textures/objects/bottom wall.png");
 
 			// seconds walls
 			superiorWall2.objet.height = HEIGHT;
 			superiorWall2.objet.width = WIDTH;
 			superiorWall2.objet.x = static_cast<float>(GetScreenWidth());
 			superiorWall2.objet.y = static_cast<float>(GetRandomValue(-(static_cast<int>(HEIGHT / 2)), 0));
+			superiorWall2.texture = LoadTexture("assets/textures/objects/superior wall.png");
 
-			buttomWall2.objet.height = HEIGHT;
-			buttomWall2.objet.width = WIDTH;
-			buttomWall2.objet.x = static_cast<float>(GetScreenWidth());
-			buttomWall2.objet.y = superiorWall2.objet.y + HEIGHT + 200;
+			bottomWall2.objet.height = HEIGHT;
+			bottomWall2.objet.width = WIDTH;
+			bottomWall2.objet.x = static_cast<float>(GetScreenWidth());
+			bottomWall2.objet.y = superiorWall2.objet.y + HEIGHT + GetScreenHeight() / 3;
+			bottomWall2.texture = LoadTexture("assets/textures/objects/bottom wall.png");
 
 			screenCenter = false;
 			moveSecondPipe = false;
@@ -82,15 +86,15 @@ namespace Flappy_Bird
 			superiorWall1.objet.x = static_cast<float>(GetScreenWidth() + HEIGHT / 2);
 			superiorWall1.objet.y = static_cast<float>(GetRandomValue(-(static_cast<int>(HEIGHT / 2)), 0));
 
-			buttomWall1.objet.x = static_cast<float>(GetScreenWidth() + HEIGHT / 2);
-			buttomWall1.objet.y = superiorWall1.objet.y + HEIGHT + 200;
+			bottomWall1.objet.x = static_cast<float>(GetScreenWidth() + HEIGHT / 2);
+			bottomWall1.objet.y = superiorWall1.objet.y + HEIGHT + 200;
 
 			// seconds walls
 			superiorWall2.objet.x = static_cast<float>(GetScreenWidth());
 			superiorWall2.objet.y = static_cast<float>(GetRandomValue(-(static_cast<int>(HEIGHT / 2)), 0));
 
-			buttomWall2.objet.x = static_cast<float>(GetScreenWidth());
-			buttomWall2.objet.y = superiorWall2.objet.y + HEIGHT + 200;
+			bottomWall2.objet.x = static_cast<float>(GetScreenWidth());
+			bottomWall2.objet.y = superiorWall2.objet.y + HEIGHT + 200;
 
 			screenCenter = false;
 			moveSecondPipe = false;
@@ -98,7 +102,10 @@ namespace Flappy_Bird
 
 		void Unload()
 		{
-			UnloadTexture(walls);
+			UnloadTexture(bottomWall1.texture);
+			UnloadTexture(bottomWall2.texture);
+			UnloadTexture(superiorWall1.texture);
+			UnloadTexture(superiorWall2.texture);
 		}
 
 		void MovementEnemies()
@@ -131,40 +138,40 @@ namespace Flappy_Bird
 
 			//walls
 
-			if ((buttomWall1.objet.x + WIDTH < 0) && (superiorWall1.objet.x + WIDTH < 0))
+			if ((bottomWall1.objet.x + WIDTH < 0) && (superiorWall1.objet.x + WIDTH < 0))
 			{
 				superiorWall1.objet.x = static_cast<float>(GetScreenWidth());
 				superiorWall1.objet.y = static_cast<float>(GetRandomValue(-(static_cast<int>(HEIGHT / 2)), 0));
 
-				buttomWall1.objet.x = static_cast<float>(GetScreenWidth());
+				bottomWall1.objet.x = static_cast<float>(GetScreenWidth());
 
 				if (player.points < 9)
 				{
-					buttomWall1.objet.y = superiorWall1.objet.y + HEIGHT + 200;
+					bottomWall1.objet.y = superiorWall1.objet.y + HEIGHT + 200;
 				}
 				else
 				{
-					buttomWall1.objet.y = superiorWall1.objet.y + HEIGHT + 150;
+					bottomWall1.objet.y = superiorWall1.objet.y + HEIGHT + 150;
 				}
 
 				screenCenter = false;
 			}
 
-			if ((buttomWall1.objet.x + WIDTH / 2 < GetScreenWidth() / 2) && ((superiorWall1.objet.x + WIDTH / 2 < GetScreenWidth() / 2)) &&
+			if ((bottomWall1.objet.x + WIDTH / 2 < GetScreenWidth() / 2) && ((superiorWall1.objet.x + WIDTH / 2 < GetScreenWidth() / 2)) &&
 				(screenCenter == false))
 			{
 				superiorWall2.objet.x = static_cast<float>(GetScreenWidth());
 				superiorWall2.objet.y = static_cast<float>(GetRandomValue(-(static_cast<int>(HEIGHT / 2)), 0));
 
-				buttomWall2.objet.x = static_cast<float>(GetScreenWidth());
+				bottomWall2.objet.x = static_cast<float>(GetScreenWidth());
 
 				if (player.points < 9)
 				{
-					buttomWall2.objet.y = superiorWall2.objet.y + HEIGHT + 200;
+					bottomWall2.objet.y = superiorWall2.objet.y + HEIGHT + 200;
 				}
 				else
 				{
-					buttomWall2.objet.y = superiorWall2.objet.y + HEIGHT + 150;
+					bottomWall2.objet.y = superiorWall2.objet.y + HEIGHT + 150;
 				}
 
 				screenCenter = true;
@@ -172,22 +179,22 @@ namespace Flappy_Bird
 			}
 
 			superiorWall1.objet.x -= SPEED_WALL * GetFrameTime();
-			buttomWall1.objet.x -= SPEED_WALL * GetFrameTime();
+			bottomWall1.objet.x -= SPEED_WALL * GetFrameTime();
 
 			if (moveSecondPipe == true)
 			{
 				superiorWall2.objet.x -= SPEED_WALL * GetFrameTime();
-				buttomWall2.objet.x -= SPEED_WALL * GetFrameTime();
+				bottomWall2.objet.x -= SPEED_WALL * GetFrameTime();
 			}
 		}
 
 		void DrawEnemies()
 		{
-			DrawTexture(walls, static_cast<int>(superiorWall1.objet.x), static_cast<int>(superiorWall1.objet.y), GRAY);
-			DrawTexture(walls, static_cast<int>(buttomWall1.objet.x), static_cast<int>(buttomWall1.objet.y), GRAY);
+			DrawTexture(superiorWall1.texture, static_cast<int>(superiorWall1.objet.x), static_cast<int>(superiorWall1.objet.y), GRAY);
+			DrawTexture(bottomWall1.texture, static_cast<int>(bottomWall1.objet.x), static_cast<int>(bottomWall1.objet.y), GRAY);
 
-			DrawTexture(walls, static_cast<int>(superiorWall2.objet.x), static_cast<int>(superiorWall2.objet.y), GRAY);
-			DrawTexture(walls, static_cast<int>(buttomWall2.objet.x), static_cast<int>(buttomWall2.objet.y), GRAY);
+			DrawTexture(superiorWall2.texture, static_cast<int>(superiorWall2.objet.x), static_cast<int>(superiorWall2.objet.y), GRAY);
+			DrawTexture(bottomWall2.texture, static_cast<int>(bottomWall2.objet.x), static_cast<int>(bottomWall2.objet.y), GRAY);
 
 			DrawCircleV(skull.position, skull.radius, RED);
 		}
