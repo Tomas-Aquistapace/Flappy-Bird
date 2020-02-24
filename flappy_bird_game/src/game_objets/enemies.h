@@ -10,14 +10,24 @@ namespace Flappy_Bird
 		struct WALLS 
 		{
 			Rectangle objet;
+			//Texture2D texture;
 		};
+
+		struct SkULLS
+		{
+			Vector2 position;
+			float radius;
+			//Texture2D texture;
+		};
+
+		extern SkULLS skull;
 
 		extern WALLS buttomWall1;
 		extern WALLS buttomWall2;
 		extern WALLS superiorWall1;
 		extern WALLS superiorWall2;
 
-		extern const float SPEED_ENEMI;
+		extern const float SPEED_WALL;
 
 		extern void Initialize();
 		extern void Reset();
