@@ -24,7 +24,7 @@ namespace Flappy_Bird
 		const short FONT_UI = 40;
 		const short PIXELS_AXIS = 20;
 
-		// animation
+		// animations
 		static Vector2 position;
 		static Rectangle frameRec;
 		static float currentFrame = 0;
@@ -52,10 +52,9 @@ namespace Flappy_Bird
 			player.state = falling;
 			player.force = 0.0f;
 
-			player.body.height = HEIGHT_PLAYER;
-			player.body.width = WIDTH_PLAYER;
-			player.body.x = static_cast <float>(GetScreenWidth() / 3);
-			player.body.y = static_cast <float>(GetScreenHeight() / 2);
+			player.position.x = static_cast <float>(GetScreenWidth() / 3);
+			player.position.y = static_cast <float>(GetScreenHeight() / 2);
+			player.radius = 15;
 
 			player.points = 0;
 			player.maxPoints = 0;
@@ -82,8 +81,9 @@ namespace Flappy_Bird
 			player.state = falling;
 			player.force = 0.0f;
 
-			player.body.x = static_cast <float>(GetScreenWidth() / 3);
-			player.body.y = static_cast <float>(GetScreenHeight() / 2);
+			player.position.x = static_cast <float>(GetScreenWidth() / 3);
+			player.position.y = static_cast <float>(GetScreenHeight() / 2);
+
 			player.points = 0;
 			player.exitGame = false;
 
@@ -119,13 +119,15 @@ namespace Flappy_Bird
 
 		void LoseOrWin()
 		{
-			if (CheckCollisionRecs(player.body, superiorWall1.objet) == true ||
-				CheckCollisionRecs(player.body, superiorWall2.objet) == true ||
-				CheckCollisionRecs(player.body, buttomWall1.objet) == true ||
-				CheckCollisionRecs(player.body, buttomWall2.objet) == true
+			if (CheckCollisionCircleRec(player.position, player.radius, superiorWall1.objet) == true ||
+				CheckCollisionCircleRec(player.position, player.radius, superiorWall2.objet) == true ||
+				CheckCollisionCircleRec(player.position, player.radius, buttomWall1.objet) == true ||
+				CheckCollisionCircleRec(player.position, player.radius, buttomWall2.objet) == true
 				||
-				(player.body.y + player.body.height >= GetScreenHeight()) ||
-				(player.body.y <= 0))
+				(player.position.y + player.radius >= GetScreenHeight()) ||
+				(player.position.y <= 0)
+				||
+				(CheckCollisionCircles(player.position, player.radius, skull.position, skull.radius) == true))
 			{
 				Sounds::StateEndMusic(Sounds::play);
 				PlaySound(Sounds::die_sound);
@@ -141,11 +143,11 @@ namespace Flappy_Bird
 
 		void EarnPoint()
 		{
-			if (player.body.x > (buttomWall1.objet.x + buttomWall1.objet.width - 3.5f) &&
-				player.body.x <= (buttomWall1.objet.x + buttomWall1.objet.width)
+			if (player.position.x > (buttomWall1.objet.x + buttomWall1.objet.width - 3.5f) &&
+				player.position.x <= (buttomWall1.objet.x + buttomWall1.objet.width)
 				||
-				player.body.x > (buttomWall2.objet.x + buttomWall2.objet.width - 3.5f) &&
-				player.body.x <= (buttomWall2.objet.x + buttomWall2.objet.width))
+				player.position.x > (buttomWall2.objet.x + buttomWall2.objet.width - 3.5f) &&
+				player.position.x <= (buttomWall2.objet.x + buttomWall2.objet.width))
 			{
 				player.points++;
 			}
@@ -153,6 +155,7 @@ namespace Flappy_Bird
 
 		void DrawPlayer()
 		{
+			DrawCircleV(player.position, player.radius, BLUE);
 			if (player.state == jumping)
 				AnimationJump();
 			else
@@ -201,7 +204,7 @@ namespace Flappy_Bird
 				player.state = falling;		
 			}
 			
-			player.body.y -= player.force * GetFrameTime() * 2;
+			player.position.y -= player.force * GetFrameTime() * 2;
 
 			if (player.force > MIN_GRAVITY)
 			{
@@ -225,7 +228,7 @@ namespace Flappy_Bird
 
 					frameRec.x = static_cast<float>(currentFrame*(player.spriteMovement.width / 4));
 				}
-				position = { player.body.x - player.body.width / 2, player.body.y };
+				position = { player.position.x - player.radius * 2, player.position.y - player.radius };
 			}
 
 			DrawTextureRec(player.spriteMovement, frameRec, position, WHITE);
@@ -247,7 +250,7 @@ namespace Flappy_Bird
 
 					frameRecJump.x = static_cast<float>(currentFrameJump * (player.spriteJump.width / 2));
 				}
-				position = { player.body.x - player.body.width / 2, player.body.y };
+				position = { player.position.x - player.radius * 2, player.position.y - player.radius };
 			}
 			DrawTextureRec(player.spriteJump, frameRecJump, position, WHITE);
 		}

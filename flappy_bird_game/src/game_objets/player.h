@@ -18,7 +18,9 @@ namespace Flappy_Bird
 
 		struct PLAYER 
 		{
-			Rectangle body;
+			Vector2 position;
+			float radius;
+
 			JUMP state;
 			float force;
 			int points;
