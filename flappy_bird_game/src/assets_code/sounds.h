@@ -16,6 +16,7 @@ namespace Flappy_Bird
 		
 		extern Sound jump;
 		extern Sound die_sound;
+		extern Sound screamSkull;
 
 		extern void LoadMusic_Sound();
 		extern void SetEffectsVolume(bool mute);

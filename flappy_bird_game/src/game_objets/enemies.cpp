@@ -2,6 +2,7 @@
 
 #include "player.h"
 #include "assets_code/textures.h"
+#include "assets_code/sounds.h"
 
 namespace Flappy_Bird
 {
@@ -35,6 +36,8 @@ namespace Flappy_Bird
 			{
 				skull.position.y = static_cast<float>(GetRandomValue(GetScreenHeight() / 5, GetScreenHeight() - GetScreenHeight() / 5));
 			} while ((skull.position.y >= GetScreenHeight() / 3) && (skull.position.y <= GetScreenHeight() - GetScreenHeight() / 3));
+
+			skull.appears = false;
 
 			walls = LoadTexture("assets/textures/objects/wall.png");
 
@@ -72,6 +75,8 @@ namespace Flappy_Bird
 			{
 				skull.position.y = static_cast<float>(GetRandomValue(GetScreenHeight() / 5, GetScreenHeight() - GetScreenHeight() / 5));
 			} while ((skull.position.y >= GetScreenHeight() / 3) && (skull.position.y <= GetScreenHeight() - GetScreenHeight() / 3));
+			
+			skull.appears = false;
 
 			// firts walls
 			superiorWall1.objet.x = static_cast<float>(GetScreenWidth() + HEIGHT / 2);
@@ -112,6 +117,16 @@ namespace Flappy_Bird
 			if (player.points >= 10)
 			{
 				skull.position.x -= SPEED_SKULL * GetFrameTime();
+			}
+
+			if (skull.position.x <= GetScreenWidth() && skull.position.x >= 0 && skull.appears == false)
+			{
+				PlaySound(Sounds::screamSkull);
+				skull.appears = true;
+			}
+			else if (skull.position.x <= 0)
+			{
+				skull.appears = false;
 			}
 
 			//walls
@@ -168,13 +183,13 @@ namespace Flappy_Bird
 
 		void DrawEnemies()
 		{
-			DrawCircleV(skull.position, skull.radius, RED);
-
 			DrawTexture(walls, static_cast<int>(superiorWall1.objet.x), static_cast<int>(superiorWall1.objet.y), GRAY);
 			DrawTexture(walls, static_cast<int>(buttomWall1.objet.x), static_cast<int>(buttomWall1.objet.y), GRAY);
 
 			DrawTexture(walls, static_cast<int>(superiorWall2.objet.x), static_cast<int>(superiorWall2.objet.y), GRAY);
 			DrawTexture(walls, static_cast<int>(buttomWall2.objet.x), static_cast<int>(buttomWall2.objet.y), GRAY);
+
+			DrawCircleV(skull.position, skull.radius, RED);
 		}
 	}
 }

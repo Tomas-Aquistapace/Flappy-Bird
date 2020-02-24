@@ -123,7 +123,7 @@ namespace Flappy_Bird
 			}
 			else
 			{
-				DrawTextEx(Textures::textFont, "S", text1Pos, FONT_OPTIONS, 2, RED);
+				DrawTextEx(Textures::textFont, "S", text1Pos, FONT_OPTIONS, 2, MAROON);
 			}
 
 			DrawTexture(optionsEffects, GetScreenWidth() / 2 + optionsEffects.width, GetScreenHeight() - (optionsEffects.height + optionsEffects.height / 3), DARKBLUE);
@@ -133,7 +133,7 @@ namespace Flappy_Bird
 			}
 			else
 			{
-				DrawTextEx(Textures::textFont, "M", text2Pos, FONT_OPTIONS, 2, RED);
+				DrawTextEx(Textures::textFont, "M", text2Pos, FONT_OPTIONS, 2, MAROON);
 			}
 
 

@@ -8,6 +8,8 @@ namespace Flappy_Bird
 
 		Sound jump;
 		Sound die_sound;
+		Sound screamSkull;
+
 		static Music gameMusic;
 		static Music endMusic;
 		static Music player_flames;
@@ -22,6 +24,7 @@ namespace Flappy_Bird
 			
 			jump = LoadSound("assets/sounds/player_sounds/jump.ogg");
 			die_sound = LoadSound("assets/sounds/player_sounds/lose.ogg");
+			screamSkull = LoadSound("assets/sounds/enemies/SCREAM_4.ogg");
 
 			PlayMusicStream(gameMusic);
 		}
@@ -35,6 +38,7 @@ namespace Flappy_Bird
 
 				SetSoundVolume(jump, 0.0f);
 				SetSoundVolume(die_sound, 0.0f);
+				SetSoundVolume(screamSkull, 0.0f);
 			}
 			else
 			{
@@ -43,6 +47,7 @@ namespace Flappy_Bird
 
 				SetSoundVolume(jump, 1.0f);
 				SetSoundVolume(die_sound, 1.0f);
+				SetSoundVolume(screamSkull, 1.0f);
 			}
 		}
 		
@@ -120,6 +125,7 @@ namespace Flappy_Bird
 			UnloadMusicStream(player_flames);
 			UnloadSound(jump);
 			UnloadSound(die_sound);
+			UnloadSound(screamSkull);
 
 			CloseAudioDevice();
 		}

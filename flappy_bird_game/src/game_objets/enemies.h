@@ -17,6 +17,7 @@ namespace Flappy_Bird
 		{
 			Vector2 position;
 			float radius;
+			bool appears;
 			//Texture2D texture;
 		};
 
