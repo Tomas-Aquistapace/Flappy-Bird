@@ -6,6 +6,9 @@ namespace Flappy_Bird
 {
 	namespace Textures
 	{	
+		Font tittleFont;
+		Font textFont;
+
 		static float scrolling_floor = 0.0f;
 		static float scrolling_trees_layer_1 = 0.0f;
 		static float scrolling_mist = 0.0f;
@@ -14,18 +17,15 @@ namespace Flappy_Bird
 		static float scrolling_trees_layer_4 = 0.0f;
 		static float scrolling_stars = 0.0f;
 
-		Texture2D trees_layer_1;
-		Texture2D mist;
-		Texture2D trees_layer_2;
-		Texture2D trees_layer_3;
-		Texture2D trees_layer_4;
-		Texture2D floor;
-		Texture2D stars;
-		Texture2D moon;
-		Texture2D base;
-
-		Font tittleFont;
-		Font textFont;
+		static Texture2D trees_layer_1;
+		static Texture2D mist;
+		static Texture2D trees_layer_2;
+		static Texture2D trees_layer_3;
+		static Texture2D trees_layer_4;
+		static Texture2D floor;
+		static Texture2D stars;
+		static Texture2D moon;
+		static Texture2D base;
 
 		void LoadTextures()
 		{

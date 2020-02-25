@@ -203,7 +203,6 @@ namespace Flappy_Bird
 			BeginDrawing();
 			ClearBackground(BLACK);
 
-			//Textures::MovementBackgrounds();
 			Textures::DrawBackground();
 
 			DrawTexture(menuTittle, GetScreenWidth() / 2 - menuTittle.width / 2, GetScreenHeight() / 2 - menuTittle.height, GRAY);

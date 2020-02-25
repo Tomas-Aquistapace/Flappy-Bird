@@ -17,8 +17,8 @@ namespace Flappy_Bird
 		WALLS superiorWall1;
 		WALLS superiorWall2;
 
-		const float SPEED_WALL = 200.0f;
-		const float SPEED_SKULL = 300.0f;
+		static const float SPEED_WALL = 200.0f;
+		static const float SPEED_SKULL = 300.0f;
 		static const float HEIGHT = 300;
 		static const float WIDTH = 50;
 

@@ -12,22 +12,18 @@ namespace Flappy_Bird
 	namespace Player
 	{
 		PLAYER player;
+		bool pause;
 
 		Texture2D frameworkSkin1;
 		Texture2D frameworkSkin2;
 
-		bool pause;
-
 		static const int MOUSERADIUS = 0;
 
-		const float HEIGHT_PLAYER = 30;
-		const float WIDTH_PLAYER = 30;
-		const float FORCE = 150.0f;
-		const float GRAVITY = 90;
-		const float MIN_GRAVITY = -150.0f;
-
-		const short FONT_UI = 40;
-		const short PIXELS_AXIS = 20;
+		static const float HEIGHT_PLAYER = 30;
+		static const float WIDTH_PLAYER = 30;
+		static const float FORCE = 150.0f;
+		static const float GRAVITY = 90;
+		static const float MIN_GRAVITY = -150.0f;
 
 		// animations
 		static Vector2 position;
@@ -43,7 +39,6 @@ namespace Flappy_Bird
 		// ---------
 
 		static void Jump(Rectangle pauseButtom, Rectangle menuButtom);
-		static void DrawUI();
 		static void AnimationMove();
 		static void AnimationJump();
 
@@ -161,25 +156,9 @@ namespace Flappy_Bird
 				currentFrameJump = 0;
 				framesCounterJump = 0;
 			}
-			DrawUI();
 		}
 
 		//------------------------------------------
-
-		static void DrawUI()
-		{
-			Vector2 text1Pos;
-			Vector2 text2Pos;
-
-			text1Pos.x = static_cast<float>(PIXELS_AXIS);
-			text1Pos.y = static_cast<float>(GetScreenHeight() - FONT_UI);
-			
-			text2Pos.x = static_cast<float>(GetScreenWidth() + GetScreenWidth() / 4 - MeasureText("Enter to Pause", FONT_UI) - PIXELS_AXIS);
-			text2Pos.y = static_cast<float>(GetScreenHeight() - FONT_UI);
-
-			DrawTextEx(Textures::textFont, FormatText("Points   %i", Player::player.points), text1Pos, FONT_UI, 2, WHITE);
-			DrawTextEx(Textures::textFont, "Enter to Pause", text2Pos, FONT_UI, 2, WHITE);
-		}
 
 		static void Jump(Rectangle pauseButtom, Rectangle menuButtom)
 		{

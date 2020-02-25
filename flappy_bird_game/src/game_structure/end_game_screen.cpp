@@ -4,6 +4,7 @@
 
 #include "menu_screen.h"
 #include "game_objets/player.h"
+#include "game_objets/enemies.h"
 #include "assets_code/textures.h"
 #include "assets_code/sounds.h"
 
@@ -19,11 +20,13 @@ namespace Flappy_Bird
 		static const float WIDTH = 50;
 
 		static Rectangle menuButtom;
+		static Rectangle resetButtom;
 
 		static Texture2D endScreenTittle;
 		static Texture2D endScreenPoints;
 
 		static void ButtomMenuPressed();
+		static void ButtomResetPressed();
 		static void DrawEndGame();
 
 		void Initialize()
@@ -32,8 +35,13 @@ namespace Flappy_Bird
 			
 			menuButtom.height = HEIGHT;
 			menuButtom.width = WIDTH;
-			menuButtom.x = static_cast<float>(GetScreenWidth() / 2 - menuButtom.width / 2);
+			menuButtom.x = static_cast<float>(GetScreenWidth() / 2 + menuButtom.width / 2);
 			menuButtom.y = static_cast<float>(GetScreenHeight() / 2 + GetScreenHeight() / 3);
+
+			resetButtom.height = HEIGHT;
+			resetButtom.width = WIDTH;
+			resetButtom.x = static_cast<float>(GetScreenWidth() / 2 - (resetButtom.width + resetButtom.width / 2));
+			resetButtom.y = static_cast<float>(GetScreenHeight() / 2 + GetScreenHeight() / 3);
 
 			endScreenTittle = LoadTexture("assets/textures/framework/frameworkGameOverTittle.png");
 
@@ -83,6 +91,34 @@ namespace Flappy_Bird
 			}
 		}
 
+		static void ButtomResetPressed()
+		{
+			if (CheckCollisionCircleRec(GetMousePosition(), MOUSERADIUS, resetButtom))
+			{
+				if (IsMouseButtonDown(MOUSE_LEFT_BUTTON))
+				{
+					DrawRectangleRec(resetButtom, DARKGRAY);
+				}
+				else
+				{
+					DrawRectangleRec(resetButtom, GRAY);
+				}
+				if (IsMouseButtonReleased(MOUSE_LEFT_BUTTON))
+				{
+					Sounds::StateEndMusic(Sounds::stop);
+					Sounds::StateGameMusic(Sounds::play);
+					Sounds::StatePlayerMusic(Sounds::play);
+					Menu::scene = Menu::game;
+					Player::Reset();
+					Enemies::Reset();
+				}
+			}
+			else
+			{
+				DrawRectangleRec(resetButtom, GRAY);
+			}
+		}
+
 		static void DrawEndGame()
 		{
 			int extraPixels = 10;
@@ -110,7 +146,8 @@ namespace Flappy_Bird
 			DrawTexture(endScreenPoints, GetScreenWidth() / 2 - endScreenPoints.width / 2, GetScreenHeight() / 2 + (endScreenPoints.height - endScreenPoints.height / 3), DARKGRAY);
 			DrawTextEx(Textures::textFont, FormatText("Max Points  %i", Player::player.maxPoints), text2Pos, FONT_POINT, 2, WHITE);
 
-			ButtomMenuPressed();
+			ButtomMenuPressed(); 
+			ButtomResetPressed();
 
 			EndDrawing();
 		}

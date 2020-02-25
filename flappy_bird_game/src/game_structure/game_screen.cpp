@@ -12,7 +12,9 @@ namespace Flappy_Bird
 {
 	namespace Game
 	{
-		static const short FONT_PAUSE = 80;
+		static const short FONT_PAUSE = 80; 
+		static const short PIXELS_AXIS = 20;
+		static const short FONT_UI = 40;
 
 		static const int MOUSERADIUS = 0;
 
@@ -110,10 +112,14 @@ namespace Flappy_Bird
 
 		static void Draw()
 		{
-			Vector2 textPos;
+			Vector2 text1Pos;
+			Vector2 text2Pos;
 			
-			textPos.x = static_cast<float>(GetScreenWidth() / 2 - FONT_PAUSE);
-			textPos.y = static_cast<float>(GetScreenHeight() / 2);
+			text1Pos.x = static_cast<float>(GetScreenWidth() / 2 - FONT_PAUSE);
+			text1Pos.y = static_cast<float>(GetScreenHeight() / 2);
+
+			text2Pos.x = static_cast<float>(PIXELS_AXIS);
+			text2Pos.y = static_cast<float>(GetScreenHeight() - menuButtom.height);
 
 			BeginDrawing();
 			ClearBackground(BLACK);
@@ -122,13 +128,14 @@ namespace Flappy_Bird
 			Textures::DrawBackground();
 
 			Enemies::DrawEnemies();
-
 			Player::DrawPlayer();
 
 			if (Player::pause == true)
 			{
-				DrawTextEx(Textures::tittleFont, "Pause", textPos, FONT_PAUSE, 2, BLACK);
+				DrawTextEx(Textures::tittleFont, "Pause", text1Pos, FONT_PAUSE, 2, BLACK);
 			}
+
+			DrawTextEx(Textures::textFont, FormatText("Points   %i", Player::player.points), text2Pos, FONT_UI, 2, WHITE);
 
 			ButtomMenuPressed();
 			ButtomPausePressed();

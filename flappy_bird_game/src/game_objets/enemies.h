@@ -29,8 +29,6 @@ namespace Flappy_Bird
 		extern WALLS superiorWall1;
 		extern WALLS superiorWall2;
 
-		extern const float SPEED_WALL;
-
 		extern void Initialize();
 		extern void Reset();
 		extern void Unload();
