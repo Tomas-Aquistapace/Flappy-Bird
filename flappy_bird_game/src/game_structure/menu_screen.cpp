@@ -110,7 +110,7 @@ namespace Flappy_Bird
 				}
 				else
 				{
-					DrawTexture(leftArrow.menuArrows, static_cast<int>(leftArrow.rec.x), static_cast<int>(leftArrow.rec.y), GRAY);
+					DrawTexture(leftArrow.menuArrows, static_cast<int>(leftArrow.rec.x), static_cast<int>(leftArrow.rec.y), BLACK);
 				}
 				if (IsMouseButtonReleased(MOUSE_LEFT_BUTTON))
 				{
@@ -119,7 +119,7 @@ namespace Flappy_Bird
 			}
 			else
 			{
-				DrawTexture(leftArrow.menuArrows, static_cast<int>(leftArrow.rec.x), static_cast<int>(leftArrow.rec.y), GRAY);
+				DrawTexture(leftArrow.menuArrows, static_cast<int>(leftArrow.rec.x), static_cast<int>(leftArrow.rec.y), BLACK);
 			}
 		}
 
@@ -133,7 +133,7 @@ namespace Flappy_Bird
 				}
 				else
 				{
-					DrawTexture(rightArrow.menuArrows, static_cast<int>(rightArrow.rec.x), static_cast<int>(rightArrow.rec.y), GRAY);
+					DrawTexture(rightArrow.menuArrows, static_cast<int>(rightArrow.rec.x), static_cast<int>(rightArrow.rec.y), BLACK);
 				}
 				if (IsMouseButtonReleased(MOUSE_LEFT_BUTTON))
 				{
@@ -142,7 +142,7 @@ namespace Flappy_Bird
 			}
 			else
 			{
-				DrawTexture(rightArrow.menuArrows, static_cast<int>(rightArrow.rec.x), static_cast<int>(rightArrow.rec.y), GRAY);
+				DrawTexture(rightArrow.menuArrows, static_cast<int>(rightArrow.rec.x), static_cast<int>(rightArrow.rec.y), BLACK);
 			}
 		}
 

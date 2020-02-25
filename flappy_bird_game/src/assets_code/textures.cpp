@@ -11,12 +11,14 @@ namespace Flappy_Bird
 		static float scrolling_mist = 0.0f;
 		static float scrolling_trees_layer_2 = 0.0f;
 		static float scrolling_trees_layer_3 = 0.0f;
+		static float scrolling_trees_layer_4 = 0.0f;
 		static float scrolling_stars = 0.0f;
 
 		Texture2D trees_layer_1;
 		Texture2D mist;
 		Texture2D trees_layer_2;
 		Texture2D trees_layer_3;
+		Texture2D trees_layer_4;
 		Texture2D floor;
 		Texture2D stars;
 		Texture2D moon;
@@ -34,6 +36,7 @@ namespace Flappy_Bird
 			mist = LoadTexture("assets/textures/scenarios/mist.png");
 			trees_layer_2 = LoadTexture("assets/textures/scenarios/trees_layer_2.png");
 			trees_layer_3 = LoadTexture("assets/textures/scenarios/trees_layer_3.png");
+			trees_layer_4 = LoadTexture("assets/textures/scenarios/trees_layer_4.png");
 			floor = LoadTexture("assets/textures/scenarios/floor.png");
 			stars = LoadTexture("assets/textures/scenarios/stars.png");
 			moon = LoadTexture("assets/textures/scenarios/moon.png");
@@ -52,6 +55,7 @@ namespace Flappy_Bird
 			UnloadTexture(mist);
 			UnloadTexture(trees_layer_2);
 			UnloadTexture(trees_layer_3);
+			UnloadTexture(trees_layer_4);
 			UnloadTexture(floor);
 			UnloadTexture(stars);
 			UnloadTexture(moon);
@@ -65,9 +69,10 @@ namespace Flappy_Bird
 		{
 			if (Player::pause != true)
 			{
-				scrolling_stars -= 20.0f * GetFrameTime();
-				scrolling_trees_layer_3 -= 25.0f * GetFrameTime();
-				scrolling_trees_layer_2 -= 75.0f * GetFrameTime();
+				scrolling_stars -= 15.0f * GetFrameTime();
+				scrolling_trees_layer_4 -= 35.0f * GetFrameTime();
+				scrolling_trees_layer_3 -= 60.0f * GetFrameTime();
+				scrolling_trees_layer_2 -= 110.0f * GetFrameTime();
 				scrolling_mist -= 80.0f * GetFrameTime();
 				scrolling_trees_layer_1 -= 120.0f * GetFrameTime();
 				scrolling_floor -= 120.0f * GetFrameTime();
@@ -75,6 +80,8 @@ namespace Flappy_Bird
 
 			if (scrolling_stars <= -stars.width)
 				scrolling_stars = 0.0f;
+			if (scrolling_trees_layer_4 <= -trees_layer_4.width)
+				scrolling_trees_layer_4 = 0.0f;
 			if (scrolling_trees_layer_3 <= -trees_layer_3.width)
 				scrolling_trees_layer_3 = 0.0f;
 			if (scrolling_trees_layer_2 <= -trees_layer_2.width)
@@ -88,7 +95,9 @@ namespace Flappy_Bird
 		}
 
 		void DrawBackground()
-		{			
+		{
+			float positionY = 100;
+
 			DrawTextureV(base, Vector2{ 0, 0 }, WHITE);
 			
 			DrawTextureV(moon, Vector2{ static_cast<float>(moon.width / -3), 0 }, WHITE);
@@ -96,20 +105,23 @@ namespace Flappy_Bird
 			DrawTextureV(stars, Vector2{ scrolling_stars, 0 }, WHITE);
 			DrawTextureV(stars, Vector2{ stars.width + scrolling_stars, 0 }, WHITE);
 			
-			DrawTextureV(trees_layer_3, Vector2{ scrolling_trees_layer_3, 100 }, WHITE);
-			DrawTextureV(trees_layer_3, Vector2{ trees_layer_3.width + scrolling_trees_layer_3, 100 }, WHITE);
+			DrawTextureV(trees_layer_4, Vector2{ scrolling_trees_layer_4, positionY }, WHITE);
+			DrawTextureV(trees_layer_4, Vector2{ trees_layer_4.width + scrolling_trees_layer_4, positionY }, WHITE);
 			
-			DrawTextureV(trees_layer_2, Vector2{ scrolling_trees_layer_2, 100 }, WHITE);
-			DrawTextureV(trees_layer_2, Vector2{ trees_layer_2.width + scrolling_trees_layer_2, 100 }, WHITE);
+			DrawTextureV(trees_layer_3, Vector2{ scrolling_trees_layer_3, positionY }, WHITE);
+			DrawTextureV(trees_layer_3, Vector2{ trees_layer_3.width + scrolling_trees_layer_3, positionY }, WHITE);
 			
-			DrawTextureV(mist, Vector2{ scrolling_mist, 100 }, WHITE);
-			DrawTextureV(mist, Vector2{ mist.width + scrolling_mist, 100 }, WHITE);
+			DrawTextureV(trees_layer_2, Vector2{ scrolling_trees_layer_2, positionY }, WHITE);
+			DrawTextureV(trees_layer_2, Vector2{ trees_layer_2.width + scrolling_trees_layer_2, positionY }, WHITE);
+			
+			DrawTextureV(mist, Vector2{ scrolling_mist, positionY }, WHITE);
+			DrawTextureV(mist, Vector2{ mist.width + scrolling_mist, positionY }, WHITE);
 
-			DrawTextureV(trees_layer_1, Vector2{ scrolling_trees_layer_1, 100 }, WHITE);
-			DrawTextureV(trees_layer_1, Vector2{ trees_layer_1.width + scrolling_trees_layer_1, 100 }, WHITE);
+			DrawTextureV(trees_layer_1, Vector2{ scrolling_trees_layer_1, positionY }, WHITE);
+			DrawTextureV(trees_layer_1, Vector2{ trees_layer_1.width + scrolling_trees_layer_1, positionY }, WHITE);
 
-			DrawTextureV(floor, Vector2{ scrolling_floor, 100 }, WHITE);
-			DrawTextureV(floor, Vector2{ floor.width + scrolling_floor, 100 }, WHITE);
+			DrawTextureV(floor, Vector2{ scrolling_floor, positionY }, WHITE);
+			DrawTextureV(floor, Vector2{ floor.width + scrolling_floor, positionY }, WHITE);
 		}
 	}
 }
