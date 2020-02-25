@@ -17,8 +17,6 @@ namespace Flappy_Bird
 		WALLS superiorWall1;
 		WALLS superiorWall2;
 
-		//static Texture2D walls;
-
 		const float SPEED_WALL = 200.0f;
 		const float SPEED_SKULL = 300.0f;
 		static const float HEIGHT = 300;
@@ -38,8 +36,6 @@ namespace Flappy_Bird
 			} while ((skull.position.y >= GetScreenHeight() / 3) && (skull.position.y <= GetScreenHeight() - GetScreenHeight() / 3));
 
 			skull.appears = false;
-
-			//walls = LoadTexture("assets/textures/objects/wall.png");
 
 			// firts walls
 			superiorWall1.objet.height = HEIGHT;

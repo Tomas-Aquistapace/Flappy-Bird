@@ -11,18 +11,30 @@ namespace Flappy_Bird
 {
 	namespace End_game
 	{
-		const float FONT_POINT = 50;
-		const float FONT_EXIT = 40;
+		static const float FONT_POINT = 50;
+
+		static const int MOUSERADIUS = 0;
+
+		static const float HEIGHT = 50;
+		static const float WIDTH = 50;
+
+		static Rectangle menuButtom;
 
 		static Texture2D endScreenTittle;
 		static Texture2D endScreenPoints;
 
 		static void Input();
+		static void ButtomMenuPressed();
 		static void DrawEndGame();
 
 		void Initialize()
 		{
 			Image endGameImage;
+			
+			menuButtom.height = HEIGHT;
+			menuButtom.width = WIDTH;
+			menuButtom.x = static_cast<float>(GetScreenWidth() / 2 - menuButtom.width / 2);
+			menuButtom.y = static_cast<float>(GetScreenHeight() / 2 + GetScreenHeight() / 3);
 
 			endScreenTittle = LoadTexture("assets/textures/framework/frameworkGameOverTittle.png");
 
@@ -58,23 +70,44 @@ namespace Flappy_Bird
 			}
 		}
 
+		static void ButtomMenuPressed()
+		{
+			if (CheckCollisionCircleRec(GetMousePosition(), MOUSERADIUS, menuButtom))
+			{
+				if (IsMouseButtonDown(MOUSE_LEFT_BUTTON))
+				{
+					DrawRectangleRec(menuButtom, DARKGRAY);
+				}
+				else
+				{
+					DrawRectangleRec(menuButtom, GRAY);
+				}
+				if (IsMouseButtonReleased(MOUSE_LEFT_BUTTON))
+				{
+					Sounds::StateEndMusic(Sounds::stop);
+					Sounds::StateGameMusic(Sounds::play);
+					Menu::scene = Menu::menu;
+				}
+			}
+			else
+			{
+				DrawRectangleRec(menuButtom, GRAY);
+			}
+		}
+
 		static void DrawEndGame()
 		{
 			int extraPixels = 10;
 
 			Vector2 text1Pos;
 			Vector2 text2Pos;
-			Vector2 text3Pos;
 
-			text1Pos.x = static_cast<float>((GetScreenWidth() / 2 + endScreenPoints.width / 3.5f) - ((MeasureText("Points  %i", static_cast<int>(FONT_POINT)) / 2)));
+			text1Pos.x = static_cast<float>((GetScreenWidth() / 2 + endScreenPoints.width / 3.5f) - ((MeasureText("Points  %i", static_cast<int>(FONT_POINT)) / 2)) - extraPixels);
 			text1Pos.y = static_cast<float>(GetScreenHeight() / 2 - endScreenPoints.height / 2 + extraPixels);
 
-			text2Pos.x = static_cast<float>((GetScreenWidth() / 2 + endScreenPoints.width / 2.5f) - ((MeasureText("Max Points  %i", static_cast<int>(FONT_POINT)) / 2)));
+			text2Pos.x = static_cast<float>((GetScreenWidth() / 2 + endScreenPoints.width / 2.5f) - ((MeasureText("Max Points  %i", static_cast<int>(FONT_POINT)) / 2)) - extraPixels);
 			text2Pos.y = static_cast<float>(GetScreenHeight() / 2 + endScreenPoints.height);
 			
-			text3Pos.x = static_cast<float>(GetScreenWidth() / 2 - (FONT_EXIT + FONT_EXIT / 2));
-			text3Pos.y = static_cast<float>(GetScreenHeight() / 2 + GetScreenHeight() / 3);
-
 			BeginDrawing();
 			ClearBackground(BLACK);
 
@@ -89,7 +122,7 @@ namespace Flappy_Bird
 			DrawTexture(endScreenPoints, GetScreenWidth() / 2 - endScreenPoints.width / 2, GetScreenHeight() / 2 + (endScreenPoints.height - endScreenPoints.height / 3), DARKGRAY);
 			DrawTextEx(Textures::textFont, FormatText("Max Points  %i", Player::player.maxPoints), text2Pos, FONT_POINT, 2, WHITE);
 
-			DrawTextEx(Textures::textFont, "Press Enter", text3Pos, FONT_EXIT, 2, WHITE);
+			ButtomMenuPressed();
 
 			EndDrawing();
 		}

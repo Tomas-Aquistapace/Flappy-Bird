@@ -1,6 +1,5 @@
 #include "menu_screen.h"
 
-//#include "game_screen.h"
 #include "game_objets/player.h"
 #include "game_objets/enemies.h"
 #include "assets_code/textures.h"
@@ -15,15 +14,18 @@ namespace Flappy_Bird
 		ARROW leftArrow;
 		ARROW rightArrow;
 
+		static Rectangle playButtom;
+		static Rectangle exitButtom;
+
 		static Texture2D menuTittle;
 
-		static const float FONT_PRESS_SPACE = 40.0f;
-		static const float FONT_PRESS_ESCAPE = 35.0f;
+		static const int MOUSERADIUS = 0;
 		
 		static const float HEIGHT = 100;
 		static const float WIDTH = 80;
 
-		static void InputMenu();
+		static void ButtomPlayPressed();
+		static void ButtomExitPressed();
 		static void DrawMenu();
 
 		void Initialize()
@@ -62,6 +64,20 @@ namespace Flappy_Bird
 			rightArrow.menuArrowsPressed = LoadTextureFromImage(arrowRightPressedImage);
 			menuTittle = LoadTextureFromImage(menuTittleImage);
 
+			// ------------------
+
+			playButtom.height = 100;
+			playButtom.width = 200;
+			playButtom.x = static_cast<float>(GetScreenWidth() / 2 - playButtom.width / 2);
+			playButtom.y = static_cast<float>(GetScreenHeight() / 2 + playButtom.height / 2);
+
+			exitButtom.height = 50;
+			exitButtom.width = 50;
+			exitButtom.x = exitButtom.height;
+			exitButtom.y = static_cast<float>(GetScreenHeight() - (exitButtom.height + exitButtom.height / 2));
+
+			// ------------------
+
 			UnloadImage(arrowLeftImage);
 			UnloadImage(arrowLeftPressedImage);
 			UnloadImage(arrowRightImage);
@@ -80,99 +96,122 @@ namespace Flappy_Bird
 
 		void Menu()
 		{
-			InputMenu();
 			Sounds::StateGameMusic(Sounds::update);
 			DrawMenu();
 		}
 
 		void KeysLeftPressed(SCENE place)
 		{
-			if (IsKeyDown(KEY_LEFT) == true)
+			if (CheckCollisionCircleRec(GetMousePosition(), MOUSERADIUS, leftArrow.rec))
 			{
-				DrawTexture(leftArrow.menuArrowsPressed, static_cast<int>(leftArrow.rec.x), static_cast<int>(leftArrow.rec.y), GRAY);
+				if (IsMouseButtonDown(MOUSE_LEFT_BUTTON))
+				{
+					DrawTexture(leftArrow.menuArrowsPressed, static_cast<int>(leftArrow.rec.x), static_cast<int>(leftArrow.rec.y), GRAY);
+				}
+				else
+				{
+					DrawTexture(leftArrow.menuArrows, static_cast<int>(leftArrow.rec.x), static_cast<int>(leftArrow.rec.y), GRAY);
+				}
+				if (IsMouseButtonReleased(MOUSE_LEFT_BUTTON))
+				{
+					scene = place;
+				}
 			}
 			else
 			{
 				DrawTexture(leftArrow.menuArrows, static_cast<int>(leftArrow.rec.x), static_cast<int>(leftArrow.rec.y), GRAY);
 			}
-			if (IsKeyReleased(KEY_LEFT) == true)
-			{
-				scene = place;
-			}
 		}
 
 		void KeysRightPressed(SCENE place)
 		{
-			if (IsKeyDown(KEY_RIGHT) == true)
+			if (CheckCollisionCircleRec(GetMousePosition(), MOUSERADIUS, rightArrow.rec))
 			{
-				DrawTexture(rightArrow.menuArrowsPressed, static_cast<int>(rightArrow.rec.x), static_cast<int>(rightArrow.rec.y), GRAY);
+				if (IsMouseButtonDown(MOUSE_LEFT_BUTTON))
+				{
+					DrawTexture(rightArrow.menuArrowsPressed, static_cast<int>(rightArrow.rec.x), static_cast<int>(rightArrow.rec.y), GRAY);
+				}
+				else
+				{
+					DrawTexture(rightArrow.menuArrows, static_cast<int>(rightArrow.rec.x), static_cast<int>(rightArrow.rec.y), GRAY);
+				}
+				if (IsMouseButtonReleased(MOUSE_LEFT_BUTTON))
+				{
+					scene = place;
+				}
 			}
 			else
 			{
 				DrawTexture(rightArrow.menuArrows, static_cast<int>(rightArrow.rec.x), static_cast<int>(rightArrow.rec.y), GRAY);
 			}
-			if (IsKeyReleased(KEY_RIGHT) == true)
-			{
-				scene = place;
-			}
 		}
 
 		// ----------------------------
 
-		static void InputMenu()
+		static void ButtomPlayPressed()
 		{
-			if (IsKeyPressed(KEY_SPACE) == true)
+			if (CheckCollisionCircleRec(GetMousePosition(), MOUSERADIUS, playButtom))
 			{
-				Player::ResetPlayer();
-				Enemies::Reset();
-				Sounds::StatePlayerMusic(Sounds::play);
-				scene = game;
+				if (IsMouseButtonDown(MOUSE_LEFT_BUTTON))
+				{
+					DrawRectangleRec(playButtom, DARKGRAY);
+				}
+				else
+				{
+					DrawRectangleRec(playButtom, GRAY);
+				}
+				if (IsMouseButtonReleased(MOUSE_LEFT_BUTTON))
+				{
+					Player::ResetPlayer();
+					Enemies::Reset();
+					Sounds::StatePlayerMusic(Sounds::play);
+					scene = game;
+				}
 			}
+			else
+			{
+				DrawRectangleRec(playButtom, GRAY);
+			}
+		}
 
-			/*if (IsKeyPressed(KEY_LEFT) == true)
+		static void ButtomExitPressed()
+		{
+			if (CheckCollisionCircleRec(GetMousePosition(), MOUSERADIUS, exitButtom))
 			{
-				scenes = options;
+				if (IsMouseButtonDown(MOUSE_LEFT_BUTTON))
+				{
+					DrawRectangleRec(exitButtom, RED);
+				}
+				else
+				{
+					DrawRectangleRec(exitButtom, MAROON);
+				}
+				if (IsMouseButtonReleased(MOUSE_LEFT_BUTTON))
+				{
+					scene = exit;
+					Sounds::StateGameMusic(Sounds::stop);
+				}
 			}
-
-			if (IsKeyPressed(KEY_RIGHT) == true)
+			else
 			{
-				scenes = credits;
-			}
-*/
-			if (IsKeyPressed(KEY_ESCAPE) == true)
-			{
-				scene = exit;
-				Sounds::StateGameMusic(Sounds::stop);
+				DrawRectangleRec(exitButtom, MAROON);
 			}
 		}
 
 		static void DrawMenu()
-		{
-			Vector2 text1Pos;
-			Vector2 text2Pos;
-
-			text1Pos.x = static_cast<float>(GetScreenWidth() / 2 - FONT_PRESS_SPACE * 2);
-			text1Pos.y = static_cast<float>(leftArrow.rec.y);
-			
-			text2Pos.x = FONT_PRESS_ESCAPE;
-			text2Pos.y = static_cast<float>(GetScreenHeight() - (FONT_PRESS_ESCAPE + FONT_PRESS_ESCAPE / 3));
-			
+		{			
 			BeginDrawing();
 			ClearBackground(BLACK);
 
-			Textures::MovementBackgrounds();
+			//Textures::MovementBackgrounds();
 			Textures::DrawBackground();
 
 			DrawTexture(menuTittle, GetScreenWidth() / 2 - menuTittle.width / 2, GetScreenHeight() / 2 - menuTittle.height, GRAY);
 
-			DrawTextEx(Textures::textFont, "press SPACE\n      to JUMP", text1Pos, FONT_PRESS_SPACE, 2, WHITE);
-			DrawTextEx(Textures::textFont, "press ESCAPE to EXIT", text2Pos, FONT_PRESS_ESCAPE, 2, DARKBLUE);
-
 			KeysLeftPressed(options);
 			KeysRightPressed(credits);
-
-			//DrawTexture(leftArrow.menuArrows, static_cast<int>(leftArrow.rec.x), static_cast<int>(leftArrow.rec.y), GRAY);
-			//DrawTexture(rightArrow.menuArrows, static_cast<int>(rightArrow.rec.x), static_cast<int>(rightArrow.rec.y), GRAY);
+			ButtomPlayPressed();
+			ButtomExitPressed();
 
 			EndDrawing();
 		}

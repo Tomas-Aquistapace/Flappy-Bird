@@ -189,7 +189,9 @@ namespace Flappy_Bird
 
 		static void Jump()
 		{
-			if (IsKeyPressed(KEY_SPACE) == true)
+			//if (IsKeyPressed(KEY_SPACE) == true)
+			//{
+			if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON) == true)
 			{
 				if (player.state == falling)
 				{
