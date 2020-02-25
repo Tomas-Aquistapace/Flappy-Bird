@@ -69,6 +69,7 @@ namespace Flappy_Bird
 		Enemies::Initialize();
 
 		Menu::Initialize();
+		Game::Initialiaze();
 		Options::Initialize();
 		Credits::Initialize();
 		End_game::Initialize();
@@ -85,6 +86,7 @@ namespace Flappy_Bird
 		Enemies::Unload();
 
 		Menu::Unload();
+		Game::Unload();
 		Options::Unload();
 		Credits::Unload();
 		End_game::Unload();

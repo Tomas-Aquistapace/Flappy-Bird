@@ -5,6 +5,8 @@ namespace Flappy_Bird
 {
 	namespace Game
 	{
+		extern void Initialiaze();
+		extern void Unload();
 		extern void Game();
 	}
 }

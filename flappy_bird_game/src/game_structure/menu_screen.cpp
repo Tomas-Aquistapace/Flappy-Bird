@@ -162,7 +162,7 @@ namespace Flappy_Bird
 				}
 				if (IsMouseButtonReleased(MOUSE_LEFT_BUTTON))
 				{
-					Player::ResetPlayer();
+					Player::Reset();
 					Enemies::Reset();
 					Sounds::StatePlayerMusic(Sounds::play);
 					scene = game;

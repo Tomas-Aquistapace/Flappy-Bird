@@ -42,9 +42,9 @@ namespace Flappy_Bird
 		extern bool pause;
 		
 		extern void Initialize();
-		extern void ResetPlayer();
+		extern void Reset();
 		extern void Unload();
-		extern void Input();
+		extern void Input(Rectangle pauseButtom, Rectangle menuButtom);
 		extern void LoseOrWin();
 		extern void EarnPoint();
 		extern void DrawPlayer();

@@ -23,7 +23,6 @@ namespace Flappy_Bird
 		static Texture2D endScreenTittle;
 		static Texture2D endScreenPoints;
 
-		static void Input();
 		static void ButtomMenuPressed();
 		static void DrawEndGame();
 
@@ -53,22 +52,11 @@ namespace Flappy_Bird
 
 		void EndGame()
 		{
-			Input();
 			Sounds::StateEndMusic(Sounds::update);
 			DrawEndGame();
 		}
 
 		// -----------------------
-
-		static void Input()
-		{
-			if (IsKeyPressed(KEY_ENTER) == true)
-			{
-				Sounds::StateEndMusic(Sounds::stop);
-				Sounds::StateGameMusic(Sounds::play);
-				Menu::scene = Menu::menu;
-			}
-		}
 
 		static void ButtomMenuPressed()
 		{

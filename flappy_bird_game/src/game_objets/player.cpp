@@ -18,6 +18,8 @@ namespace Flappy_Bird
 
 		bool pause;
 
+		static const int MOUSERADIUS = 0;
+
 		const float HEIGHT_PLAYER = 30;
 		const float WIDTH_PLAYER = 30;
 		const float FORCE = 150.0f;
@@ -40,7 +42,7 @@ namespace Flappy_Bird
 		static float maxCounterJump = 0.30f;
 		// ---------
 
-		static void Jump();
+		static void Jump(Rectangle pauseButtom, Rectangle menuButtom);
 		static void DrawUI();
 		static void AnimationMove();
 		static void AnimationJump();
@@ -77,7 +79,7 @@ namespace Flappy_Bird
 			pause = false;
 		}
 
-		void ResetPlayer()
+		void Reset()
 		{
 			player.winOrLose = inGame;
 
@@ -103,24 +105,11 @@ namespace Flappy_Bird
 			UnloadTexture(frameworkSkin2);
 		}
 
-		void Input()
+		void Input(Rectangle pauseButtom, Rectangle menuButtom)
 		{
-			if (IsKeyPressed(KEY_ESCAPE) == true)
-			{
-				ResetPlayer();
-				Initialize();
-				Menu::scene = Menu::menu;
-				Sounds::StatePlayerMusic(Sounds::stop);
-			}
-
-			if (IsKeyPressed(KEY_ENTER) == true)
-			{
-				pause = !pause;
-			}
-
 			if (pause == false)
 			{
-				Jump();
+				Jump(pauseButtom, menuButtom);
 			}
 		}
 
@@ -187,11 +176,9 @@ namespace Flappy_Bird
 			DrawTextEx(Textures::textFont, "Enter to Pause", text2Pos, FONT_UI, 2, WHITE);
 		}
 
-		static void Jump()
+		static void Jump(Rectangle pauseButtom, Rectangle menuButtom)
 		{
-			//if (IsKeyPressed(KEY_SPACE) == true)
-			//{
-			if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON) == true)
+			if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON) == true && CheckCollisionCircleRec(GetMousePosition(), MOUSERADIUS, pauseButtom) == false && CheckCollisionCircleRec(GetMousePosition(), MOUSERADIUS, menuButtom) == false)
 			{
 				if (player.state == falling)
 				{
@@ -199,11 +186,6 @@ namespace Flappy_Bird
 					player.force = FORCE;
 
 					PlaySound(Sounds::jump);
-				}
-				else if (player.state == jumping)
-				{
-					player.state = falling;
-					player.force = 0;
 				}
 			}
 
