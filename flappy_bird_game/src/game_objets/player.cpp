@@ -71,7 +71,7 @@ namespace Flappy_Bird
 
 			player.spriteJump1 = LoadTexture("assets/textures/character/gosthisalto-Sheet1.png");
 			player.spriteJump2 = LoadTexture("assets/textures/character/gosthisalto-Sheet2.png");
-			frameRecJump = { 0.0f, 0.0f, static_cast<float>(player.spriteMovement1.height), static_cast<float>(player.spriteMovement1.width / 4) };
+			frameRecJump = { 0.0f, 0.0f, static_cast<float>(player.spriteJump1.height), static_cast<float>(player.spriteJump1.width / 2) };
 
 			frameworkSkin1 = LoadTexture("assets/textures/character/framework-skin-1.png");
 			frameworkSkin2 = LoadTexture("assets/textures/character/framework-skin-2.png");
@@ -152,10 +152,15 @@ namespace Flappy_Bird
 		void DrawPlayer()
 		{
 			if (player.state == jumping)
+			{
 				AnimationJump();
+			}
 			else
+			{
 				AnimationMove();
-			
+				currentFrameJump = 0;
+				framesCounterJump = 0;
+			}
 			DrawUI();
 		}
 
@@ -172,7 +177,7 @@ namespace Flappy_Bird
 			text2Pos.x = static_cast<float>(GetScreenWidth() + GetScreenWidth() / 4 - MeasureText("Enter to Pause", FONT_UI) - PIXELS_AXIS);
 			text2Pos.y = static_cast<float>(GetScreenHeight() - FONT_UI);
 
-			DrawTextEx(Textures::textFont, FormatText("Points ~ %i", Player::player.points), text1Pos, FONT_UI, 2, WHITE);
+			DrawTextEx(Textures::textFont, FormatText("Points   %i", Player::player.points), text1Pos, FONT_UI, 2, WHITE);
 			DrawTextEx(Textures::textFont, "Enter to Pause", text2Pos, FONT_UI, 2, WHITE);
 		}
 
@@ -216,7 +221,7 @@ namespace Flappy_Bird
 					if (currentFrame > 1)
 						currentFrame = 0;
 
-					frameRec.x = static_cast<float>(currentFrame*(player.spriteMovement1.width / 4));
+					frameRec.x = static_cast<float>(currentFrame * (player.spriteMovement1.width / 4));
 				}
 				position = { player.position.x - player.radius * 2, player.position.y - player.radius };
 			}
