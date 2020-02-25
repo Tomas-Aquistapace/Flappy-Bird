@@ -60,6 +60,7 @@ namespace Flappy_Bird
 			bottomWall1.objet.x = static_cast<float>(GetScreenWidth() + HEIGHT / 2);
 			bottomWall1.objet.y = superiorWall1.objet.y + HEIGHT + GetScreenHeight() / 3;
 			bottomWall1.texture = LoadTexture("assets/textures/enemies/bottom wall.png");
+			bottomWall1.textureDegrade = LoadTexture("assets/textures/enemies/bottom degrade.png");
 
 			// seconds walls
 			superiorWall2.objet.height = HEIGHT;
@@ -73,6 +74,7 @@ namespace Flappy_Bird
 			bottomWall2.objet.x = static_cast<float>(GetScreenWidth());
 			bottomWall2.objet.y = superiorWall2.objet.y + HEIGHT + GetScreenHeight() / 3;
 			bottomWall2.texture = LoadTexture("assets/textures/enemies/bottom wall.png");
+			bottomWall2.textureDegrade = LoadTexture("assets/textures/enemies/bottom degrade.png");
 
 			screenCenter = false;
 			moveSecondPipe = false;
@@ -111,7 +113,9 @@ namespace Flappy_Bird
 		{
 			UnloadTexture(skull.texture);
 			UnloadTexture(bottomWall1.texture);
+			UnloadTexture(bottomWall1.textureDegrade);
 			UnloadTexture(bottomWall2.texture);
+			UnloadTexture(bottomWall2.textureDegrade);
 			UnloadTexture(superiorWall1.texture);
 			UnloadTexture(superiorWall2.texture);
 		}
@@ -199,14 +203,16 @@ namespace Flappy_Bird
 		void DrawEnemies()
 		{
 			DrawTexture(superiorWall1.texture, static_cast<int>(superiorWall1.objet.x), static_cast<int>(superiorWall1.objet.y), GRAY);
+
 			DrawTexture(bottomWall1.texture, static_cast<int>(bottomWall1.objet.x), static_cast<int>(bottomWall1.objet.y), GRAY);
+			DrawTexture(bottomWall1.textureDegrade, static_cast<int>(bottomWall1.objet.x), static_cast<int>(GetScreenHeight() - bottomWall1.textureDegrade.height), GRAY);
 
 			DrawTexture(superiorWall2.texture, static_cast<int>(superiorWall2.objet.x), static_cast<int>(superiorWall2.objet.y), GRAY);
+
 			DrawTexture(bottomWall2.texture, static_cast<int>(bottomWall2.objet.x), static_cast<int>(bottomWall2.objet.y), GRAY);
+			DrawTexture(bottomWall2.textureDegrade, static_cast<int>(bottomWall2.objet.x), static_cast<int>(GetScreenHeight() - bottomWall1.textureDegrade.height), GRAY);
 
 			AnimationMoveSkull();
-
-			//DrawCircleV(skull.position, skull.radius, RED);
 		}
 
 		// --------------------------------

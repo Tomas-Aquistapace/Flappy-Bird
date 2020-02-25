@@ -11,6 +11,7 @@ namespace Flappy_Bird
 		{
 			Rectangle objet;
 			Texture2D texture;
+			Texture2D textureDegrade;
 		};
 
 		struct SkULLS
