@@ -2,7 +2,7 @@
 
 #include "game_objets/player.h"
 
-namespace Flappy_Bird
+namespace Spooky_Ghost
 {
 	namespace Textures
 	{	

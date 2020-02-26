@@ -12,7 +12,7 @@
 #include "assets_code/textures.h"
 #include "assets_code/sounds.h"
 
-namespace Flappy_Bird
+namespace Spooky_Ghost
 {
 	static void InitialiceAll();
 	static void UnloadAll();
@@ -60,8 +60,7 @@ namespace Flappy_Bird
 		const int SCREENWIDTH = 600;
 		const int SCREENHEIGHT = 600;
 
-		InitWindow(SCREENWIDTH, SCREENHEIGHT, "Flappy Flame - Tomas Aquistapace");
-		//HideCursor();
+		InitWindow(SCREENWIDTH, SCREENHEIGHT, "Spooky Ghost - Tomas Aquistapace");
 
 		SetExitKey(KEY_BACK);
 

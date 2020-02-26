@@ -1,6 +1,6 @@
 #include "game_structure/flow_of_game.h"
 
-using namespace Flappy_Bird;
+using namespace Spooky_Ghost;
 
 int main()
 {

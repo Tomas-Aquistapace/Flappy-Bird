@@ -5,7 +5,7 @@
 #include "assets_code/textures.h"
 #include "assets_code/sounds.h"
 
-namespace Flappy_Bird
+namespace Spooky_Ghost
 {
 	namespace Menu
 	{
@@ -21,6 +21,8 @@ namespace Flappy_Bird
 
 		static const int MOUSERADIUS = 0;
 		
+		static const float FONT_VERSION = 30;
+
 		static const float HEIGHT = 100;
 		static const float WIDTH = 80;
 
@@ -211,6 +213,8 @@ namespace Flappy_Bird
 			KeysRightPressed(credits);
 			ButtomPlayPressed();
 			ButtomExitPressed();
+
+			DrawTextEx(Textures::textFont, "v2.0", Vector2{ GetScreenWidth() - FONT_VERSION * 2, GetScreenHeight() - FONT_VERSION }, FONT_VERSION, 2, WHITE);
 
 			EndDrawing();
 		}

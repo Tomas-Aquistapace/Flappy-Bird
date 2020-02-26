@@ -1,6 +1,6 @@
 #include "sounds.h"
 
-namespace Flappy_Bird
+namespace Spooky_Ghost
 {
 	namespace Sounds
 	{

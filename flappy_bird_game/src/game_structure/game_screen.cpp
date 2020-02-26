@@ -8,7 +8,7 @@
 #include "assets_code/textures.h"
 #include "assets_code/sounds.h"
 
-namespace Flappy_Bird
+namespace Spooky_Ghost
 {
 	namespace Game
 	{

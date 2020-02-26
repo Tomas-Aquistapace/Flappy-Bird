@@ -6,7 +6,7 @@
 #include "assets_code/textures.h"
 #include "assets_code/sounds.h"
 
-namespace Flappy_Bird
+namespace Spooky_Ghost
 {
 	namespace Credits
 	{
@@ -58,12 +58,11 @@ namespace Flappy_Bird
 			BeginDrawing();
 			ClearBackground(BLACK);
 
-			//Textures::MovementBackgrounds();
 			Textures::DrawBackground();
 
 			DrawTexture(creditsTittle, GetScreenWidth() / 2 - creditsTittle.width / 2, GetScreenHeight() / 10, DARKGRAY);
 
-			DrawTexture(credits, GetScreenWidth() / 2 - credits.width / 2, GetScreenHeight() / 2 - credits.height / 3, GRAY);
+			DrawTexture(credits, GetScreenWidth() / 2 - credits.width / 2, GetScreenHeight() / 2 - credits.height / 4, GRAY);
 
 			DrawTexture(raylibCredits, GetScreenWidth() - raylibCredits.width, GetScreenHeight() - raylibCredits.height, WHITE);
 

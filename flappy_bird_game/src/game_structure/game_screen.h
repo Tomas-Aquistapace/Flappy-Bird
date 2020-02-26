@@ -1,7 +1,7 @@
 #ifndef GAME_SCREEN_H
 #define GAME_SCREEN_H
 
-namespace Flappy_Bird
+namespace Spooky_Ghost
 {
 	namespace Game
 	{

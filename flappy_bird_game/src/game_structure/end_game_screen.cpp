@@ -8,7 +8,7 @@
 #include "assets_code/textures.h"
 #include "assets_code/sounds.h"
 
-namespace Flappy_Bird
+namespace Spooky_Ghost
 {
 	namespace End_game
 	{
@@ -141,10 +141,10 @@ namespace Flappy_Bird
 			DrawTexture(endScreenTittle, GetScreenWidth() / 2 - endScreenTittle.width / 2, GetScreenHeight() / 10, DARKGRAY);
 
 			DrawTexture(endScreenPoints, GetScreenWidth() / 2 - endScreenPoints.width / 2, GetScreenHeight() / 2 - (endScreenPoints.height - endScreenPoints.height / 3), GRAY);
-			DrawTextEx(Textures::textFont, FormatText("Points  %i", Player::player.points), text1Pos, FONT_POINT, 2, BLACK);
+			DrawTextEx(Textures::textFont, FormatText("Points  %i", Player::player.points), text1Pos, FONT_POINT, 2, GRAY);
 
 			DrawTexture(endScreenPoints, GetScreenWidth() / 2 - endScreenPoints.width / 2, GetScreenHeight() / 2 + (endScreenPoints.height - endScreenPoints.height / 3), DARKGRAY);
-			DrawTextEx(Textures::textFont, FormatText("Max Points  %i", Player::player.maxPoints), text2Pos, FONT_POINT, 2, WHITE);
+			DrawTextEx(Textures::textFont, FormatText("Max Points  %i", Player::player.maxPoints), text2Pos, FONT_POINT, 2, GRAY);
 
 			ButtomMenuPressed(); 
 			ButtomResetPressed();

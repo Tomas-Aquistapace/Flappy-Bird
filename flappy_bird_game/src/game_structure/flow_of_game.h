@@ -1,12 +1,9 @@
 #ifndef FLOW_OF_GAME_H
 #define FLOW_OF_GAME_H
 
-namespace Flappy_Bird
+namespace Spooky_Ghost
 {
-
-	void FlowOfGame();
-
-
+	extern void FlowOfGame();
 }
 
 #endif // !FLOW_OF_GAME_H

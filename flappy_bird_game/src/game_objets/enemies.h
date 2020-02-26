@@ -3,7 +3,7 @@
 
 #include "raylib.h"
 
-namespace Flappy_Bird
+namespace Spooky_Ghost
 {
 	namespace Enemies
 	{
