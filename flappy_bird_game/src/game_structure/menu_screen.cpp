@@ -14,8 +14,8 @@ namespace Spooky_Ghost
 		ARROW leftArrow;
 		ARROW rightArrow;
 
-		static Rectangle playButtom;
-		static Rectangle exitButtom;
+		static BUTTOM playButtom;
+		static BUTTOM exitButtom;
 
 		static Texture2D menuTittle;
 
@@ -68,15 +68,19 @@ namespace Spooky_Ghost
 
 			// ------------------
 
-			playButtom.height = 100;
-			playButtom.width = 200;
-			playButtom.x = static_cast<float>(GetScreenWidth() / 2 - playButtom.width / 2);
-			playButtom.y = static_cast<float>(GetScreenHeight() / 2 + playButtom.height / 2);
+			playButtom.rec.height = 100;
+			playButtom.rec.width = 200;
+			playButtom.rec.x = static_cast<float>(GetScreenWidth() / 2 - playButtom.rec.width / 2);
+			playButtom.rec.y = static_cast<float>(GetScreenHeight() / 2 + playButtom.rec.height / 2);
+			playButtom.texture = LoadTexture("assets/textures/buttoms/boton play.png");
+			playButtom.texturePressed = LoadTexture("assets/textures/buttoms/boton play pressed.png");
 
-			exitButtom.height = 50;
-			exitButtom.width = 50;
-			exitButtom.x = exitButtom.height;
-			exitButtom.y = static_cast<float>(GetScreenHeight() - (exitButtom.height + exitButtom.height / 2));
+			exitButtom.rec.height = 50;
+			exitButtom.rec.width = 50;
+			exitButtom.rec.x = exitButtom.rec.height;
+			exitButtom.rec.y = static_cast<float>(GetScreenHeight() - (exitButtom.rec.height + exitButtom.rec.height / 2));
+			exitButtom.texture = LoadTexture("assets/textures/buttoms/Boton exit.png");
+			exitButtom.texturePressed = LoadTexture("assets/textures/buttoms/Boton exit pressed.png");
 
 			// ------------------
 
@@ -94,6 +98,10 @@ namespace Spooky_Ghost
 			UnloadTexture(rightArrow.menuArrows);
 			UnloadTexture(rightArrow.menuArrowsPressed);
 			UnloadTexture(menuTittle);
+			UnloadTexture(playButtom.texture);
+			UnloadTexture(playButtom.texturePressed);
+			UnloadTexture(exitButtom.texture);
+			UnloadTexture(exitButtom.texturePressed);
 		}
 
 		void Menu()
@@ -152,15 +160,15 @@ namespace Spooky_Ghost
 
 		static void ButtomPlayPressed()
 		{
-			if (CheckCollisionCircleRec(GetMousePosition(), MOUSERADIUS, playButtom))
+			if (CheckCollisionCircleRec(GetMousePosition(), MOUSERADIUS, playButtom.rec))
 			{
 				if (IsMouseButtonDown(MOUSE_LEFT_BUTTON))
 				{
-					DrawRectangleRec(playButtom, DARKGRAY);
+					DrawTexture(playButtom.texturePressed, static_cast<int>(playButtom.rec.x), static_cast<int>(playButtom.rec.y), GRAY);
 				}
 				else
 				{
-					DrawRectangleRec(playButtom, GRAY);
+					DrawTexture(playButtom.texture, static_cast<int>(playButtom.rec.x), static_cast<int>(playButtom.rec.y), BLACK);
 				}
 				if (IsMouseButtonReleased(MOUSE_LEFT_BUTTON))
 				{
@@ -172,21 +180,21 @@ namespace Spooky_Ghost
 			}
 			else
 			{
-				DrawRectangleRec(playButtom, GRAY);
+				DrawTexture(playButtom.texture, static_cast<int>(playButtom.rec.x), static_cast<int>(playButtom.rec.y), BLACK);
 			}
 		}
 
 		static void ButtomExitPressed()
 		{
-			if (CheckCollisionCircleRec(GetMousePosition(), MOUSERADIUS, exitButtom))
+			if (CheckCollisionCircleRec(GetMousePosition(), MOUSERADIUS, exitButtom.rec))
 			{
 				if (IsMouseButtonDown(MOUSE_LEFT_BUTTON))
 				{
-					DrawRectangleRec(exitButtom, RED);
+					DrawTexture(exitButtom.texturePressed, static_cast<int>(exitButtom.rec.x), static_cast<int>(exitButtom.rec.y), RED);
 				}
 				else
 				{
-					DrawRectangleRec(exitButtom, MAROON);
+					DrawTexture(exitButtom.texture, static_cast<int>(exitButtom.rec.x), static_cast<int>(exitButtom.rec.y), MAROON);
 				}
 				if (IsMouseButtonReleased(MOUSE_LEFT_BUTTON))
 				{
@@ -196,7 +204,7 @@ namespace Spooky_Ghost
 			}
 			else
 			{
-				DrawRectangleRec(exitButtom, MAROON);
+				DrawTexture(exitButtom.texture, static_cast<int>(exitButtom.rec.x), static_cast<int>(exitButtom.rec.y), MAROON);
 			}
 		}
 

@@ -12,6 +12,13 @@ namespace Spooky_Ghost
 			game, exit, menu, options, credits, endGame
 		};
 
+		struct BUTTOM
+		{
+			Rectangle rec;
+			Texture2D texture;
+			Texture2D texturePressed;
+		};
+
 		struct ARROW
 		{
 			Rectangle rec;

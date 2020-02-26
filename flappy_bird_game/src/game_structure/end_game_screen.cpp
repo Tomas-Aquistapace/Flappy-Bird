@@ -1,7 +1,5 @@
 #include "end_game_screen.h"
 
-#include "raylib.h"
-
 #include "menu_screen.h"
 #include "game_objets/player.h"
 #include "game_objets/enemies.h"
@@ -19,8 +17,8 @@ namespace Spooky_Ghost
 		static const float HEIGHT = 50;
 		static const float WIDTH = 50;
 
-		static Rectangle menuButtom;
-		static Rectangle resetButtom;
+		static BUTTOM menuButtom;
+		static BUTTOM resetButtom;
 
 		static Texture2D endScreenTittle;
 		static Texture2D endScreenPoints;
@@ -33,15 +31,19 @@ namespace Spooky_Ghost
 		{
 			Image endGameImage;
 			
-			menuButtom.height = HEIGHT;
-			menuButtom.width = WIDTH;
-			menuButtom.x = static_cast<float>(GetScreenWidth() / 2 + menuButtom.width / 2);
-			menuButtom.y = static_cast<float>(GetScreenHeight() / 2 + GetScreenHeight() / 3);
+			menuButtom.rec.height = HEIGHT;
+			menuButtom.rec.width = WIDTH;
+			menuButtom.rec.x = static_cast<float>(GetScreenWidth() / 2 + menuButtom.rec.width / 2);
+			menuButtom.rec.y = static_cast<float>(GetScreenHeight() / 2 + GetScreenHeight() / 3);
+			menuButtom.texture = LoadTexture("assets/textures/buttoms/Boton Menu.png");
+			menuButtom.texturePressed = LoadTexture("assets/textures/buttoms/Boton Menu Pressed.png");
 
-			resetButtom.height = HEIGHT;
-			resetButtom.width = WIDTH;
-			resetButtom.x = static_cast<float>(GetScreenWidth() / 2 - (resetButtom.width + resetButtom.width / 2));
-			resetButtom.y = static_cast<float>(GetScreenHeight() / 2 + GetScreenHeight() / 3);
+			resetButtom.rec.height = HEIGHT;
+			resetButtom.rec.width = WIDTH;
+			resetButtom.rec.x = static_cast<float>(GetScreenWidth() / 2 - (resetButtom.rec.width + resetButtom.rec.width / 2));
+			resetButtom.rec.y = static_cast<float>(GetScreenHeight() / 2 + GetScreenHeight() / 3);
+			resetButtom.texture = LoadTexture("assets/textures/buttoms/Boton Replay.png");
+			resetButtom.texturePressed = LoadTexture("assets/textures/buttoms/Boton Replay Pressed.png");
 
 			endScreenTittle = LoadTexture("assets/textures/framework/frameworkGameOverTittle.png");
 
@@ -56,6 +58,10 @@ namespace Spooky_Ghost
 		{
 			UnloadTexture(endScreenTittle);
 			UnloadTexture(endScreenPoints);
+			UnloadTexture(menuButtom.texture);
+			UnloadTexture(menuButtom.texturePressed);
+			UnloadTexture(resetButtom.texture);
+			UnloadTexture(resetButtom.texturePressed);
 		}
 
 		void EndGame()
@@ -68,15 +74,15 @@ namespace Spooky_Ghost
 
 		static void ButtomMenuPressed()
 		{
-			if (CheckCollisionCircleRec(GetMousePosition(), MOUSERADIUS, menuButtom))
+			if (CheckCollisionCircleRec(GetMousePosition(), MOUSERADIUS, menuButtom.rec))
 			{
 				if (IsMouseButtonDown(MOUSE_LEFT_BUTTON))
 				{
-					DrawRectangleRec(menuButtom, DARKGRAY);
+					DrawTexture(menuButtom.texturePressed, static_cast<int>(menuButtom.rec.x), static_cast<int>(menuButtom.rec.y), GRAY);
 				}
 				else
 				{
-					DrawRectangleRec(menuButtom, GRAY);
+					DrawTexture(menuButtom.texture, static_cast<int>(menuButtom.rec.x), static_cast<int>(menuButtom.rec.y), GRAY);
 				}
 				if (IsMouseButtonReleased(MOUSE_LEFT_BUTTON))
 				{
@@ -87,21 +93,21 @@ namespace Spooky_Ghost
 			}
 			else
 			{
-				DrawRectangleRec(menuButtom, GRAY);
+				DrawTexture(menuButtom.texture, static_cast<int>(menuButtom.rec.x), static_cast<int>(menuButtom.rec.y), GRAY);
 			}
 		}
 
 		static void ButtomResetPressed()
 		{
-			if (CheckCollisionCircleRec(GetMousePosition(), MOUSERADIUS, resetButtom))
+			if (CheckCollisionCircleRec(GetMousePosition(), MOUSERADIUS, resetButtom.rec))
 			{
 				if (IsMouseButtonDown(MOUSE_LEFT_BUTTON))
 				{
-					DrawRectangleRec(resetButtom, DARKGRAY);
+					DrawTexture(resetButtom.texturePressed, static_cast<int>(resetButtom.rec.x), static_cast<int>(resetButtom.rec.y), GRAY);
 				}
 				else
 				{
-					DrawRectangleRec(resetButtom, GRAY);
+					DrawTexture(resetButtom.texture, static_cast<int>(resetButtom.rec.x), static_cast<int>(resetButtom.rec.y), GRAY);
 				}
 				if (IsMouseButtonReleased(MOUSE_LEFT_BUTTON))
 				{
@@ -115,7 +121,7 @@ namespace Spooky_Ghost
 			}
 			else
 			{
-				DrawRectangleRec(resetButtom, GRAY);
+				DrawTexture(resetButtom.texture, static_cast<int>(resetButtom.rec.x), static_cast<int>(resetButtom.rec.y), GRAY);
 			}
 		}
 

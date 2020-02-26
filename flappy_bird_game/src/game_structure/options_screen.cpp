@@ -1,7 +1,5 @@
 #include "options_screen.h"
 
-#include "raylib.h"
-
 #include "menu_screen.h"
 #include "game_objets/player.h"
 #include "assets_code/textures.h"
@@ -11,7 +9,6 @@ namespace Spooky_Ghost
 {
 	namespace Options
 	{
-
 		static const int MOUSERADIUS = 0;
 
 		static const float HEIGHT = 50;
@@ -20,8 +17,9 @@ namespace Spooky_Ghost
 		static bool muteEffects = false;
 		static bool muteMusic = false;
 
-		static Rectangle musicButtom;
-		static Rectangle soundButtom;
+		static BUTTOM musicButtom;
+		static BUTTOM soundButtom;
+
 		static Rectangle skinsButtom;
 
 		static Texture2D optionsTittle;
@@ -34,15 +32,19 @@ namespace Spooky_Ghost
 
 		void Initialize()
 		{
-			musicButtom.height = HEIGHT;
-			musicButtom.width = WIDTH;
-			musicButtom.x = musicButtom.width;
-			musicButtom.y = static_cast<float>(GetScreenHeight() - (musicButtom.height + musicButtom.height / 2));
+			musicButtom.rec.height = HEIGHT;
+			musicButtom.rec.width = WIDTH;
+			musicButtom.rec.x = musicButtom.rec.width;
+			musicButtom.rec.y = static_cast<float>(GetScreenHeight() - (musicButtom.rec.height + musicButtom.rec.height / 2));
+			musicButtom.texture = LoadTexture("assets/textures/buttoms/Boton Musica On.png");
+			musicButtom.texturePressed = LoadTexture("assets/textures/buttoms/Boton Musica Off.png");
 
-			soundButtom.height = HEIGHT;
-			soundButtom.width = WIDTH;
-			soundButtom.x = musicButtom.x + soundButtom.width * 2;
-			soundButtom.y = static_cast<float>(GetScreenHeight() - (soundButtom.height + soundButtom.height / 2));
+			soundButtom.rec.height = HEIGHT;
+			soundButtom.rec.width = WIDTH;
+			soundButtom.rec.x = musicButtom.rec.x + soundButtom.rec.width * 2;
+			soundButtom.rec.y = static_cast<float>(GetScreenHeight() - (soundButtom.rec.height + soundButtom.rec.height / 2)); 
+			soundButtom.texture = LoadTexture("assets/textures/buttoms/Boton Sonido On.png");
+			soundButtom.texturePressed = LoadTexture("assets/textures/buttoms/Boton Sonido Mute.png");
 
 			skinsButtom.height = static_cast<float>(Player::frameworkSkin1.height);
 			skinsButtom.width = static_cast<float>(Player::frameworkSkin1.width);
@@ -55,6 +57,10 @@ namespace Spooky_Ghost
 		void Unload()
 		{
 			UnloadTexture(optionsTittle);
+			UnloadTexture(musicButtom.texture);
+			UnloadTexture(musicButtom.texturePressed);
+			UnloadTexture(soundButtom.texture);
+			UnloadTexture(soundButtom.texturePressed);
 		}
 
 		void Options()
@@ -69,7 +75,7 @@ namespace Spooky_Ghost
 
 		static void ButtomsMuteMusic()
 		{
-			if (CheckCollisionCircleRec(GetMousePosition(), MOUSERADIUS, musicButtom))
+			if (CheckCollisionCircleRec(GetMousePosition(), MOUSERADIUS, musicButtom.rec))
 			{
 				if (IsMouseButtonReleased(MOUSE_LEFT_BUTTON))
 				{
@@ -79,17 +85,17 @@ namespace Spooky_Ghost
 			
 			if (muteMusic == false)
 			{
-				DrawRectangleRec(musicButtom, GRAY);
+				DrawTexture(musicButtom.texture, static_cast<int>(musicButtom.rec.x), static_cast<int>(musicButtom.rec.y), GRAY);
 			}
 			else
 			{
-				DrawRectangleRec(musicButtom, RED);	
+				DrawTexture(musicButtom.texturePressed, static_cast<int>(musicButtom.rec.x), static_cast<int>(musicButtom.rec.y), RED);
 			}
 		}
 
 		static void ButtomsMuteSound()
 		{
-			if (CheckCollisionCircleRec(GetMousePosition(), MOUSERADIUS, soundButtom))
+			if (CheckCollisionCircleRec(GetMousePosition(), MOUSERADIUS, soundButtom.rec))
 			{
 				if (IsMouseButtonReleased(MOUSE_LEFT_BUTTON))
 				{
@@ -99,11 +105,11 @@ namespace Spooky_Ghost
 
 			if (muteEffects == false)
 			{
-				DrawRectangleRec(soundButtom, GRAY);
+				DrawTexture(soundButtom.texture, static_cast<int>(soundButtom.rec.x), static_cast<int>(soundButtom.rec.y), GRAY);
 			}
 			else
 			{
-				DrawRectangleRec(soundButtom, RED);
+				DrawTexture(soundButtom.texturePressed, static_cast<int>(soundButtom.rec.x), static_cast<int>(soundButtom.rec.y), RED);
 			}			
 		}
 
