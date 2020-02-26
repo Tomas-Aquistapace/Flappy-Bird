@@ -44,19 +44,20 @@ namespace Spooky_Ghost
 
 		void Initialize()
 		{
-			player.winOrLose = inGame;
-
-			player.state = falling;
-			player.force = 0.0f;
-
 			player.position.x = static_cast <float>(GetScreenWidth() / 3);
 			player.position.y = static_cast <float>(GetScreenHeight() / 2);
 			player.radius = 15;
 
+			player.state = falling;
+			player.force = 0.0f;
+
+			player.winPoint = false;
 			player.points = 0;
 			player.maxPoints = 0;
-			player.exitGame = false;
 
+			player.exitGame = false;
+			player.winOrLose = inGame;
+			
 			player.skinSelected = 1;
 			player.maxSkins = 2;
 
@@ -138,9 +139,16 @@ namespace Spooky_Ghost
 				player.position.x <= (bottomWall1.objet.x + bottomWall1.objet.width)
 				||
 				player.position.x > (bottomWall2.objet.x + bottomWall2.objet.width - 3.5f) &&
-				player.position.x <= (bottomWall2.objet.x + bottomWall2.objet.width))
+				player.position.x <= (bottomWall2.objet.x + bottomWall2.objet.width)
+				&&
+				player.winPoint == false)
 			{
 				player.points++;
+				player.winPoint = true;
+			}
+			else
+			{
+				player.winPoint = false;
 			}
 		}
 

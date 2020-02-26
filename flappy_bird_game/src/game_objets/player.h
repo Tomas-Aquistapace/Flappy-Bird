@@ -23,10 +23,14 @@ namespace Spooky_Ghost
 
 			JUMP state;
 			float force;
+
+			bool winPoint;
 			int points;
 			int maxPoints;
+
 			bool exitGame;
 			WIN_OR_LOSE winOrLose;
+
 			int skinSelected;
 			int maxSkins;
 			Texture2D spriteMovement1;
