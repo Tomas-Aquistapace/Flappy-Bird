@@ -60,7 +60,7 @@ namespace Spooky_Ghost
 		const int SCREENWIDTH = 600;
 		const int SCREENHEIGHT = 600;
 
-		InitWindow(SCREENWIDTH, SCREENHEIGHT, "Spooky Ghost - Tomas Aquistapace");
+		InitWindow(SCREENWIDTH, SCREENHEIGHT, "Spooky Ghost");
 
 		SetExitKey(KEY_BACK);
 

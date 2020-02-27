@@ -10,6 +10,9 @@
     <Filter Include="assets_code">
       <UniqueIdentifier>{3ef14680-4574-466f-9163-1e161388a567}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{086cd952-abb6-40d3-a093-c35089ed5f98}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\main.cpp" />
@@ -75,5 +78,12 @@
     <ClInclude Include="..\src\assets_code\sounds.h">
       <Filter>assets_code</Filter>
     </ClInclude>
+    <ClInclude Include="resource.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Resource.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\res\assets\icon\icon.ico" />
   </ItemGroup>
 </Project>
