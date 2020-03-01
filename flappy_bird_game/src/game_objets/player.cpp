@@ -21,9 +21,9 @@ namespace Spooky_Ghost
 
 		static const float HEIGHT_PLAYER = 30;
 		static const float WIDTH_PLAYER = 30;
-		static const float FORCE = 150.0f;
+		static const float FORCE = 120.0f;
 		static const float GRAVITY = 90;
-		static const float MIN_GRAVITY = -150.0f;
+		static const float MIN_FORCE = -150.0f;
 
 		// animations
 		static Vector2 position;
@@ -188,7 +188,7 @@ namespace Spooky_Ghost
 			
 			player.position.y -= player.force * GetFrameTime() * 2;
 
-			if (player.force > MIN_GRAVITY)
+			if (player.force > MIN_FORCE)
 			{
 				player.force -= GRAVITY * GetFrameTime() * 2;
 			}

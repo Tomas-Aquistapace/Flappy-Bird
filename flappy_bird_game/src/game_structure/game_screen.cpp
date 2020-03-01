@@ -19,15 +19,23 @@ namespace Spooky_Ghost
 		static const float HEIGHT = 50;
 		static const float WIDTH = 50;
 
+		static const float MAX_SECONDS = 3;
+		static float seconds;
+		static bool initCounter;
+
 		static BUTTOM menuButtom;
 		static BUTTOM pauseButtom;
 
-		static void Draw();
+		static void SecondsPause();
 		static void ButtomMenuPressed();
 		static void ButtomPausePressed();
+		static void Draw();
 
 		void Initialiaze()
 		{
+			seconds = MAX_SECONDS;
+			initCounter = false;
+
 			menuButtom.rec.height = HEIGHT;
 			menuButtom.rec.width = WIDTH;
 			menuButtom.rec.x = static_cast<float>(GetScreenWidth() - menuButtom.rec.width * 2);
@@ -54,6 +62,7 @@ namespace Spooky_Ghost
 		void Game()
 		{
 			Player::Input(pauseButtom.rec, menuButtom.rec);
+			SecondsPause();
 			if (Player::pause == false)
 			{
 				Enemies::MovementEnemies();
@@ -66,6 +75,19 @@ namespace Spooky_Ghost
 		}
 
 		// -----------------------
+
+		static void SecondsPause()
+		{
+			if (seconds <= 0 && initCounter == true)
+			{
+				Player::pause = false;
+				initCounter = false;
+			}
+			else if (initCounter == true)
+			{
+				seconds -= GetFrameTime();
+			}
+		}
 
 		static void ButtomMenuPressed()
 		{
@@ -103,9 +125,17 @@ namespace Spooky_Ghost
 				{
 					DrawTexture(pauseButtom.texture, static_cast<int>(pauseButtom.rec.x), static_cast<int>(pauseButtom.rec.y), GRAY);
 				}
-				if (IsMouseButtonReleased(MOUSE_LEFT_BUTTON))
+				if (IsMouseButtonReleased(MOUSE_LEFT_BUTTON) && initCounter == false)
 				{
-					Player::pause = !Player::pause;
+					if (Player::pause == true)
+					{
+						seconds = MAX_SECONDS;
+						initCounter = true;
+					}
+					else
+					{
+						Player::pause = true;
+					}
 				}
 			}
 			else
@@ -134,9 +164,25 @@ namespace Spooky_Ghost
 			Enemies::DrawEnemies();
 			Player::DrawPlayer();
 
-			if (Player::pause == true)
+			if (Player::pause == true && initCounter == false)
 			{
-				DrawTextEx(Textures::tittleFont, "Pause", text1Pos, FONT_PAUSE, 2, BLACK);
+				DrawTextEx(Textures::tittleFont, "Pause", text1Pos, FONT_PAUSE, 2, WHITE);
+			}
+			else if (Player::pause == true && initCounter == true)
+			{
+
+				if (seconds > 2)
+				{
+					DrawTextEx(Textures::tittleFont, "3", Vector2{ static_cast<float>(GetScreenWidth() / 2),  static_cast<float>(GetScreenHeight() / 2) }, FONT_PAUSE, 2, WHITE);
+				}
+				else if (seconds > 1 && seconds <= 2)
+				{
+					DrawTextEx(Textures::tittleFont, "2", Vector2{ static_cast<float>(GetScreenWidth() / 2),  static_cast<float>(GetScreenHeight() / 2) }, FONT_PAUSE, 2, WHITE);
+				}
+				else if (seconds > 0 && seconds <= 1)
+				{
+					DrawTextEx(Textures::tittleFont, "1", Vector2{ static_cast<float>(GetScreenWidth() / 2),  static_cast<float>(GetScreenHeight() / 2) }, FONT_PAUSE, 2, WHITE);
+				}
 			}
 
 			DrawTextEx(Textures::textFont, FormatText("Points   %i", Player::player.points), text2Pos, FONT_UI, 2, WHITE);

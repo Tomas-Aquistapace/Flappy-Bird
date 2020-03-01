@@ -222,7 +222,7 @@ namespace Spooky_Ghost
 			ButtomPlayPressed();
 			ButtomExitPressed();
 
-			DrawTextEx(Textures::textFont, "v2.1", Vector2{ GetScreenWidth() - FONT_VERSION * 2, GetScreenHeight() - FONT_VERSION }, FONT_VERSION, 2, WHITE);
+			DrawTextEx(Textures::textFont, "v2.2", Vector2{ GetScreenWidth() - FONT_VERSION * 2, GetScreenHeight() - FONT_VERSION }, FONT_VERSION, 2, WHITE);
 
 			EndDrawing();
 		}
